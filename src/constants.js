@@ -10,9 +10,8 @@ export const COLOR = {
         400: "236deg 11% 27%",
         500: "235deg 12% 19%",
         600: "235deg 16% 15%",
-        700: "237deg 100% 4%",
     },
-    black: "0deg 0% 0%",
+    black: "237deg 100% 4%",
     white: "0deg 0% 100%",
 };
 
@@ -26,6 +25,7 @@ export const RADIUS = {
     s: 4,
     m: 6,
     l: 8,
+    xl: 24,
 };
 
 export const FONT_SIZE = {
