@@ -6,4 +6,4 @@ const Template = ({ children }) => {
 
 const Wrapper = styled.div``;
 
-export default Wrapper;
+export default Template;

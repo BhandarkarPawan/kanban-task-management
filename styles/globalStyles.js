@@ -1,5 +1,11 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS, WEIGHTS } from "../src/constants";
+import {
+    COLORS,
+    FONT_SIZES,
+    LINE_HEIGHTS,
+    RADIUS,
+    WEIGHTS,
+} from "../src/constants";
 
 const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -27,14 +33,30 @@ html{
     --color-gray-700: hsl(${COLORS.gray[700]});
 
 	// border radius
-	--r-xs : 2px;
-	--r-s : 4px;
-	--r-m : 6px;
-	--r-l : 8px;
+	--r-xs : ${RADIUS.xs}px;
+	--r-s : ${RADIUS.s}px;
+	--r-m : ${RADIUS.m}px;
+	--r-l : ${RADIUS.l}px;
 
-	// typography
+	// font weights 
 	--weight-bold : ${WEIGHTS.bold};
 	--weight-medium : ${WEIGHTS.medium};
+
+	// font sizes 
+	--size-h-xl: ${FONT_SIZES.headingXL}
+	--size-h-l : ${FONT_SIZES.headingL}
+	--size-h-m : ${FONT_SIZES.headingM}
+	--size-h-s : ${FONT_SIZES.headingS}
+	--size-b-l : ${FONT_SIZES.bodyL}
+	--size-b-m : ${FONT_SIZES.bodyM}
+
+	// line heights
+	--line-h-xl:  ${LINE_HEIGHTS.headingXL}rem;
+	--line-h-l :  ${LINE_HEIGHTS.headingL} 
+	--line-h-m :  ${LINE_HEIGHTS.headingM}rem;
+	--line-h-s :  ${LINE_HEIGHTS.headingS}rem;
+	--line-b-l :  ${LINE_HEIGHTS.bodyL}rem;
+	--line-b-m :  ${LINE_HEIGHTS.bodyM}rem;
 }
 
 
@@ -51,38 +73,6 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
-}
-
-.heading-xl {
-	font-size: calc(1rem * 24/18);
-	line-height: calc(1rem * 30/18);
-}
-
-.heading-l{
-	font-size: calc(1rem * 18/18); 
-	line-height: calc(1rem * 23/18);
-}
-
-.heading-m{
-	font-size: calc(1rem * 15/18);
-	line-height: calc(1rem * 19/18);
-}
-
-.heading-s{
-	font-size: calc(1rem * 12/18);
-	line-height: calc(1rem * 15/18);
-	font-kerning: 2.4;
-}
-
-.body-l {
-	font-weight: 500;
-	font-size: calc(1rem * 13/18);
-	line-height: calc(1rem * 23/18);
-}
-
-.body-m { 
-	font-size: calc(1rem * 12/18);
-	line-height: calc(1rem * 15/18);
 }
 `;
 

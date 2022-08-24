@@ -1,4 +1,4 @@
-export const COLORS = {
+export const COLOR = {
     primary: "242deg 48% 58%",
     primaryLight: "243deg 100% 82%",
     secondary: "0deg 78% 63%",
@@ -16,19 +16,44 @@ export const COLORS = {
     white: "0deg 0% 100%",
 };
 
-export const WEIGHTS = {
+export const WEIGHT = {
     medium: 500,
     bold: 700,
 };
 
-export const BREAKPOINTS = {
+export const RADIUS = {
+    xs: 2,
+    s: 4,
+    m: 6,
+    l: 8,
+};
+
+export const FONT_SIZE = {
+    headingXL: 24 / 18,
+    headingL: 18 / 18,
+    headingM: 15 / 18,
+    headingS: 12 / 18,
+    bodyL: 13 / 18,
+    bodyM: 12 / 18,
+};
+
+export const LINE_HEIGHT = {
+    headingXL: 30 / 18,
+    headingL: 23 / 18,
+    headingM: 19 / 18,
+    headingS: 15 / 18,
+    bodyL: 23 / 18,
+    bodyM: 15 / 18,
+};
+
+export const BREAKPOINT = {
     phone: 480,
     tablet: 768,
     laptop: 1024,
 };
 
-export const QUERIES = {
-    phoneAndUp: `(min-width: ${phone / 18} rem)`,
-    tabletAndUp: `(min-width: ${tablet / 18} rem)`,
-    laptopAndUp: `(min-width: ${laptop / 18} rem)`,
+export const QUERIE = {
+    phoneAndUp: `(min-width: ${BREAKPOINT.phone / 18} rem)`,
+    tabletAndUp: `(min-width: ${BREAKPOINT.tablet / 18} rem)`,
+    laptopAndUp: `(min-width: ${BREAKPOINT.laptop / 18} rem)`,
 };
