@@ -4,7 +4,9 @@ import Button from "../Button/Button";
 const Header = ({ children }) => {
     return (
         <Wrapper>
-            <Button>Add New Task</Button>
+            <Button icon="add" label="Add New Task">
+                Add New Column
+            </Button>
         </Wrapper>
     );
 };

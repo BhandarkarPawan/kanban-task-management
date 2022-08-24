@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import Icon from "../Icon/Icon";
 
-const Button = ({ children }) => {
+const Button = ({ icon, label, children }) => {
     return (
         <Wrapper>
+            {icon && label && <Icon icon={icon} label={label} />}
             <Label>{children}</Label>
         </Wrapper>
     );
@@ -10,6 +12,8 @@ const Button = ({ children }) => {
 
 const Wrapper = styled.button`
     background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
 `;
 
 const Label = styled.h3``;

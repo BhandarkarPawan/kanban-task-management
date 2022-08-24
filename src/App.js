@@ -3,6 +3,7 @@ import { ThemeProvider } from "styled-components";
 import "./App.css";
 import Header from "./components/Header";
 import GlobalStyles from "./styles/globalStyles";
+import ResetStyles from "./styles/resetStyles";
 import { darkTheme, lightTheme } from "./styles/themes";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     console.log(theme);
     return (
         <>
+            <ResetStyles />
             <GlobalStyles />
             <ThemeProvider theme={theme}>
                 <button onClick={themeToggler}>Switch Theme</button>
