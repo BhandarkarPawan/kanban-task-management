@@ -6,7 +6,7 @@ const BoardsList = ({ boards, children }) => {
     const TITLE = "All Boards";
 
     return (
-        <Wrapper>
+        <Wrapper role="radiogroup">
             <Title>
                 {TITLE}({boards.length})
             </Title>
@@ -18,6 +18,7 @@ const BoardsList = ({ boards, children }) => {
                             key={i}
                             id={board.name}
                             type="radio"
+                            value={board.name}
                         >
                             {board.name}
                         </Board>
@@ -51,6 +52,17 @@ const Title = styled.h3`
     letter-spacing: 2.4px;
     color: var(--color-gray-300);
     margin-bottom: 19px;
+`;
+
+const AddButton = styled.button`
+    display: flex;
+    color: var(--color-primary);
+    align-items: baseline;
+`;
+
+const IconWrapper = styled.div`
+    height: 7px;
+    width: 7px;
 `;
 
 export default BoardsList;

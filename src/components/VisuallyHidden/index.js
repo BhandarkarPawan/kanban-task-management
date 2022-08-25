@@ -1,2 +1,1 @@
-export { default } from "./Template";
-
+export { default } from "./VisuallyHidden";

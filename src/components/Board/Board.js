@@ -20,7 +20,9 @@ const Wrapper = styled.div`
 `;
 
 const Input = styled.input`
-    display: none;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
 `;
 
 const IconWrapper = styled.div`
@@ -46,6 +48,10 @@ const LabelWrapper = styled.label`
     ${Input}:checked + & {
         color: var(--color-white);
         background-color: var(--color-primary);
+    }
+
+    ${Input}:focus-visible + & {
+        outline: var(--focus-outline);
     }
 `;
 

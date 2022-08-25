@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 
 export const ICON = {
     add: "icon-add-task-mobile.svg",
@@ -12,7 +12,7 @@ const Icon = ({ icon, label }) => {
     return (
         <Wrapper>
             <VisuallyHidden>{label}</VisuallyHidden>
-            <SVG src={src} alt={label} />
+            <SVG src={src} aria-hidden alt={label} />
         </Wrapper>
     );
 };

@@ -3,7 +3,7 @@ import Icon from "../Icon";
 
 const AddBoardButton = ({ onClick }) => {
     return (
-        <Wrapper>
+        <Wrapper aria-label="Create New Board">
             <IconWrapper>
                 <Icon icon="board" />
             </IconWrapper>
