@@ -54,6 +54,7 @@ const ResponsiveIconWrapper = styled.div`
 const Label = styled.div`
     display: ${(props) => props.responsive && "none"};
     font-size: var(--size-h-m);
+    line-height: var(--line-h-m);
 
     @media ${QUERY.tabletAndUp} {
         display: initial;

@@ -18,6 +18,7 @@ const Wrapper = styled.button`
 
 const Label = styled.div`
     font-size: var(--size-h-m);
+    line-height: var(--line-h-m);
     display: flex;
     align-items: baseline;
     gap: 4px;
