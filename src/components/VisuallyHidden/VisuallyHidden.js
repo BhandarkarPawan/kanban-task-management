@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 // source: https://www.joshwcomeau.com/snippets/react-components/visually-hidden/
 
@@ -37,7 +38,7 @@ const VisuallyHidden = ({ children, ...delegated }) => {
         }
     }, []);
     if (forceShow) {
-        return children;
+        return <Caption>{children}</Caption>;
     }
     return (
         <span style={hiddenStyles} {...delegated}>
@@ -45,4 +46,8 @@ const VisuallyHidden = ({ children, ...delegated }) => {
         </span>
     );
 };
+
+const Caption = styled.div`
+    border: 1px dotted;
+`;
 export default VisuallyHidden;

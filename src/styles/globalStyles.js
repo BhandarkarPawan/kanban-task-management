@@ -38,12 +38,12 @@ html{
 	--weight-medium : ${WEIGHT.medium};
 
 	// font sizes 
-	--size-h-xl: ${FONT_SIZE.headingXL}
-	--size-h-l : ${FONT_SIZE.headingL}
-	--size-h-m : ${FONT_SIZE.headingM}
-	--size-h-s : ${FONT_SIZE.headingS}
-	--size-b-l : ${FONT_SIZE.bodyL}
-	--size-b-m : ${FONT_SIZE.bodyM}
+	--size-h-xl: ${FONT_SIZE.headingXL}rem;
+	--size-h-l : ${FONT_SIZE.headingL}rem;
+	--size-h-m : ${FONT_SIZE.headingM}rem;
+	--size-h-s : ${FONT_SIZE.headingS}rem;
+	--size-b-l : ${FONT_SIZE.bodyL}rem;
+	--size-b-m : ${FONT_SIZE.bodyM}rem;
 
 	// line heights
 	--line-h-xl:  ${LINE_HEIGHT.headingXL}rem;

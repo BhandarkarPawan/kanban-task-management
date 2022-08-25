@@ -52,8 +52,8 @@ export const BREAKPOINT = {
     laptop: 1024,
 };
 
-export const QUERIE = {
-    phoneAndUp: `(min-width: ${BREAKPOINT.phone / 18} rem)`,
-    tabletAndUp: `(min-width: ${BREAKPOINT.tablet / 18} rem)`,
-    laptopAndUp: `(min-width: ${BREAKPOINT.laptop / 18} rem)`,
+export const QUERY = {
+    phoneAndUp: `(min-width: ${BREAKPOINT.phone / 18}rem)`,
+    tabletAndUp: `(min-width: ${BREAKPOINT.tablet / 18}rem)`,
+    laptopAndUp: `(min-width: ${BREAKPOINT.laptop / 18}rem)`,
 };

@@ -5,13 +5,13 @@ export const ICON = {
     add: "icon-add-task-mobile.svg",
 };
 
-const Icon = ({ icon, label }) => {
+const Icon = ({ icon, label, height, width }) => {
     const src = `assets/${ICON[icon]}`;
 
     return (
         <Wrapper>
             <VisuallyHidden>{label}</VisuallyHidden>
-            <img src={src} alt={label} />
+            <img height={height} width={width} src={src} alt={label} />
         </Wrapper>
     );
 };

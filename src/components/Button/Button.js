@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import Icon from "../Icon/Icon";
 
-const Button = ({ icon, label, children }) => {
+const Button = ({ children }) => {
     return (
         <Wrapper>
-            {icon && label && <Icon icon={icon} label={label} />}
             <Label>{children}</Label>
         </Wrapper>
     );
@@ -12,10 +10,17 @@ const Button = ({ icon, label, children }) => {
 
 const Wrapper = styled.button`
     background-color: var(--color-primary);
-    display: flex;
-    align-items: center;
+    color: white;
+    padding: 13px 18px 12px 18px;
+    border: none;
+    border-radius: 5000px;
 `;
 
-const Label = styled.h3``;
+const Label = styled.div`
+    font-size: var(--size-h-m);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+`;
 
 export default Button;

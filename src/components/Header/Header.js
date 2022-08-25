@@ -1,12 +1,18 @@
 import styled from "styled-components";
-import Button from "../Button/Button";
+import { ResponsiveIconButton } from "../IconButton/IconButton";
 
-const Header = ({ children }) => {
+const Header = () => {
     return (
         <Wrapper>
-            <Button icon="add" label="Add New Task">
-                Add New Column
-            </Button>
+            <ResponsiveIconButton
+                icon="add"
+                label="Add New Task"
+                height="12px"
+                width="12px"
+                responsive
+            >
+                Add New Task
+            </ResponsiveIconButton>
         </Wrapper>
     );
 };
