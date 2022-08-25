@@ -12,7 +12,7 @@ const Header = () => {
 };
 
 const Wrapper = styled.header`
-    background-color: ${({ theme }) => theme.background};
+    background-color: ${({ theme }) => theme.backgroundLight};
     width: 100%;
     padding: 16px;
 `;

@@ -1,6 +1,6 @@
 export const lightTheme = {
-    background: `var(--color-white)`,
-    backgroundLight: `var(--color-gray-100)`,
+    backgroundLight: `var(--color-white)`,
+    background: `var(--color-gray-100)`,
 };
 
 export const darkTheme = {
