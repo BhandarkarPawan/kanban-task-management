@@ -11,11 +11,19 @@ const Icon = ({ icon, label, height, width }) => {
     return (
         <Wrapper>
             <VisuallyHidden>{label}</VisuallyHidden>
-            <img height={height} width={width} src={src} alt={label} />
+            <img src={src} alt={label} />
         </Wrapper>
     );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    height: 100%;
+    width: 100%;
+`;
+
+const SVG = styled.img`
+    height: 100%;
+    width: 100%;
+`;
 
 export default Icon;

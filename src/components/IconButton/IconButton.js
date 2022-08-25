@@ -2,32 +2,22 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Icon from "../Icon";
 
-const IconButton = ({ icon, label, height, width, children }) => {
-    if (!icon || !label) {
-        console.warn("Both the icon and the label must be specified");
-    }
-
+const IconButton = ({ icon, label, children }) => {
     return (
         <Wrapper>
-            {icon && label && (
-                <Icon height={height} width={width} icon={icon} label={label} />
-            )}
+            {icon && label && <Icon icon={icon} label={label} />}
             <Label>{children}</Label>
         </Wrapper>
     );
 };
 
-export const ResponsiveIconButton = ({
-    icon,
-    label,
-    height,
-    width,
-    children,
-}) => {
+export const ResponsiveIconButton = ({ icon, label, children }) => {
     return (
         <ResponsiveWrapper>
             {icon && label && (
-                <Icon height={height} width={width} icon={icon} label={label} />
+                <ResponsiveIconWrapper>
+                    <Icon icon={icon} label={label} />
+                </ResponsiveIconWrapper>
             )}
             <Label responsive>{children}</Label>
         </ResponsiveWrapper>
@@ -48,6 +38,16 @@ const Wrapper = styled.button`
 const ResponsiveWrapper = styled(Wrapper)`
     @media ${QUERY.tabletAndUp} {
         padding: 13px 24px;
+    }
+`;
+
+const ResponsiveIconWrapper = styled.div`
+    height: 12px;
+    width: 12px;
+
+    @media ${QUERY.tabletAndUp} {
+        height: 7px;
+        width: 7px;
     }
 `;
 
