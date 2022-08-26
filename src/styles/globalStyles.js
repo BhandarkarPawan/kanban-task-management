@@ -32,6 +32,7 @@ html{
     --color-gray-400: hsl(${COLOR.gray[400]});
     --color-gray-500: hsl(${COLOR.gray[500]});
     --color-gray-600: hsl(${COLOR.gray[600]});
+	--color-overlay: hsla(${COLOR.black} / 0.6);
 
 	// border radius
 	--r-xs : ${RADIUS.xs}px;

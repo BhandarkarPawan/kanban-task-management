@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import "./App.css";
-import BoardsList from "./components/BoardsList";
+import Button from "./components/Button";
 import Header from "./components/Header";
+import data from "./data.json";
 import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
 import { darkTheme, lightTheme } from "./styles/themes";
 
-import data from "./data.json";
 function App() {
     const [theme, setTheme] = useState(lightTheme);
+    const [selectedBoard, setSelectedBoard] = useState(data.boards[0]);
 
     const themeToggler = () => {
         theme === lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
@@ -20,12 +21,24 @@ function App() {
             <ResetStyles />
             <GlobalStyles />
             <ThemeProvider theme={theme}>
-                <button onClick={themeToggler}>Switch Theme</button>
-                <Header></Header>
-                <BoardsList boards={data.boards} />
+                <TempWrapper>
+                    <Button onClick={themeToggler}>Switch Theme</Button>
+                </TempWrapper>
+                <Header
+                    boards={data.boards}
+                    selectedBoard={selectedBoard}
+                    setSelectedBoard={setSelectedBoard}
+                ></Header>
             </ThemeProvider>
         </>
     );
 }
+
+const TempWrapper = styled.div`
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 16px;
+`;
 
 export default App;

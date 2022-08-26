@@ -4,6 +4,8 @@ import VisuallyHidden from "../VisuallyHidden";
 export const ICON = {
     add: "icon-add-task-mobile.svg",
     board: "icon-board.svg",
+    down: "icon-chevron-down.svg",
+    up: "icon-chevron-up.svg",
 };
 
 const Icon = ({ icon, label }) => {

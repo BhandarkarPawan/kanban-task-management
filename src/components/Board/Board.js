@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import Icon from "../Icon";
 
-const Board = ({ id, name, value, checked, children }) => {
+const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
     return (
         <Wrapper>
-            <Input type="radio" id={id} name={name} value={value} />
+            <Input
+                type="radio"
+                id={id}
+                name={name}
+                value={value}
+                checked={checked}
+                onChange={() => setSelectedBoard(value)}
+            />
             <LabelWrapper htmlFor={id}>
                 <IconWrapper>
                     <Icon icon="board" />

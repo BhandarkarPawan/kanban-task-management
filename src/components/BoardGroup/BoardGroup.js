@@ -2,12 +2,13 @@ import styled from "styled-components";
 import AddBoardButton from "../AddBoardButton";
 import Board from "../Board/Board";
 
-const BoardsList = ({ boards, children }) => {
+const BoardGroup = ({ boards, selectedBoard, setSelectedBoard }) => {
     const TITLE = "All Boards";
+    const ARIA_LABEL = `${TITLE} There are currently ${boards.length} boards`;
 
     return (
         <Wrapper role="radiogroup">
-            <Title>
+            <Title aria-label={ARIA_LABEL}>
                 {TITLE}({boards.length})
             </Title>
             <Stretched>
@@ -18,7 +19,9 @@ const BoardsList = ({ boards, children }) => {
                             key={i}
                             id={board.name}
                             type="radio"
-                            value={board.name}
+                            value={board}
+                            checked={selectedBoard === board}
+                            setSelectedBoard={setSelectedBoard}
                         >
                             {board.name}
                         </Board>
@@ -36,7 +39,7 @@ const Wrapper = styled.fieldset`
 
     padding: 0;
     border: none;
-    padding: var(--space);
+    padding: 16px var(--space);
     background-color: ${({ theme }) => theme.backgroundLight};
 `;
 
@@ -53,16 +56,4 @@ const Title = styled.h3`
     color: var(--color-gray-300);
     margin-bottom: 19px;
 `;
-
-const AddButton = styled.button`
-    display: flex;
-    color: var(--color-primary);
-    align-items: baseline;
-`;
-
-const IconWrapper = styled.div`
-    height: 7px;
-    width: 7px;
-`;
-
-export default BoardsList;
+export default BoardGroup;

@@ -13,6 +13,7 @@ export const COLOR = {
     },
     black: "237deg 100% 4%",
     white: "0deg 0% 100%",
+    overlay: "0deg 0% 0",
 };
 
 export const WEIGHT = {

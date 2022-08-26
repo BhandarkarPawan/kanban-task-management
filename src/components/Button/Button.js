@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Button = ({ children }) => {
+const Button = ({ children, onClick }) => {
     return (
-        <Wrapper>
+        <Wrapper onClick={onClick}>
             <Label>{children}</Label>
         </Wrapper>
     );
