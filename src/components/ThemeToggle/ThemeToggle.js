@@ -1,17 +1,19 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { darkTheme } from "../../styles/themes";
-import Icon, { ICON } from "../Icon/Icon";
+import Icon, { ICON } from "../Icon";
 import Toggle from "../Toggle";
 
-const ThemeToggle = ({ selectedTheme, toggleTheme }) => {
+const ThemeToggle = ({ toggleTheme }) => {
+    const theme = useTheme();
+
     return (
         <Wrapper>
             <LightIconWrapper>
-                <Icon icon={ICON.lightTheme} />
+                <Icon label="Light Theme" icon={ICON.lightTheme} />
             </LightIconWrapper>
-            <Toggle isOn={selectedTheme === darkTheme} onChange={toggleTheme} />
+            <Toggle isOn={theme === darkTheme} onChange={toggleTheme} />
             <DarkIconWrapper>
-                <Icon icon={ICON.darkTheme} />
+                <Icon label="Dark Theme" icon={ICON.darkTheme} />
             </DarkIconWrapper>
         </Wrapper>
     );

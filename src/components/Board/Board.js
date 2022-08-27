@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import Icon from "../Icon";
-import { ICON } from "../Icon/Icon";
+import Icon, { ICON } from "../Icon";
 
 const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
     return (
@@ -15,7 +14,7 @@ const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
             />
             <LabelWrapper htmlFor={id}>
                 <IconWrapper>
-                    <Icon icon={ICON.board} />
+                    <Icon label={name} icon={ICON.board} />
                 </IconWrapper>
                 {children}
             </LabelWrapper>
@@ -49,7 +48,7 @@ const LabelWrapper = styled.label`
     font-size: var(--size-h-m);
     line-height: var(--line-h-m);
     gap: 12px;
-    padding: 16px 24px;
+    padding: 14px 0px 15px 24px;
     color: var(--color-gray-300);
     border-radius: 0px 5000px 5000px 0px;
 

@@ -2,8 +2,8 @@ import styled from "styled-components";
 import AddBoardButton from "../AddBoardButton";
 import Board from "../Board/Board";
 
-const BoardGroup = ({ boards, selectedBoard, setSelectedBoard }) => {
-    const TITLE = "All Boards";
+const BoardGroup = ({ boards, selectedBoard, setSelectedBoard, children }) => {
+    const TITLE = "All Boards  ";
     const ARIA_LABEL = `${TITLE} There are currently ${boards.length} boards`;
 
     return (
@@ -18,7 +18,6 @@ const BoardGroup = ({ boards, selectedBoard, setSelectedBoard }) => {
                             name={TITLE}
                             key={i}
                             id={board.name}
-                            type="radio"
                             value={board}
                             checked={selectedBoard === board}
                             setSelectedBoard={setSelectedBoard}
@@ -28,19 +27,25 @@ const BoardGroup = ({ boards, selectedBoard, setSelectedBoard }) => {
                     );
                 })}
 
-                <AddBoardButton />
+                <AddBoardButton
+                    onClick={() => {
+                        console.log("TODO: Adds new board");
+                    }}
+                />
             </Stretched>
+            {children}
         </Wrapper>
     );
 };
 
 const Wrapper = styled.fieldset`
-    --space: 24px;
-
-    padding: 0;
+    --space: 16px;
     border: none;
     padding: 16px var(--space);
     background-color: ${({ theme }) => theme.backgroundLight};
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 `;
 
 const Stretched = styled.div`
@@ -54,6 +59,7 @@ const Title = styled.h3`
     text-transform: uppercase;
     letter-spacing: 2.4px;
     color: var(--color-gray-300);
-    margin-bottom: 19px;
+    margin-left: 8px;
+    margin-bottom: 3px;
 `;
 export default BoardGroup;

@@ -55,7 +55,7 @@ html{
 
 	// line heights
 	--line-h-xl:  ${LINE_HEIGHT.headingXL}rem;
-	--line-h-l :  ${LINE_HEIGHT.headingL} 
+	--line-h-l :  ${LINE_HEIGHT.headingL};
 	--line-h-m :  ${LINE_HEIGHT.headingM}rem;
 	--line-h-s :  ${LINE_HEIGHT.headingS}rem;
 	--line-b-l :  ${LINE_HEIGHT.bodyL}rem;

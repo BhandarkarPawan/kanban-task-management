@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Toggle = ({ isOn, onChange }) => {
-    console.log(isOn);
     return (
         <Wrapper
             type="button"

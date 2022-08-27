@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Icon, { ICON } from "../Icon";
+import Icon, { ICON } from "../Icon/Icon";
 
 const AddBoardButton = ({ onClick }) => {
     return (

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import BoardGroup from "../BoardGroup";
 import Icon, { ICON } from "../Icon";
 
-const BoardSelect = ({ boards, selectedBoard, setSelectedBoard }) => {
+const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleModal() {
@@ -42,7 +42,9 @@ const BoardSelect = ({ boards, selectedBoard, setSelectedBoard }) => {
                             boards={boards}
                             selectedBoard={selectedBoard}
                             setSelectedBoard={handleSelectBoard}
-                        />
+                        >
+                            {children}
+                        </BoardGroup>
                     </ModalStyle>
                 )}
                 overlayElement={(props, contentElement) => (
