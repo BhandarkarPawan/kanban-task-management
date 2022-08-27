@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Icon from "../Icon";
+import Icon, { ICON } from "../Icon";
 
 const AddBoardButton = ({ onClick }) => {
     return (
         <Wrapper aria-label="Create New Board">
             <IconWrapper>
-                <Icon icon="board" />
+                <Icon icon={ICON.board} />
             </IconWrapper>
             + Create New Board
         </Wrapper>

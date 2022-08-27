@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import BoardGroup from "../BoardGroup";
-import Icon from "../Icon";
+import Icon, { ICON } from "../Icon";
 
 const BoardSelect = ({ boards, selectedBoard, setSelectedBoard }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,9 +23,9 @@ const BoardSelect = ({ boards, selectedBoard, setSelectedBoard }) => {
                 {selectedBoard.name}
                 <IconWrapper>
                     {isOpen ? (
-                        <Icon icon="up" label="Close Menu" />
+                        <Icon icon={ICON.up} label="Close Menu" />
                     ) : (
-                        <Icon icon="down" label="Expand Menu" />
+                        <Icon icon={ICON.down} label="Expand Menu" />
                     )}
                 </IconWrapper>
             </Select>
@@ -73,7 +73,7 @@ const ModalStyle = styled.div`
 
     // TODO: Find a better solution
     position: absolute;
-    top: 80px;
+    top: 16px;
     left: 53px;
 
     @media ${QUERY.tabletAndUp} {
@@ -118,6 +118,7 @@ const OverlayStyle = styled.div`
     right: 0;
     bottom: 0;
     background: var(--color-overlay);
+    margin-top: 64px;
 
     @media ${QUERY.tabletAndUp} {
         display: none;

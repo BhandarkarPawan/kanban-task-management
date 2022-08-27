@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Icon from "../Icon";
+import { ICON } from "../Icon/Icon";
 
 const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
     return (
@@ -14,7 +15,7 @@ const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
             />
             <LabelWrapper htmlFor={id}>
                 <IconWrapper>
-                    <Icon icon="board" />
+                    <Icon icon={ICON.board} />
                 </IconWrapper>
                 {children}
             </LabelWrapper>

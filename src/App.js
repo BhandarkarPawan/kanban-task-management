@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import "./App.css";
-import Button from "./components/Button";
-import Header from "./components/Header";
+import ThemeToggle from "./components/ThemeToggle";
 import data from "./data.json";
 import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
@@ -21,14 +20,15 @@ function App() {
             <ResetStyles />
             <GlobalStyles />
             <ThemeProvider theme={theme}>
-                <TempWrapper>
+                {/* <TempWrapper>
                     <Button onClick={themeToggler}>Switch Theme</Button>
                 </TempWrapper>
                 <Header
                     boards={data.boards}
                     selectedBoard={selectedBoard}
                     setSelectedBoard={setSelectedBoard}
-                ></Header>
+                ></Header> */}
+                <ThemeToggle selectedTheme={theme} toggleTheme={themeToggler} />
             </ThemeProvider>
         </>
     );

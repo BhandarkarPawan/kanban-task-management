@@ -6,10 +6,12 @@ export const ICON = {
     board: "icon-board.svg",
     down: "icon-chevron-down.svg",
     up: "icon-chevron-up.svg",
+    lightTheme: "icon-light-theme.svg",
+    darkTheme: "icon-dark-theme.svg",
 };
 
 const Icon = ({ icon, label }) => {
-    const src = `assets/${ICON[icon]}`;
+    const src = `assets/${icon}`;
 
     return (
         <Wrapper>
