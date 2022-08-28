@@ -1,7 +1,6 @@
 import { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import "./App.css";
-import Button from "./components/Button";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import data from "./data.json";
@@ -27,9 +26,6 @@ function App() {
             <ResetStyles />
             <GlobalStyles />
             <ThemeProvider theme={theme}>
-                <TempWrapper>
-                    <Button onClick={toggleSidebar}>Show Sidebar</Button>
-                </TempWrapper>
                 <Sidebar
                     selectedBoard={selectedBoard}
                     setSelectedBoard={setSelectedBoard}
@@ -50,12 +46,5 @@ function App() {
         </>
     );
 }
-
-const TempWrapper = styled.div`
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 16px;
-`;
 
 export default App;

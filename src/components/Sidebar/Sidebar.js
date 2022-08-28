@@ -13,8 +13,8 @@ const Sidebar = ({
     setSelectedBoard,
     toggleTheme,
 }) => {
-    return (
-        <Wrapper showSidebar={showSidebar}>
+    return showSidebar ? (
+        <Wrapper>
             <LogoWrapper>
                 <Logo full />
             </LogoWrapper>
@@ -29,19 +29,25 @@ const Sidebar = ({
             <ToggleStretch>
                 <ThemeToggle toggleTheme={toggleTheme} />
             </ToggleStretch>
-            <HideSidebar role="button" onClick={toggleSidebar}>
+            <HideSidebarButton onClick={toggleSidebar}>
                 {/* TODO: Remove IconWrapper */}
-                <IconWrapper>
+                <HideIconWrapper>
                     <Icon icon={ICON.hideSidebar} label="Hide Sidebar" />
-                </IconWrapper>
-                <Label>Hide Sidebar</Label>
-            </HideSidebar>
+                </HideIconWrapper>
+                <Label aria-hidden>Hide Sidebar</Label>
+            </HideSidebarButton>
         </Wrapper>
+    ) : (
+        <ShowSidebarButton onClick={toggleSidebar}>
+            <ShowIconWrapper>
+                <Icon icon={ICON.showSidebar} label="Show Sidebar" />
+            </ShowIconWrapper>
+        </ShowSidebarButton>
     );
 };
 
 const Wrapper = styled.nav`
-    display: none;
+    display: flex;
     --pad-h: 24px;
 
     @media ${QUERY.laptopAndUp} {
@@ -50,7 +56,7 @@ const Wrapper = styled.nav`
 
     @media ${QUERY.tabletAndUp} {
         background-color: ${({ theme }) => theme.backgroundLight};
-        display: ${(props) => (props.showSidebar ? "flex" : "none")};
+
         flex-direction: column;
         justify-content: start;
         padding: 32px var(--pad-h);
@@ -68,16 +74,37 @@ const Stretched = styled.div`
     margin-right: calc(-1 * var(--pad-h));
 `;
 
-const HideSidebar = styled.div`
+const HideSidebarButton = styled.button`
+    background-color: transparent;
+    border: none;
     margin-top: 30px;
     display: flex;
     align-items: center;
     gap: 10px;
 `;
 
-const IconWrapper = styled.div`
+const ShowSidebarButton = styled.button`
+    position: fixed;
+    width: 56px;
+    height: 48px;
+    padding: 0px;
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: 0 5000px 5000px 0;
+    bottom: 32px;
+    left: 0px;
+`;
+
+const HideIconWrapper = styled.div`
     height: 16px;
     width: 18px;
+`;
+
+const ShowIconWrapper = styled.div`
+    height: 12px;
+    width: 18px;
+    margin-left: 16px;
+    margin-right: 22px;
 `;
 
 const Label = styled.label`
