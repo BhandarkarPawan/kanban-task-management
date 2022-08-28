@@ -47,7 +47,7 @@ const Sidebar = ({
 };
 
 const Wrapper = styled.nav`
-    display: flex;
+    display: none;
     --pad-h: 24px;
 
     @media ${QUERY.laptopAndUp} {
@@ -56,7 +56,7 @@ const Wrapper = styled.nav`
 
     @media ${QUERY.tabletAndUp} {
         background-color: ${({ theme }) => theme.backgroundLight};
-
+        display: flex;
         flex-direction: column;
         justify-content: start;
         padding: 32px var(--pad-h);
