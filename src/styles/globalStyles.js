@@ -81,16 +81,20 @@ body {
 }
 
 #root{
-	/* @media ${QUERY.tabletAndUp}{
+	/* display: flex; */
+
+	@media ${QUERY.tabletAndUp}{
 		display: grid;
-		grid-template-columns: 260px 1fr;
+		place-items: center;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto 1fr;
 		grid-template-areas: 
 			"sidebar header"
 			"sidebar main";
-	} */
+	}
 
-	display: flex;
-	align-items: start;
+	/* display: flex;
+	align-items: start; */
 }
 
 code {

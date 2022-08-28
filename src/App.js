@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -42,9 +42,18 @@ function App() {
                     fullLogo={false}
                     showLogo={!showSidebar}
                 ></Header>
+                <Main></Main>
             </ThemeProvider>
         </>
     );
 }
+
+export const Main = styled.main`
+    background-color: ${({ theme }) => theme.background};
+    height: 100%;
+    width: 100%;
+
+    grid-area: main;
+`;
 
 export default App;

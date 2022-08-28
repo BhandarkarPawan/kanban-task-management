@@ -16,7 +16,9 @@ const Header = ({
 }) => {
     return (
         <Wrapper>
-            {showLogo && <Logo full={fullLogo} />}
+            <LogoWrapper show={showLogo}>
+                <Logo full={fullLogo} />
+            </LogoWrapper>
             <BoardSelect
                 boards={boards}
                 selectedBoard={selectedBoard}
@@ -33,22 +35,30 @@ const Header = ({
 };
 
 const Wrapper = styled.header`
+    --pad: 16px 16px;
+
+    @media ${QUERY.tabletAndUp} {
+        --pad: 16px 24px;
+    }
+
+    @media ${QUERY.laptopAndUp} {
+        --pad: 20px 32px 28px 24px;
+    }
+
     background-color: ${({ theme }) => theme.backgroundLight};
     color: ${({ theme }) => theme.color};
     width: 100%;
-    padding: 16px;
-    /* grid-area: header; */
+    padding: var(--pad);
+    grid-area: header;
 
     display: flex;
     align-items: center;
     gap: 16px;
+`;
 
+const LogoWrapper = styled.div`
     @media ${QUERY.tabletAndUp} {
-        padding: 16px 24px;
-    }
-
-    @media ${QUERY.laptopAndUp} {
-        padding: 20px 32px 28px 32px;
+        display: ${(props) => (props.show ? "inital" : "none")};
     }
 `;
 

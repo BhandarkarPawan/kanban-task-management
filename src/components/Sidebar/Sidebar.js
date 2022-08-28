@@ -49,6 +49,7 @@ const Sidebar = ({
 const Wrapper = styled.nav`
     display: none;
     --pad-h: 24px;
+    grid-area: sidebar;
 
     @media ${QUERY.laptopAndUp} {
         --pad-h: 32px;
@@ -84,15 +85,20 @@ const HideSidebarButton = styled.button`
 `;
 
 const ShowSidebarButton = styled.button`
-    position: fixed;
-    width: 56px;
-    height: 48px;
-    padding: 0px;
-    border: none;
-    background-color: var(--color-primary);
-    border-radius: 0 5000px 5000px 0;
-    bottom: 32px;
-    left: 0px;
+    display: none;
+
+    @media ${QUERY.tabletAndUp} {
+        display: initial;
+        position: fixed;
+        width: 56px;
+        height: 48px;
+        padding: 0px;
+        border: none;
+        background-color: var(--color-primary);
+        border-radius: 0 5000px 5000px 0;
+        bottom: 32px;
+        left: 0px;
+    }
 `;
 
 const HideIconWrapper = styled.div`
