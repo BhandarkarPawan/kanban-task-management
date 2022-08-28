@@ -19,7 +19,9 @@ export const ResponsiveIconButton = ({ icon, label, children }) => {
                     <Icon icon={icon} label={label} />
                 </ResponsiveIconWrapper>
             )}
-            <Label responsive>{children}</Label>
+            <Label responsive aria-hidden>
+                {children}
+            </Label>
         </ResponsiveWrapper>
     );
 };

@@ -25,7 +25,7 @@ const Header = ({
                 <ThemeToggle toggleTheme={toggleTheme} />
             </BoardSelect>
             <Spacer />
-            <ResponsiveIconButton icon={ICON.add} label="">
+            <ResponsiveIconButton icon={ICON.add} label="Add New Task">
                 Add New Task
             </ResponsiveIconButton>
         </Wrapper>
