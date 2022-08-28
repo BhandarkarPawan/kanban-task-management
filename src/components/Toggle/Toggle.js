@@ -32,7 +32,7 @@ const Knob = styled.div`
 
     transform: ${(props) =>
         props.isOn ? "translateX(0px)" : "translateX(20px)"};
-    transition: transform 500ms ease;
+    transition: transform 300ms ease;
 `;
 
 export default Toggle;

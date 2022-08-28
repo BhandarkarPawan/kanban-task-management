@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { QUERY } from "../../constants";
 import Icon, { ICON } from "../Icon/Icon";
 
 const AddBoardButton = ({ onClick }) => {
@@ -30,6 +31,10 @@ const Wrapper = styled.button`
     border: none;
     background-color: transparent;
     color: var(--color-primary);
+
+    @media ${QUERY.laptopAndUp} {
+        padding-left: 32px;
+    }
 `;
 
 export default AddBoardButton;

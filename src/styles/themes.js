@@ -1,13 +1,13 @@
 export const lightTheme = {
-    backgroundLight: `var(--color-white)`,
     background: `var(--color-gray-100)`,
+    backgroundLight: `var(--color-white)`,
     color: `var(--color-black)`,
-    logo: `url(assets/logo-light.svg)`,
+    logo: `assets/logo-dark.svg`,
 };
 
 export const darkTheme = {
-    background: `var(--color-black)`,
-    backgroundLight: `var(--color-gray-600)`,
+    background: `var(--color-gray-600)`,
+    backgroundLight: `var(--color-gray-500)`,
     color: `var(--color-white)`,
-    logo: `url(assets/logo-dark.svg)`,
+    logo: `assets/logo-light.svg`,
 };

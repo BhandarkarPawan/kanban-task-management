@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { QUERY } from "../../constants";
 import AddBoardButton from "../AddBoardButton";
 import Board from "../Board/Board";
 
@@ -40,12 +41,18 @@ const BoardGroup = ({ boards, selectedBoard, setSelectedBoard, children }) => {
 
 const Wrapper = styled.fieldset`
     --space: 16px;
+
+    @media ${QUERY.laptopAndUp} {
+        --space: 24px;
+    }
+
     border: none;
     padding: 16px var(--space);
     background-color: ${({ theme }) => theme.backgroundLight};
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
 `;
 
 const Stretched = styled.div`

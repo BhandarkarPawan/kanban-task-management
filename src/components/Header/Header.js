@@ -6,10 +6,17 @@ import { ResponsiveIconButton } from "../IconButton/IconButton";
 import Logo from "../Logo";
 import ThemeToggle from "../ThemeToggle";
 
-const Header = ({ boards, selectedBoard, setSelectedBoard, toggleTheme }) => {
+const Header = ({
+    boards,
+    selectedBoard,
+    setSelectedBoard,
+    toggleTheme,
+    fullLogo,
+    showLogo,
+}) => {
     return (
         <Wrapper>
-            <Logo />
+            {showLogo && <Logo full={fullLogo} />}
             <BoardSelect
                 boards={boards}
                 selectedBoard={selectedBoard}
@@ -18,7 +25,7 @@ const Header = ({ boards, selectedBoard, setSelectedBoard, toggleTheme }) => {
                 <ThemeToggle toggleTheme={toggleTheme} />
             </BoardSelect>
             <Spacer />
-            <ResponsiveIconButton icon={ICON.add} label="Add New Task">
+            <ResponsiveIconButton icon={ICON.add} label="">
                 Add New Task
             </ResponsiveIconButton>
         </Wrapper>
@@ -30,13 +37,14 @@ const Wrapper = styled.header`
     color: ${({ theme }) => theme.color};
     width: 100%;
     padding: 16px;
+    /* grid-area: header; */
 
     display: flex;
     align-items: center;
     gap: 16px;
 
     @media ${QUERY.tabletAndUp} {
-        padding: 24px 16px;
+        padding: 16px 24px;
     }
 
     @media ${QUERY.laptopAndUp} {

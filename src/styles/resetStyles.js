@@ -20,8 +20,9 @@ const ResetStyles = createGlobalStyle`
   */
 html,
 body,
-#__next {
-    /* min-height: 100%; */
+#__next, 
+#root {
+    height: 100%;
 }
 /*
 	Typographic tweaks!

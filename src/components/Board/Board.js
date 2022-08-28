@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { QUERY } from "../../constants";
 import Icon, { ICON } from "../Icon";
 
 const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
@@ -24,6 +25,14 @@ const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
 
 const Wrapper = styled.div`
     margin-right: 24px;
+
+    @media ${QUERY.tabletAndUp} {
+        margin-right: 20px;
+    }
+
+    @media ${QUERY.laptopAndUp} {
+        margin-right: 24px;
+    }
 `;
 
 const Input = styled.input`
@@ -51,6 +60,10 @@ const LabelWrapper = styled.label`
     padding: 14px 0px 15px 24px;
     color: var(--color-gray-300);
     border-radius: 0px 5000px 5000px 0px;
+
+    @media ${QUERY.laptopAndUp} {
+        padding-left: 32px;
+    }
 
     ${Input}:checked + & {
         color: var(--color-white);

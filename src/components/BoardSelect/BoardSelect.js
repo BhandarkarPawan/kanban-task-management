@@ -105,6 +105,7 @@ const Label = styled(Select)`
 
     @media ${QUERY.tabletAndUp} {
         display: revert;
+        padding-top: 4px;
     }
 
     @media ${QUERY.laptopAndUp} {

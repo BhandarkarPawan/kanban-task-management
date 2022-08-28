@@ -1,5 +1,12 @@
 import { createGlobalStyle } from "styled-components";
-import { COLOR, FONT_SIZE, LINE_HEIGHT, RADIUS, WEIGHT } from "../constants";
+import {
+    COLOR,
+    FONT_SIZE,
+    LINE_HEIGHT,
+    QUERY,
+    RADIUS,
+    WEIGHT,
+} from "../constants";
 
 const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -71,6 +78,19 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 	font-weight: var(--weight-bold);
+}
+
+#root{
+	/* @media ${QUERY.tabletAndUp}{
+		display: grid;
+		grid-template-columns: 260px 1fr;
+		grid-template-areas: 
+			"sidebar header"
+			"sidebar main";
+	} */
+
+	display: flex;
+	align-items: start;
 }
 
 code {

@@ -1,4 +1,5 @@
 import styled, { useTheme } from "styled-components";
+import { QUERY } from "../../constants";
 import { darkTheme } from "../../styles/themes";
 import Icon, { ICON } from "../Icon";
 import Toggle from "../Toggle";
@@ -24,10 +25,13 @@ const Wrapper = styled.div`
     gap: 24px;
     padding: 14px;
     background-color: ${({ theme }) => theme.background};
-    width: 235px;
     border-radius: var(--r-m);
-    display: flex;
     justify-content: center;
+    width: 235px;
+
+    @media ${QUERY.laptopAndUp} {
+        width: 251px;
+    }
 `;
 
 const LightIconWrapper = styled.div`
