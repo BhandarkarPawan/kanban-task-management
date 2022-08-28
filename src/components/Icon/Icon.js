@@ -8,6 +8,7 @@ export const ICON = {
     up: "icon-chevron-up.svg",
     lightTheme: "icon-light-theme.svg",
     darkTheme: "icon-dark-theme.svg",
+    hideSidebar: "icon-hide-sidebar.svg",
 };
 
 const Icon = ({ icon, label }) => {

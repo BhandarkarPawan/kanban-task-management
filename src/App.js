@@ -36,6 +36,7 @@ function App() {
                     showSidebar={showSidebar}
                     boards={data.boards}
                     toggleTheme={toggleTheme}
+                    toggleSidebar={toggleSidebar}
                 />
                 <Header
                     boards={data.boards}
