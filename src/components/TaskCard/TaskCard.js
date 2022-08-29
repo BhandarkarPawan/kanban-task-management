@@ -24,6 +24,7 @@ const Wrapper = styled.div`
     border-radius: var(--r-l);
     width: 280px;
     padding: 23px 16px;
+    scroll-snap-align: start;
 `;
 
 const Title = styled.div`

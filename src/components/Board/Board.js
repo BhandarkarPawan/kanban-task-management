@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import TaskCard from "../TaskCard";
+import Column from "../Column";
 
 const Board = ({ board }) => {
     return (
         <Wrapper>
             {board.columns.map((column) => (
-                <Column>
-                    {column.tasks.map((task) => (
-                        <TaskCard task={task} />
-                    ))}
-                </Column>
+                <Column column={column} />
             ))}
             <AddColumnButton>+ New Column</AddColumnButton>
         </Wrapper>
@@ -17,39 +13,30 @@ const Board = ({ board }) => {
 };
 
 const Wrapper = styled.main`
+    --pad-h: 22px;
+
     background-color: ${({ theme }) => theme.background};
     height: 100%;
     width: 100%;
     grid-area: main;
-    padding: 0px 22px; // TODO: Update this
+    padding: 0px var(--pad-h); // TODO: Update this
 
     display: flex;
     gap: 20px;
 
+    // For an improved scroll experience on mobile
     overflow-x: scroll;
-    overflow-y: hidden; ;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0px var(--pad-h);
 `;
 
-const Column = styled.section`
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex-shrink: 0;
-    padding: 24px 2px;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-`;
-
+// TODO: Add comments everywhere
 // TODO: Make these button styles global
 const AddColumnButton = styled.button`
     border: none;
     background: ${({ theme }) => theme.backgroundDark};
+
     width: 280px;
     margin: 24px 0px;
     border-radius: var(--r-m);
@@ -57,6 +44,9 @@ const AddColumnButton = styled.button`
     font-size: var(--size-h-xl);
     line-height: var(--line-h-xl);
     color: var(--color-gray-300);
+
+    // For an improved scroll experience on mobile
+    scroll-snap-align: start;
 `;
 
 export default Board;
