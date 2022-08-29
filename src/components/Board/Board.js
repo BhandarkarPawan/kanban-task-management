@@ -1,16 +1,57 @@
 import styled from "styled-components";
+import { QUERY } from "../../constants";
+import Button from "../Button";
 import Column from "../Column";
 
 const Board = ({ board }) => {
+    const isEmpty = board.columns.length === 0;
+
     return (
         <Wrapper>
-            {board.columns.map((column) => (
-                <Column column={column} />
-            ))}
-            <AddColumnButton>+ New Column</AddColumnButton>
+            {isEmpty ? (
+                <EmptyWrapper>
+                    <Label>
+                        This board is empty. Create a new column to get started.
+                    </Label>
+                    <Button
+                        onClick={() => {
+                            console.log("Adding new column");
+                        }}
+                    >
+                        {/* Do not read "plus" on voiceover */}
+                        <span aria-hidden>+</span>Add New Column
+                    </Button>
+                </EmptyWrapper>
+            ) : (
+                <>
+                    {board.columns.map((column) => (
+                        <Column column={column} />
+                    ))}
+                    <AddColumnButton>+ New Column</AddColumnButton>
+                </>
+            )}
         </Wrapper>
     );
 };
+
+const EmptyWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin: auto;
+    text-align: center;
+
+    @media ${QUERY.laptopAndUp} {
+        gap: 32px;
+    }
+`;
+
+const Label = styled.label`
+    font-size: var(--sizeh-l);
+    line-height: var(--line-h-l);
+    color: var(--color-gray-300);
+`;
 
 const Wrapper = styled.main`
     --pad-h: 22px;
