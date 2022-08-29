@@ -1,6 +1,7 @@
 import { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import "./App.css";
+import Board from "./components/Board";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import data from "./data.json";
@@ -42,18 +43,10 @@ function App() {
                     fullLogo={false}
                     showLogo={!showSidebar}
                 ></Header>
-                <Main></Main>
+                <Board board={data.boards[0]} />
             </ThemeProvider>
         </>
     );
 }
-
-export const Main = styled.main`
-    background-color: ${({ theme }) => theme.background};
-    height: 100%;
-    width: 100%;
-
-    grid-area: main;
-`;
 
 export default App;

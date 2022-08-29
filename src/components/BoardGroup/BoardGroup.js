@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import AddBoardButton from "../AddBoardButton";
-import Board from "../Board/Board";
+import BoardOption from "../BoardOption";
 
 const BoardGroup = ({ boards, selectedBoard, setSelectedBoard, children }) => {
     const TITLE = "All Boards  ";
@@ -15,7 +15,7 @@ const BoardGroup = ({ boards, selectedBoard, setSelectedBoard, children }) => {
             <Stretched>
                 {boards.map((board, i) => {
                     return (
-                        <Board
+                        <BoardOption
                             name={TITLE}
                             key={i}
                             id={board.name}
@@ -24,10 +24,9 @@ const BoardGroup = ({ boards, selectedBoard, setSelectedBoard, children }) => {
                             setSelectedBoard={setSelectedBoard}
                         >
                             {board.name}
-                        </Board>
+                        </BoardOption>
                     );
                 })}
-
                 <AddBoardButton
                     onClick={() => {
                         console.log("TODO: Adds new board");

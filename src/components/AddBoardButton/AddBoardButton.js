@@ -31,6 +31,7 @@ const Wrapper = styled.button`
     border: none;
     background-color: transparent;
     color: var(--color-primary);
+    width: 100%;
 
     @media ${QUERY.laptopAndUp} {
         padding-left: 32px;

@@ -67,7 +67,32 @@ html{
 	--line-h-s :  ${LINE_HEIGHT.headingS}rem;
 	--line-b-l :  ${LINE_HEIGHT.bodyL}rem;
 	--line-b-m :  ${LINE_HEIGHT.bodyM}rem;
+
+	// 
+	--shadow-color-light: 219deg 24% 61%;
+	--shadow-light:   
+		0px 0.2px 0.2px hsl(var(--shadow-color-light) / 0.26),
+		0px 0.6px 0.6px -0.5px hsl(var(--shadow-color-light) / 0.25),
+		0px 1.1px 1.1px -1px hsl(var(--shadow-color-light) / 0.23),
+		0px 2px 2.1px -1.6px hsl(var(--shadow-color-light) / 0.22),
+		0.1px 3.6px 3.7px -2.1px hsl(var(--shadow-color-light) / 0.2),
+		0.1px 6px 6.2px -2.6px hsl(var(--shadow-color-light) / 0.19),
+		0.2px 9.6px 9.9px -3.1px hsl(var(--shadow-color-light) / 0.17);
+
+	--shadow-color-dark: 236deg 26% 7%;
+	--shadow-dark:  
+		0px 0.2px 0.2px hsl(var(--shadow-color-dark) / 0.17),
+		0px 0.8px 0.9px -0.2px hsl(var(--shadow-color-dark) / 0.17),
+		0px 1.3px 1.5px -0.5px hsl(var(--shadow-color-dark) / 0.18),
+		0px 1.9px 2.2px -0.7px hsl(var(--shadow-color-dark) / 0.18),
+		0.1px 2.8px 3.3px -1px hsl(var(--shadow-color-dark) / 0.18),
+		0.1px 3.9px 4.5px -1.2px hsl(var(--shadow-color-dark) / 0.19),
+		0.1px 5.5px 6.4px -1.5px hsl(var(--shadow-color-dark) / 0.19),
+		0.2px 7.6px 8.8px -1.7px hsl(var(--shadow-color-dark) / 0.2),
+		0.2px 10.3px 12px -2px hsl(var(--shadow-color-dark) / 0.2),
+		0.3px 13.8px 16px -2.2px hsl(var(--shadow-color-dark) / 0.2);
 }
+
 
 
 body {
@@ -81,7 +106,11 @@ body {
 }
 
 #root{
-	/* display: flex; */
+	display: grid;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: 
+		"header"
+		"main";
 
 	@media ${QUERY.tabletAndUp}{
 		display: grid;
@@ -92,9 +121,6 @@ body {
 			"sidebar header"
 			"sidebar main";
 	}
-
-	/* display: flex;
-	align-items: start; */
 }
 
 code {

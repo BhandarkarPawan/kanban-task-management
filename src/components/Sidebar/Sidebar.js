@@ -82,6 +82,7 @@ const HideSidebarButton = styled.button`
     display: flex;
     align-items: center;
     gap: 10px;
+    border-radius: var(--r-s);
 `;
 
 const ShowSidebarButton = styled.button`

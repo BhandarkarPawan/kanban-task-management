@@ -1,78 +1,62 @@
 import styled from "styled-components";
-import { QUERY } from "../../constants";
-import Icon, { ICON } from "../Icon";
+import TaskCard from "../TaskCard";
 
-const Board = ({ id, name, value, checked, children, setSelectedBoard }) => {
+const Board = ({ board }) => {
     return (
         <Wrapper>
-            <Input
-                type="radio"
-                id={id}
-                name={name}
-                value={value}
-                checked={checked}
-                onChange={() => setSelectedBoard(value)}
-            />
-            <LabelWrapper htmlFor={id}>
-                <IconWrapper>
-                    <Icon label={name} icon={ICON.board} />
-                </IconWrapper>
-                {children}
-            </LabelWrapper>
+            {board.columns.map((column) => (
+                <Column>
+                    {column.tasks.map((task) => (
+                        <TaskCard task={task} />
+                    ))}
+                </Column>
+            ))}
+            <AddColumnButton>+ New Column</AddColumnButton>
         </Wrapper>
     );
 };
 
-const Wrapper = styled.div`
-    margin-right: 24px;
+const Wrapper = styled.main`
+    background-color: ${({ theme }) => theme.background};
+    height: 100%;
+    width: 100%;
+    grid-area: main;
+    padding: 0px 22px; // TODO: Update this
 
-    @media ${QUERY.tabletAndUp} {
-        margin-right: 20px;
-    }
-
-    @media ${QUERY.laptopAndUp} {
-        margin-right: 24px;
-    }
-`;
-
-const Input = styled.input`
-    position: fixed;
-    opacity: 0;
-    pointer-events: none;
-`;
-
-const IconWrapper = styled.div`
-    height: 16px;
-    width: 16px;
-
-    ${Input}:checked + Label & {
-        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
-            hue-rotate(103deg) brightness(105%) contrast(105%);
-    }
-`;
-
-const LabelWrapper = styled.label`
     display: flex;
-    align-items: center;
-    font-size: var(--size-h-m);
-    line-height: var(--line-h-m);
-    gap: 12px;
-    padding: 14px 0px 15px 24px;
+    gap: 20px;
+
+    overflow-x: scroll;
+    overflow-y: hidden; ;
+`;
+
+const Column = styled.section`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+    padding: 24px 2px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+`;
+
+// TODO: Make these button styles global
+const AddColumnButton = styled.button`
+    border: none;
+    background: ${({ theme }) => theme.backgroundDark};
+    width: 280px;
+    margin: 24px 0px;
+    border-radius: var(--r-m);
+    flex-shrink: 0;
+    font-size: var(--size-h-xl);
+    line-height: var(--line-h-xl);
     color: var(--color-gray-300);
-    border-radius: 0px 5000px 5000px 0px;
-
-    @media ${QUERY.laptopAndUp} {
-        padding-left: 32px;
-    }
-
-    ${Input}:checked + & {
-        color: var(--color-white);
-        background-color: var(--color-primary);
-    }
-
-    ${Input}:focus-visible + & {
-        outline: var(--focus-outline);
-    }
 `;
 
 export default Board;
