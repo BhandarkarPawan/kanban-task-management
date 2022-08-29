@@ -28,9 +28,9 @@ html{
 
 	// COLORS 
 	--color-primary: hsl(${COLOR.primary});
-    --color-primaryLight: hsl(${COLOR.primaryLight});
+    --color-primary-light: hsl(${COLOR.primaryLight});
     --color-secondary: hsl(${COLOR.secondary});
-    --color-secondaryLight: hsl(${COLOR.secondaryLight});
+    --color-secondary-light: hsl(${COLOR.secondaryLight});
 	--color-black: hsl(${COLOR.black});
     --color-white: hsl(${COLOR.white});
 	--color-gray-100: hsl(${COLOR.gray[100]});

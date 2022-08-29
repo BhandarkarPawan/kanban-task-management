@@ -14,6 +14,11 @@ const Wrapper = styled.button`
     padding: 13px 18px 12px 18px;
     border: none;
     border-radius: 5000px;
+
+    &:hover {
+        background-color: var(--color-primary-light);
+        cursor: pointer;
+    }
 `;
 
 const Label = styled.div`

@@ -35,6 +35,11 @@ const Wrapper = styled.button`
     display: flex;
     align-items: baseline;
     gap: 4px;
+
+    &:hover {
+        background-color: var(--color-primary-light);
+        cursor: pointer;
+    }
 `;
 
 const ResponsiveWrapper = styled(Wrapper)`
