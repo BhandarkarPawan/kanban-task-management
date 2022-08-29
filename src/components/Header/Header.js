@@ -57,6 +57,7 @@ const Wrapper = styled.header`
 `;
 
 const LogoWrapper = styled.div`
+    flex-shrink: 0;
     @media ${QUERY.tabletAndUp} {
         display: ${(props) => (props.show ? "inital" : "none")};
     }
