@@ -38,7 +38,8 @@ const AddColumnButton = styled.button`
     background: ${({ theme }) => theme.backgroundDark};
 
     width: 280px;
-    margin: 24px 0px;
+    margin-top: 60px;
+    margin-bottom: 50px;
     border-radius: var(--r-m);
     flex-shrink: 0;
     font-size: var(--size-h-xl);
