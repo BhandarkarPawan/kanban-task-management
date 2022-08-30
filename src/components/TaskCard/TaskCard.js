@@ -6,7 +6,7 @@ const TaskCard = ({ task }) => {
     ).length;
 
     return (
-        <Wrapper tabIndex={0} role="button">
+        <Wrapper tabIndex={0}>
             <Title>{task.title}</Title>
             {task.subtasks.length && (
                 <Progress>
@@ -17,7 +17,10 @@ const TaskCard = ({ task }) => {
     );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
+    border: none;
+    text-align: left;
+
     background-color: ${({ theme }) => theme.backgroundLight};
     color: ${({ theme }) => theme.color};
     box-shadow: ${({ theme }) => theme.shadow};

@@ -11,8 +11,8 @@ const Column = ({ column }) => {
                 {column.name} ({numTasks})
             </Title>
             <TaskList>
-                {column.tasks.map((task) => (
-                    <TaskCard task={task} />
+                {column.tasks.map((task, i) => (
+                    <TaskCard key={i} task={task} />
                 ))}
             </TaskList>
         </Wrapper>

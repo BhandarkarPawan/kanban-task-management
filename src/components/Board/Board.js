@@ -24,8 +24,8 @@ const Board = ({ board }) => {
                 </EmptyWrapper>
             ) : (
                 <>
-                    {board.columns.map((column) => (
-                        <Column column={column} />
+                    {board.columns.map((column, i) => (
+                        <Column key={i} column={column} />
                     ))}
                     <AddColumnButton>+ New Column</AddColumnButton>
                 </>
@@ -70,6 +70,13 @@ const Wrapper = styled.main`
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-padding: 0px var(--pad-h);
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 `;
 
 // TODO: Add comments everywhere

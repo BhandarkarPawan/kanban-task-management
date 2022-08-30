@@ -1,9 +1,8 @@
 import { useState } from "react";
-import Modal from "react-modal";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
-import BoardGroup from "../BoardGroup";
 import Icon, { ICON } from "../Icon";
+import Modal from "../Modal";
 
 const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +14,7 @@ const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
     const handleSelectBoard = (board) => {
         setSelectedBoard(board);
         setIsOpen(false);
+        console.log("bruh");
     };
 
     return (
@@ -31,26 +31,14 @@ const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
             </Select>
             <Label disabled>{selectedBoard.name}</Label>
             <Modal
+                boards={boards}
                 isOpen={isOpen}
-                onRequestClose={toggleModal}
-                className="_"
-                overlayClassName="_"
-                ariaHideApp={false}
-                contentElement={(props) => (
-                    <ModalStyle {...props}>
-                        <BoardGroup
-                            boards={boards}
-                            selectedBoard={selectedBoard}
-                            setSelectedBoard={handleSelectBoard}
-                        >
-                            {children}
-                        </BoardGroup>
-                    </ModalStyle>
-                )}
-                overlayElement={(props, contentElement) => (
-                    <OverlayStyle {...props}>{contentElement}</OverlayStyle>
-                )}
-            ></Modal>
+                toggleModal={toggleModal}
+                handleSelectBoard={handleSelectBoard}
+                selectedBoard={selectedBoard}
+            >
+                {children}
+            </Modal>
         </Wrapper>
     );
 };
@@ -62,21 +50,6 @@ const Wrapper = styled.div`
 const IconWrapper = styled.div`
     height: 4px;
     width: 8px;
-
-    @media ${QUERY.tabletAndUp} {
-        display: none;
-    }
-`;
-
-const ModalStyle = styled.div`
-    max-width: fit-content;
-    border-radius: var(--r-l);
-    overflow: hidden;
-
-    // TODO: Find a better solution
-    position: absolute;
-    top: 16px;
-    left: 53px;
 
     @media ${QUERY.tabletAndUp} {
         display: none;
@@ -111,20 +84,6 @@ const Label = styled(Select)`
     @media ${QUERY.laptopAndUp} {
         font-size: var(--size-h-xl);
         line-height: var(--line-h-xl);
-    }
-`;
-
-const OverlayStyle = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--color-overlay);
-    margin-top: 64px;
-
-    @media ${QUERY.tabletAndUp} {
-        display: none;
     }
 `;
 
