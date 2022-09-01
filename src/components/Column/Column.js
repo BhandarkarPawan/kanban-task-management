@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TaskCard from "../TaskCard";
 
-const Column = ({ column }) => {
+const Column = ({ column, onTaskSelect }) => {
     const numTasks = column.tasks.length;
 
     return (
@@ -12,7 +12,7 @@ const Column = ({ column }) => {
             </Title>
             <TaskList>
                 {column.tasks.map((task, i) => (
-                    <TaskCard task={task} />
+                    <TaskCard onClick={onTaskSelect} key={i} task={task} />
                 ))}
             </TaskList>
         </Wrapper>

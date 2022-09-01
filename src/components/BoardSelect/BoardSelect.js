@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
+import BoardGroup from "../BoardGroup";
 import Icon, { ICON } from "../Icon";
 import Modal from "../Modal";
 
@@ -30,14 +31,14 @@ const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
                 </IconWrapper>
             </Select>
             <Label disabled>{selectedBoard.name}</Label>
-            <Modal
-                boards={boards}
-                isOpen={isOpen}
-                toggleModal={toggleModal}
-                handleSelectBoard={handleSelectBoard}
-                selectedBoard={selectedBoard}
-            >
-                {children}
+            <Modal isOpen={isOpen} toggleModal={toggleModal}>
+                <BoardGroup
+                    boards={boards}
+                    selectedBoard={selectedBoard}
+                    setSelectedBoard={handleSelectBoard}
+                >
+                    {children}
+                </BoardGroup>
             </Modal>
         </Wrapper>
     );

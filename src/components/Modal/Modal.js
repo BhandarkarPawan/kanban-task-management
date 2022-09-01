@@ -1,16 +1,7 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
-import { QUERY } from "../../constants";
-import BoardGroup from "../BoardGroup";
 
-const Modal = ({
-    boards,
-    isOpen,
-    toggleModal,
-    handleSelectBoard,
-    selectedBoard,
-    children,
-}) => {
+const Modal = ({ isOpen, toggleModal, children }) => {
     return (
         <ReactModal
             isOpen={isOpen}
@@ -19,15 +10,7 @@ const Modal = ({
             overlayClassName="_"
             ariaHideApp={false}
             contentElement={(props) => (
-                <ModalStyle {...props}>
-                    <BoardGroup
-                        boards={boards}
-                        selectedBoard={selectedBoard}
-                        setSelectedBoard={handleSelectBoard}
-                    >
-                        {children}
-                    </BoardGroup>
-                </ModalStyle>
+                <ModalStyle {...props}>{children}</ModalStyle>
             )}
             overlayElement={(props, contentElement) => (
                 <OverlayStyle {...props}>{contentElement}</OverlayStyle>
@@ -45,10 +28,6 @@ const ModalStyle = styled.div`
     position: absolute;
     top: 16px;
     left: 53px;
-
-    @media ${QUERY.tabletAndUp} {
-        display: none;
-    }
 `;
 
 const OverlayStyle = styled.div`
@@ -59,10 +38,6 @@ const OverlayStyle = styled.div`
     bottom: 0;
     background: var(--color-overlay);
     margin-top: 64px;
-
-    @media ${QUERY.tabletAndUp} {
-        display: none;
-    }
 `;
 
 export default Modal;

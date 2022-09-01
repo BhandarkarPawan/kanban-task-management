@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
-const TaskCard = ({ task }) => {
+const TaskCard = ({ task, onClick }) => {
     const completed = task.subtasks.filter(
         (subtask) => subtask.isCompleted
     ).length;
 
     return (
-        <Wrapper>
-            <Title>{task.title}</Title>
+        <Wrapper
+            onClick={() => {
+                onClick(task);
+            }}
+        >
+            <Title onClick={() => onClick(task)}>{task.title}</Title>
             {task.subtasks.length && (
                 <Progress>
                     {completed} of {task.subtasks.length} subtasks

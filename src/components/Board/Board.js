@@ -1,13 +1,39 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Button from "../Button";
 import Column from "../Column";
+import Modal from "../Modal";
 
 const Board = ({ board }) => {
     const isEmpty = board.columns.length === 0;
+    const [selectedTask, setSelectedTask] = useState(null);
+
+    const [showDetails, setShowDetails] = useState(false);
+    const toggleModal = () => {
+        setShowDetails(!showDetails);
+        setSelectedTask(null);
+    };
+
+    console.log(selectedTask && selectedTask.title);
 
     return (
         <Wrapper>
+            {selectedTask && (
+                <Modal isOpen={!!selectedTask} toggleModal={toggleModal}>
+                    <ModalContent>
+                        <TaskTitle>{selectedTask.title}</TaskTitle>
+                        <TaskDescription>
+                            {selectedTask.description}
+                        </TaskDescription>
+                        <SubtaskSection>
+                            <SubtaskProgress></SubtaskProgress>
+                            <SubTaskList></SubTaskList>
+                            <StatusDropDown></StatusDropDown>
+                        </SubtaskSection>
+                    </ModalContent>
+                </Modal>
+            )}
             {isEmpty ? (
                 <EmptyWrapper>
                     <Label>
@@ -25,7 +51,11 @@ const Board = ({ board }) => {
             ) : (
                 <>
                     {board.columns.map((column, i) => (
-                        <Column key={i} column={column} />
+                        <Column
+                            onTaskSelect={setSelectedTask}
+                            key={i}
+                            column={column}
+                        />
                     ))}
                     <AddColumnButton>+ New Column</AddColumnButton>
                 </>
@@ -34,6 +64,41 @@ const Board = ({ board }) => {
     );
 };
 
+const ModalContent = styled.div`
+    background-color: ${({ theme }) => theme.backgroundLight};
+    padding: 24px;
+    padding-bottom: 32px;
+
+    @media ${QUERY.tabletAndUp} {
+        padding: 32px;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+`;
+
+const TaskTitle = styled.h2`
+    font-size: var(--size-h-l);
+    line-height: var(--line-h-l);
+    color: ${({ theme }) => theme.color};
+`;
+
+const TaskDescription = styled.p`
+    font-size: var(--size-b-l);
+    line-height: var(--line-b-l);
+    color: var(--color-gray-300);
+    font-weight: 400; // TODO : Debug this
+`;
+
+const SubtaskSection = styled.section``;
+
+const SubtaskProgress = styled.h3``;
+
+const SubTaskList = styled.ul``;
+
+// TODO: Use drop down
+const StatusDropDown = styled.div``;
 const EmptyWrapper = styled.div`
     display: flex;
     flex-direction: column;
