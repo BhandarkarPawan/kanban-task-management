@@ -5,6 +5,8 @@ import Icon, { ICON } from "../Icon";
 import Logo from "../Logo";
 import ThemeToggle from "../ThemeToggle";
 
+// TODO: Add a "skip to content" button for keyboard
+
 const Sidebar = ({
     boards,
     showSidebar,

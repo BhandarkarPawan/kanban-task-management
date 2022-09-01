@@ -12,7 +12,7 @@ const Column = ({ column }) => {
             </Title>
             <TaskList>
                 {column.tasks.map((task, i) => (
-                    <TaskCard key={i} task={task} />
+                    <TaskCard task={task} />
                 ))}
             </TaskList>
         </Wrapper>
@@ -25,7 +25,7 @@ const Wrapper = styled.section`
     flex-direction: column;
 `;
 
-const Title = styled.h3`
+const Title = styled.h1`
     font-size: var(--size-h-s);
     line-height: var(--line-h-s);
     text-transform: uppercase;
@@ -35,10 +35,10 @@ const Title = styled.h3`
     display: flex;
     gap: 12px;
     padding-top: 24px;
-    padding-bottom: 20px;
+    padding-bottom: 18px;
 `;
 
-const TaskList = styled.div`
+const TaskList = styled.ul`
     --pad-v: 20px;
     display: flex;
     flex-direction: column;
@@ -57,6 +57,11 @@ const TaskList = styled.div`
 
     padding: 0px 2px var(--pad-v) 2px;
     overflow-y: scroll;
+
+    & > *:first-child {
+        // allows border of first card to be fully visible
+        margin-top: 2px;
+    }
 `;
 
 const Color = styled.div`

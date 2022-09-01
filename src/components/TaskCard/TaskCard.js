@@ -6,7 +6,7 @@ const TaskCard = ({ task }) => {
     ).length;
 
     return (
-        <Wrapper tabIndex={0}>
+        <Wrapper>
             <Title>{task.title}</Title>
             {task.subtasks.length && (
                 <Progress>
@@ -17,7 +17,7 @@ const TaskCard = ({ task }) => {
     );
 };
 
-const Wrapper = styled.button`
+const Wrapper = styled.li`
     border: none;
     text-align: left;
 
@@ -28,11 +28,29 @@ const Wrapper = styled.button`
     width: 280px;
     padding: 23px 16px;
     scroll-snap-align: start;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-within {
+        // Highlight the card on link focus
+        outline: var(--focus-outline);
+    }
 `;
 
-const Title = styled.div`
+const Title = styled.button`
     font-size: var(--size-h-m);
     line-height: var(--line-h-m);
+    border: none;
+    background: transparent;
+    padding: 0;
+    text-align: left;
+    margin: 0;
+
+    // TODO: Move to global button styles
+    &:hover,
+    &:focus {
+        outline: none;
+    }
 `;
 
 const Progress = styled.div`
