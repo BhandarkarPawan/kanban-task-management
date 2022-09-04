@@ -64,6 +64,7 @@ const Wrapper = styled.nav`
         justify-content: start;
         padding: 32px var(--pad-h);
         height: 100%;
+        overflow: auto;
     }
 `;
 
