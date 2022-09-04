@@ -12,7 +12,7 @@ const ThemeToggle = ({ toggleTheme }) => {
             <LightIconWrapper>
                 <Icon label="Light Theme" icon={ICON.lightTheme} />
             </LightIconWrapper>
-            <Toggle isOn={theme === darkTheme} onChange={toggleTheme} />
+            <Toggle isOn={theme !== darkTheme} onChange={toggleTheme} />
             <DarkIconWrapper>
                 <Icon label="Dark Theme" icon={ICON.darkTheme} />
             </DarkIconWrapper>

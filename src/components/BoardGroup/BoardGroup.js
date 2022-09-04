@@ -52,6 +52,7 @@ const Wrapper = styled.fieldset`
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    border-radius: var(--r-l);
 `;
 
 const Stretched = styled.div`

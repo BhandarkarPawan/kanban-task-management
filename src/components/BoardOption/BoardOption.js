@@ -1,26 +1,22 @@
+import _uniqueId from "lodash/uniqueId";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Icon, { ICON } from "../Icon";
 
-const BoardOption = ({
-    id,
-    name,
-    value,
-    checked,
-    children,
-    setSelectedBoard,
-}) => {
+const BoardOption = ({ name, value, checked, children, setSelectedBoard }) => {
+    const uniqueId = _uniqueId("boardOption-");
+    console.log(uniqueId);
     return (
         <Wrapper>
             <Input
                 type="radio"
-                id={id}
+                id={uniqueId}
                 name={name}
                 value={value}
                 checked={checked}
                 onChange={() => setSelectedBoard(value)}
             />
-            <LabelWrapper htmlFor={id}>
+            <LabelWrapper htmlFor={uniqueId}>
                 <IconWrapper>
                     <Icon label={name} icon={ICON.board} />
                 </IconWrapper>

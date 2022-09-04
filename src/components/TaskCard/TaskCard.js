@@ -34,11 +34,13 @@ const Wrapper = styled.li`
     scroll-snap-align: start;
     cursor: pointer;
 
-    &:hover,
     &:focus-within {
         // Highlight the card on link focus
         outline: var(--focus-outline);
     }
+
+    // Prevent card flashing on click
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 
 const Title = styled.button`

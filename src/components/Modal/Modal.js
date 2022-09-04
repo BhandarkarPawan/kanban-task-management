@@ -1,7 +1,8 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
+import { QUERY } from "../../constants";
 
-const Modal = ({ isOpen, toggleModal, children }) => {
+const Modal = ({ isOpen, toggleModal, children, center = false }) => {
     return (
         <ReactModal
             isOpen={isOpen}
@@ -10,7 +11,9 @@ const Modal = ({ isOpen, toggleModal, children }) => {
             overlayClassName="_"
             ariaHideApp={false}
             contentElement={(props) => (
-                <ModalStyle {...props}>{children}</ModalStyle>
+                <ModalStyle center={center} {...props}>
+                    {children}
+                </ModalStyle>
             )}
             overlayElement={(props, contentElement) => (
                 <OverlayStyle {...props}>{contentElement}</OverlayStyle>
@@ -21,23 +24,36 @@ const Modal = ({ isOpen, toggleModal, children }) => {
 
 const ModalStyle = styled.div`
     max-width: fit-content;
-    border-radius: var(--r-l);
-    overflow: hidden;
 
     // TODO: Find a better solution
-    position: absolute;
+    position: ${(props) => (props.center ? "initial" : "absolute")};
     top: 16px;
     left: 53px;
+
+    &:focus {
+        // Do not highlight the whole modal
+        outline: none;
+    }
 `;
 
 const OverlayStyle = styled.div`
     position: absolute;
-    top: 0;
+    display: grid;
+    place-items: center;
+    top: 64px;
     left: 0;
     right: 0;
     bottom: 0;
     background: var(--color-overlay);
-    margin-top: 64px;
+    padding: 0px 16px;
+
+    @media ${QUERY.tabletAndUp} {
+        top: 75px;
+    }
+
+    @media ${QUERY.laptopAndUp} {
+        top: 91px;
+    }
 `;
 
 export default Modal;

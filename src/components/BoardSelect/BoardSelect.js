@@ -74,8 +74,8 @@ const Select = styled.button`
 
 const Label = styled(Select)`
     display: none;
-    font-size: calc(1rem * 20 / 18);
-    line-height: calc(1rem * 25.2 / 18);
+    font-size: calc(1rem * 20 / 16);
+    line-height: calc(1rem * 25.2 / 16);
 
     @media ${QUERY.tabletAndUp} {
         display: revert;
