@@ -30,21 +30,21 @@ export const RADIUS = {
 };
 
 export const FONT_SIZE = {
-    headingXL: 24 / 18,
-    headingL: 18 / 18,
-    headingM: 15 / 18,
-    headingS: 12 / 18,
-    bodyL: 13 / 18,
-    bodyM: 12 / 18,
+    headingXL: 24 / 16,
+    headingL: 18 / 16,
+    headingM: 15 / 16,
+    headingS: 12 / 16,
+    bodyL: 13 / 16,
+    bodyM: 12 / 16,
 };
 
 export const LINE_HEIGHT = {
-    headingXL: 30 / 18,
-    headingL: 23 / 18,
-    headingM: 19 / 18,
-    headingS: 15 / 18,
-    bodyL: 23 / 18,
-    bodyM: 15 / 18,
+    headingXL: 30 / 16,
+    headingL: 23 / 16,
+    headingM: 19 / 16,
+    headingS: 15 / 16,
+    bodyL: 23 / 16,
+    bodyM: 15 / 16,
 };
 
 export const BREAKPOINT = {
@@ -54,7 +54,7 @@ export const BREAKPOINT = {
 };
 
 export const QUERY = {
-    phoneAndUp: `(min-width: ${BREAKPOINT.phone / 18}rem)`,
-    tabletAndUp: `(min-width: ${BREAKPOINT.tablet / 18}rem)`,
-    laptopAndUp: `(min-width: ${BREAKPOINT.laptop / 18}rem)`,
+    phoneAndUp: `(min-width: ${BREAKPOINT.phone / 16}rem)`,
+    tabletAndUp: `(min-width: ${BREAKPOINT.tablet / 16}rem)`,
+    laptopAndUp: `(min-width: ${BREAKPOINT.laptop / 16}rem)`,
 };
