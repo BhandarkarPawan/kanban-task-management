@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { QUERY } from "../../constants";
-import Icon, { ICON } from "../Icon/Icon";
+import Icon, { ICON } from "../Icon";
 
 const AddBoardButton = ({ onClick, ...delegated }) => {
     return (
@@ -13,8 +13,9 @@ const AddBoardButton = ({ onClick, ...delegated }) => {
 const IconWrapper = styled(Icon)`
     height: 16px;
     width: 16px;
-    filter: brightness(0) saturate(100%) invert(55%) sepia(73%) saturate(4925%)
-        hue-rotate(223deg) brightness(83%) contrast(86%);
+
+    filter: brightness(0) saturate(100%) invert(33%) sepia(48%) saturate(811%)
+        hue-rotate(203deg) brightness(107%) contrast(87%);
 `;
 
 const Wrapper = styled.button`
