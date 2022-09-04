@@ -61,18 +61,25 @@ const Label = styled.button`
     align-items: baseline;
     justify-content: space-between;
     color: ${({ theme }) => theme.color};
+    position: relative;
+    padding: 8px 16px;
+    border-radius: var(--r-s);
+    border: 1px solid var(--color-input-border);
 
-    &:focus {
+    // TODO: Switch to focus visible
+    /* &:focus {
         outline: none;
-    }
+    } */
 `;
 
 const OptionButton = styled.button`
     background-color: transparent;
+    position: relative;
     border: none;
     width: 100%;
     padding: 0px;
     text-align: start;
+    padding: 4px 16px;
     border-radius: var(--r-xs);
 `;
 
@@ -84,27 +91,24 @@ const IconWrapper = styled.div`
 
 const Wrapper = styled.div`
     position: relative;
-    padding: 8px 16px;
-    border: 1px solid var(--color-input-border);
     font-size: var(--size-b-l);
     line-height: var(--line-b-l);
-    border-radius: var(--r-s);
     font-weight: 500;
     overflow: visible;
 
-    &:focus-within {
+    // TODO: Switch to Focus Visible
+    /* &:focus-within {
         outline: var(--focus-outline);
-    }
+    } */
 `;
 
 const OptionList = styled.ul`
-    padding: 16px;
     background-color: ${({ theme }) => theme.backgroundLight};
     border-radius: var(--r-l);
 
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    padding: 8px 0px;
 `;
 
 const Option = styled.li`

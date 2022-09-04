@@ -34,6 +34,7 @@ const Wrapper = styled.li`
     scroll-snap-align: start;
     cursor: pointer;
 
+    // TODO: Switch to focus-visible
     &:focus-within {
         // Highlight the card on link focus
         outline: var(--focus-outline);

@@ -1,18 +1,20 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const SubTask = ({ subtask, id }) => {
+    const [checked, setChecked] = useState(subtask.isCompleted);
+    const toggleChecked = () => setChecked(!checked);
+
     return (
         <Wrapper>
             <Checkbox
                 id={id}
                 type="checkbox"
-                checked={subtask.isCompleted}
-                onChange={() => {
-                    subtask.isCompleted = true;
-                }}
+                checked={checked}
+                onChange={toggleChecked}
             ></Checkbox>
-            <DummyCheckBox checked={subtask.isCompleted} />
-            <SubTaskLabel checked={subtask.isCompleted} htmlFor={id}>
+            <DummyCheckBox checked={checked} />
+            <SubTaskLabel checked={checked} htmlFor={id}>
                 {subtask.title}
             </SubTaskLabel>
         </Wrapper>
@@ -29,9 +31,10 @@ const Wrapper = styled.li`
 
     border-radius: var(--r-s);
 
-    &:focus-within {
+    // TODO: Change to focus-visible
+    /* &:focus-within {
         outline: var(--focus-outline);
-    }
+    } */
 `;
 
 const SubTaskLabel = styled.label`
