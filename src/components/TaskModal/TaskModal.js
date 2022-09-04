@@ -2,6 +2,7 @@ import _uniqueId from "lodash/uniqueId";
 import { useState } from "react";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
+import Menu from "../Menu";
 import Modal from "../Modal";
 import StatusSelect from "../StatusSelect";
 import SubTask from "../SubTask";
@@ -15,7 +16,10 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
     return (
         <Modal center isOpen={!!task} toggleModal={toggleModal} {...delegated}>
             <Wrapper>
-                <TaskTitle>{task.title}</TaskTitle>
+                <TaskTitle>
+                    {task.title}
+                    <Menu label="Task Options Menu" />
+                </TaskTitle>
                 {task.description && (
                     <TaskDescription>{task.description}</TaskDescription>
                 )}
@@ -57,16 +61,22 @@ const Wrapper = styled.div`
     }
 
     display: flex;
+
     flex-direction: column;
     gap: 24px;
     max-width: 480px;
     border-radius: var(--r-m);
+    isolation: isolate;
 `;
 
 const TaskTitle = styled.h2`
     font-size: var(--size-h-l);
     line-height: var(--line-h-l);
     color: ${({ theme }) => theme.color};
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: space-between;
 `;
 
 const TaskDescription = styled.p`

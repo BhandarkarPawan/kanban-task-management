@@ -1,12 +1,17 @@
-import { useState } from "react";
-import ReactModal from "react-modal";
+import { useRef, useState } from "react";
+import FocusLock from "react-focus-lock";
 import styled from "styled-components";
+import useOutsideAlerter from "../../hooks/useOutsideAlerter";
 import Icon, { ICON } from "../Icon";
 
 const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const toggleModal = () => {
-        setIsOpen(!isOpen);
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
     };
 
     const handleChange = (value) => {
@@ -14,18 +19,15 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
         setIsOpen(false);
     };
 
+    const optionsRef = useRef(null);
+    useOutsideAlerter(optionsRef, closeModal);
+
     return (
         <Wrapper id={id} {...delegated}>
-            <ReactModal
-                isOpen={isOpen}
-                onRequestClose={toggleModal}
-                className="_"
-                overlayClassName="_"
-                parentSelector={() => document.getElementById(id)}
-                ariaHideApp={false}
-                contentElement={(props) => (
-                    <ModalStyle {...props}>
-                        <OptionList>
+            <ModalStyle>
+                {isOpen && (
+                    <FocusLock>
+                        <OptionList ref={optionsRef}>
                             {options.map((opt, i) => (
                                 <Option key={i}>
                                     <OptionButton
@@ -36,13 +38,10 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
                                 </Option>
                             ))}
                         </OptionList>
-                    </ModalStyle>
+                    </FocusLock>
                 )}
-                overlayElement={(props, contentElement) => (
-                    <OverlayStyle {...props}>{contentElement}</OverlayStyle>
-                )}
-            ></ReactModal>
-            <Label aria-label="Change Status" onClick={toggleModal}>
+            </ModalStyle>
+            <Label aria-label="Change Status" onClick={openModal}>
                 {selected}
                 <IconWrapper icon={ICON.down} label="Show status options" />
             </Label>

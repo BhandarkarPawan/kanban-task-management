@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+// TODO: Return focus wherever relevant
 const SubTask = ({ subtask, id, ...delegated }) => {
     const [checked, setChecked] = useState(subtask.isCompleted);
     const toggleChecked = () => setChecked(!checked);
@@ -33,9 +34,9 @@ const Wrapper = styled.li`
     border-radius: var(--r-s);
 
     // TODO: Change to focus-visible
-    /* &:focus-within {
+    &:focus-within {
         outline: var(--focus-outline);
-    } */
+    }
 `;
 
 const SubTaskLabel = styled.label`
