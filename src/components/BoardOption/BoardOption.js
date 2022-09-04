@@ -23,16 +23,14 @@ const BoardOption = ({
                 onChange={() => setSelectedBoard(value)}
             />
             <LabelWrapper htmlFor={uniqueId}>
-                <IconWrapper>
-                    <Icon label={name} icon={ICON.board} />
-                </IconWrapper>
+                <IconWrapper label={name} icon={ICON.board} />
                 {children}
             </LabelWrapper>
         </Wrapper>
     );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
     margin-right: 24px;
 
     @media ${QUERY.tabletAndUp} {
@@ -50,7 +48,7 @@ const Input = styled.input`
     pointer-events: none;
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled(Icon)`
     height: 16px;
     width: 16px;
 

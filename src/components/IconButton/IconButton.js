@@ -20,9 +20,7 @@ export const ResponsiveIconButton = ({
     return (
         <ResponsiveWrapper {...delegated}>
             {icon && label && (
-                <ResponsiveIconWrapper>
-                    <Icon icon={icon} label={label} />
-                </ResponsiveIconWrapper>
+                <ResponsiveIconWrapper icon={icon} label={label} />
             )}
             <Label responsive aria-hidden>
                 {children}
@@ -53,7 +51,7 @@ const ResponsiveWrapper = styled(Wrapper)`
     }
 `;
 
-const ResponsiveIconWrapper = styled.div`
+const ResponsiveIconWrapper = styled(Icon)`
     height: 12px;
     width: 12px;
 

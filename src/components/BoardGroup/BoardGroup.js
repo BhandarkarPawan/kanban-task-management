@@ -21,16 +21,15 @@ const BoardGroup = ({
             <Stretched>
                 {boards.map((board, i) => {
                     return (
-                        <li key={i}>
-                            <BoardOption
-                                name={TITLE}
-                                value={board}
-                                checked={selectedBoard === board}
-                                setSelectedBoard={setSelectedBoard}
-                            >
-                                {board.name}
-                            </BoardOption>
-                        </li>
+                        <BoardOption
+                            name={TITLE}
+                            key={i}
+                            value={board}
+                            checked={selectedBoard === board}
+                            setSelectedBoard={setSelectedBoard}
+                        >
+                            {board.name}
+                        </BoardOption>
                     );
                 })}
                 <AddBoardButton

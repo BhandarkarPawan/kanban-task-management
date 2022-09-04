@@ -23,6 +23,7 @@ const Wrapper = styled.button`
     border: none;
     border-radius: 5000px;
     padding: 3px;
+    cursor: pointer;
 `;
 
 const Knob = styled.div`

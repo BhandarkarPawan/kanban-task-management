@@ -18,9 +18,7 @@ const Sidebar = ({
 }) => {
     return showSidebar ? (
         <Wrapper {...delegated}>
-            <LogoWrapper>
-                <Logo full />
-            </LogoWrapper>
+            <LogoWrapper full />
             <Stretched>
                 <BoardGroup
                     boards={boards}
@@ -33,18 +31,13 @@ const Sidebar = ({
                 <ThemeToggle toggleTheme={toggleTheme} />
             </ToggleStretch>
             <HideSidebarButton onClick={toggleSidebar}>
-                {/* TODO: Remove IconWrapper */}
-                <HideIconWrapper>
-                    <Icon icon={ICON.hideSidebar} label="Hide Sidebar" />
-                </HideIconWrapper>
+                <HideIconWrapper icon={ICON.hideSidebar} label="Hide Sidebar" />
                 <Label aria-hidden>Hide Sidebar</Label>
             </HideSidebarButton>
         </Wrapper>
     ) : (
         <ShowSidebarButton onClick={toggleSidebar}>
-            <ShowIconWrapper>
-                <Icon icon={ICON.showSidebar} label="Show Sidebar" />
-            </ShowIconWrapper>
+            <ShowIconWrapper icon={ICON.showSidebar} label="Show Sidebar" />
         </ShowSidebarButton>
     );
 };
@@ -69,7 +62,7 @@ const Wrapper = styled.nav`
     }
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Logo)`
     margin-left: 2px;
     margin-bottom: 38px;
 `;
@@ -106,12 +99,12 @@ const ShowSidebarButton = styled.button`
     }
 `;
 
-const HideIconWrapper = styled.div`
+const HideIconWrapper = styled(Icon)`
     height: 16px;
     width: 18px;
 `;
 
-const ShowIconWrapper = styled.div`
+const ShowIconWrapper = styled(Icon)`
     height: 12px;
     width: 18px;
     margin-left: 16px;

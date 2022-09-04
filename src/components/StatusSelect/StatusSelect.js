@@ -44,9 +44,7 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
             ></ReactModal>
             <Label aria-label="Change Status" onClick={toggleModal}>
                 {selected}
-                <IconWrapper>
-                    <Icon icon={ICON.down} label="Show status options" />
-                </IconWrapper>
+                <IconWrapper icon={ICON.down} label="Show status options" />
             </Label>
         </Wrapper>
     );
@@ -83,7 +81,7 @@ const OptionButton = styled.button`
     border-radius: var(--r-xs);
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled(Icon)`
     width: 12px;
     height: 8px;
     flex-shrink: 0;

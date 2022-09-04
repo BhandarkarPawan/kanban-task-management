@@ -2,13 +2,6 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Icon, { ICON } from "../Icon/Icon";
 
-const IconWrapper = styled(Icon)`
-    height: 16px;
-    width: 16px;
-    filter: brightness(0) saturate(100%) invert(55%) sepia(73%) saturate(4925%)
-        hue-rotate(223deg) brightness(83%) contrast(86%);
-`;
-
 const AddBoardButton = ({ onClick, ...delegated }) => {
     return (
         <Wrapper {...delegated} aria-label="Create New Board">
@@ -16,6 +9,13 @@ const AddBoardButton = ({ onClick, ...delegated }) => {
         </Wrapper>
     );
 };
+
+const IconWrapper = styled(Icon)`
+    height: 16px;
+    width: 16px;
+    filter: brightness(0) saturate(100%) invert(55%) sepia(73%) saturate(4925%)
+        hue-rotate(223deg) brightness(83%) contrast(86%);
+`;
 
 const Wrapper = styled.button`
     display: flex;

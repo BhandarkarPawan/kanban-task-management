@@ -24,17 +24,14 @@ const BoardSelect = ({
         console.log("bruh");
     };
 
+    const icon = isOpen ? ICON.up : ICON.down;
+    const label = isOpen ? "Close Menu" : "Open Menu";
+
     return (
         <Wrapper {...delegated} aria-label="Select Board">
             <Select onClick={toggleModal}>
                 {selectedBoard.name}
-                <IconWrapper>
-                    {isOpen ? (
-                        <Icon icon={ICON.up} label="Close Menu" />
-                    ) : (
-                        <Icon icon={ICON.down} label="Expand Menu" />
-                    )}
-                </IconWrapper>
+                <IconWrapper icon={icon} label={label} />
             </Select>
             <Label disabled>{selectedBoard.name}</Label>
             <Modal isOpen={isOpen} toggleModal={toggleModal}>
@@ -54,7 +51,7 @@ const Wrapper = styled.div`
     position: relative;
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled(Icon)`
     height: 4px;
     width: 8px;
 

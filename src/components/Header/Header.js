@@ -17,9 +17,7 @@ const Header = ({
 }) => {
     return (
         <Wrapper {...delegated}>
-            <LogoWrapper show={showLogo}>
-                <Logo full={fullLogo} />
-            </LogoWrapper>
+            <LogoWrapper show={showLogo} full={fullLogo} />
             <BoardSelect
                 boards={boards}
                 selectedBoard={selectedBoard}
@@ -57,7 +55,7 @@ const Wrapper = styled.header`
     gap: 16px;
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Logo)`
     flex-shrink: 0;
     @media ${QUERY.tabletAndUp} {
         display: ${(props) => (props.show ? "inital" : "none")};

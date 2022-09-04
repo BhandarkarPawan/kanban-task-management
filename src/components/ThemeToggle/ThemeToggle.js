@@ -9,13 +9,9 @@ const ThemeToggle = ({ toggleTheme, ...delegated }) => {
 
     return (
         <Wrapper {...delegated}>
-            <LightIconWrapper>
-                <Icon label="Light Theme" icon={ICON.lightTheme} />
-            </LightIconWrapper>
+            <LightIconWrapper Icon label="Light Theme" icon={ICON.lightTheme} />
             <Toggle isOn={theme !== darkTheme} onChange={toggleTheme} />
-            <DarkIconWrapper>
-                <Icon label="Dark Theme" icon={ICON.darkTheme} />
-            </DarkIconWrapper>
+            <DarkIconWrapper label="Dark Theme" icon={ICON.darkTheme} />
         </Wrapper>
     );
 };
@@ -34,12 +30,12 @@ const Wrapper = styled.div`
     }
 `;
 
-const LightIconWrapper = styled.div`
+const LightIconWrapper = styled(Icon)`
     height: 18.33px;
     width: 18.33px;
 `;
 
-const DarkIconWrapper = styled.div`
+const DarkIconWrapper = styled(Icon)`
     height: 15px;
     width: 15px;
 `;
