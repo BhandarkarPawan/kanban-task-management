@@ -3,11 +3,17 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Icon, { ICON } from "../Icon";
 
-const BoardOption = ({ name, value, checked, children, setSelectedBoard }) => {
+const BoardOption = ({
+    name,
+    value,
+    checked,
+    children,
+    setSelectedBoard,
+    ...delegated
+}) => {
     const uniqueId = _uniqueId("boardOption-");
-    console.log(uniqueId);
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <Input
                 type="radio"
                 id={uniqueId}

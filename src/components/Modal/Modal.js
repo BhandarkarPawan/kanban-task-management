@@ -2,7 +2,13 @@ import ReactModal from "react-modal";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 
-const Modal = ({ isOpen, toggleModal, children, center = false }) => {
+const Modal = ({
+    isOpen,
+    toggleModal,
+    children,
+    center = false,
+    ...delegated
+}) => {
     return (
         <ReactModal
             isOpen={isOpen}
@@ -11,7 +17,7 @@ const Modal = ({ isOpen, toggleModal, children, center = false }) => {
             overlayClassName="_"
             ariaHideApp={false}
             contentElement={(props) => (
-                <ModalStyle center={center} {...props}>
+                <ModalStyle {...delegated} center={center} {...props}>
                     {children}
                 </ModalStyle>
             )}

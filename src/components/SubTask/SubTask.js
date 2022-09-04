@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const SubTask = ({ subtask, id }) => {
+const SubTask = ({ subtask, id, ...delegated }) => {
     const [checked, setChecked] = useState(subtask.isCompleted);
     const toggleChecked = () => setChecked(!checked);
 
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <Checkbox
                 id={id}
                 type="checkbox"
@@ -21,11 +21,12 @@ const SubTask = ({ subtask, id }) => {
     );
 };
 
+// TODO: Allow to click anywhere in the wrapper
 const Wrapper = styled.li`
     display: flex;
     gap: 16px;
     align-items: center;
-
+    cursor: pointer;
     padding: 12px;
     background-color: ${({ theme }) => theme.background};
 
@@ -42,6 +43,7 @@ const SubTaskLabel = styled.label`
     line-height: var(--line-h-s);
     opacity: ${(props) => (props.checked ? 0.5 : 1)};
     text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
+    cursor: pointer;
 `;
 
 const Checkbox = styled.input`

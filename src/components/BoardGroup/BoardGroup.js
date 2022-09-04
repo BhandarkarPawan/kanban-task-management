@@ -3,28 +3,34 @@ import { QUERY } from "../../constants";
 import AddBoardButton from "../AddBoardButton";
 import BoardOption from "../BoardOption";
 
-const BoardGroup = ({ boards, selectedBoard, setSelectedBoard, children }) => {
+const BoardGroup = ({
+    boards,
+    selectedBoard,
+    setSelectedBoard,
+    children,
+    ...delegated
+}) => {
     const TITLE = "All Boards  ";
     const ARIA_LABEL = `${TITLE} There are currently ${boards.length} boards`;
 
     return (
-        <Wrapper role="radiogroup">
+        <Wrapper {...delegated} role="radiogroup">
             <Title aria-label={ARIA_LABEL}>
                 {TITLE}({boards.length})
             </Title>
             <Stretched>
                 {boards.map((board, i) => {
                     return (
-                        <BoardOption
-                            name={TITLE}
-                            key={i}
-                            id={board.name}
-                            value={board}
-                            checked={selectedBoard === board}
-                            setSelectedBoard={setSelectedBoard}
-                        >
-                            {board.name}
-                        </BoardOption>
+                        <li key={i}>
+                            <BoardOption
+                                name={TITLE}
+                                value={board}
+                                checked={selectedBoard === board}
+                                setSelectedBoard={setSelectedBoard}
+                            >
+                                {board.name}
+                            </BoardOption>
+                        </li>
                     );
                 })}
                 <AddBoardButton
@@ -55,7 +61,7 @@ const Wrapper = styled.fieldset`
     border-radius: var(--r-l);
 `;
 
-const Stretched = styled.div`
+const Stretched = styled.ul`
     margin-left: calc(-1 * var(--space));
     margin-right: calc(-1 * var(--space));
 `;

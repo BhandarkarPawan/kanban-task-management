@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import TaskCard from "../TaskCard";
 
-const Column = ({ column, onTaskSelect }) => {
+const Column = ({ column, onTaskSelect, ...delegated }) => {
     const numTasks = column.tasks.length;
 
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <Title>
                 <Color color={column.color} />
                 {column.name} ({numTasks})

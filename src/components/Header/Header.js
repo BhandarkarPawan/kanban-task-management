@@ -13,9 +13,10 @@ const Header = ({
     toggleTheme,
     fullLogo,
     showLogo,
+    ...delegated
 }) => {
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <LogoWrapper show={showLogo}>
                 <Logo full={fullLogo} />
             </LogoWrapper>

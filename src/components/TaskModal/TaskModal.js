@@ -6,14 +6,14 @@ import Modal from "../Modal";
 import StatusSelect from "../StatusSelect";
 import SubTask from "../SubTask";
 
-const TaskModal = ({ task, toggleModal }) => {
+const TaskModal = ({ task, toggleModal, ...delegated }) => {
     const subTasks = task.subtasks;
 
     const completedSubtasks = subTasks.filter((st) => st.isCompleted);
     const [currentStatus, setCurrentStatus] = useState(task.status);
 
     return (
-        <Modal center isOpen={!!task} toggleModal={toggleModal}>
+        <Modal center isOpen={!!task} toggleModal={toggleModal} {...delegated}>
             <Wrapper>
                 <TaskTitle>{task.title}</TaskTitle>
                 {task.description && (
@@ -47,7 +47,7 @@ const TaskModal = ({ task, toggleModal }) => {
     );
 };
 
-const Wrapper = styled.article`
+const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.backgroundLight};
     padding: 24px;
     position: relative;

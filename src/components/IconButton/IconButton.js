@@ -2,18 +2,23 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Icon from "../Icon";
 
-const IconButton = ({ icon, label, children }) => {
+const IconButton = ({ icon, label, children, ...delegated }) => {
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             {icon && label && <Icon icon={icon} label={label} />}
             <Label>{children}</Label>
         </Wrapper>
     );
 };
 
-export const ResponsiveIconButton = ({ icon, label, children }) => {
+export const ResponsiveIconButton = ({
+    icon,
+    label,
+    children,
+    ...delegated
+}) => {
     return (
-        <ResponsiveWrapper>
+        <ResponsiveWrapper {...delegated}>
             {icon && label && (
                 <ResponsiveIconWrapper>
                     <Icon icon={icon} label={label} />

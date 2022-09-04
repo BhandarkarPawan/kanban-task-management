@@ -5,7 +5,13 @@ import BoardGroup from "../BoardGroup";
 import Icon, { ICON } from "../Icon";
 import Modal from "../Modal";
 
-const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
+const BoardSelect = ({
+    boards,
+    selectedBoard,
+    setSelectedBoard,
+    children,
+    ...delegated
+}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleModal() {
@@ -19,7 +25,7 @@ const BoardSelect = ({ boards, selectedBoard, setSelectedBoard, children }) => {
     };
 
     return (
-        <Wrapper aria-label="Select Board">
+        <Wrapper {...delegated} aria-label="Select Board">
             <Select onClick={toggleModal}>
                 {selectedBoard.name}
                 <IconWrapper>

@@ -10,13 +10,14 @@ export const ICON = {
     darkTheme: "icon-dark-theme.svg",
     hideSidebar: "icon-hide-sidebar.svg",
     showSidebar: "icon-show-sidebar.svg",
+    menu: "icon-vertical-ellipsis.svg",
 };
 
-const Icon = ({ icon, label }) => {
+const Icon = ({ icon, label, ...delegated }) => {
     const src = `assets/${icon}`;
 
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <VisuallyHidden>{label}</VisuallyHidden>
             <SVG src={src} aria-hidden alt={label} />
         </Wrapper>

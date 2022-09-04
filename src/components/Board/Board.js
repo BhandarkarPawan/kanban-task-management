@@ -5,7 +5,7 @@ import Button from "../Button";
 import Column from "../Column";
 import TaskModal from "../TaskModal";
 
-const Board = ({ board }) => {
+const Board = ({ board, ...delegated }) => {
     const isEmpty = board.columns.length === 0;
     const [selectedTask, setSelectedTask] = useState(null);
 
@@ -16,7 +16,7 @@ const Board = ({ board }) => {
     };
 
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             {selectedTask && (
                 <TaskModal task={selectedTask} toggleModal={toggleModal} />
             )}

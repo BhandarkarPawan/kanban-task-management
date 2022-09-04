@@ -1,10 +1,10 @@
 import styled, { useTheme } from "styled-components";
-const Logo = ({ full }) => {
+const Logo = ({ full, ...delegated }) => {
     const theme = useTheme();
 
     const imgSrc = full ? theme.logo : "assets/logo-mobile.svg";
 
-    return <Wrapper full={full} src={imgSrc} />;
+    return <Wrapper {...delegated} full={full} src={imgSrc} />;
 };
 
 const Wrapper = styled.img`

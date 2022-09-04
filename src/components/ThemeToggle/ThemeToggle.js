@@ -4,11 +4,11 @@ import { darkTheme } from "../../styles/themes";
 import Icon, { ICON } from "../Icon";
 import Toggle from "../Toggle";
 
-const ThemeToggle = ({ toggleTheme }) => {
+const ThemeToggle = ({ toggleTheme, ...delegated }) => {
     const theme = useTheme();
 
     return (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <LightIconWrapper>
                 <Icon label="Light Theme" icon={ICON.lightTheme} />
             </LightIconWrapper>

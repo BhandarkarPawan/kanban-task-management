@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-const TaskCard = ({ task, onClick }) => {
+const TaskCard = ({ task, onClick, ...delegated }) => {
     const completed = task.subtasks.filter(
         (subtask) => subtask.isCompleted
     ).length;
 
     return (
         <Wrapper
+            {...delegated}
             onClick={() => {
                 onClick(task);
             }}

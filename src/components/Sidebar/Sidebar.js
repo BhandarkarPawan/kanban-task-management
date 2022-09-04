@@ -14,9 +14,10 @@ const Sidebar = ({
     selectedBoard,
     setSelectedBoard,
     toggleTheme,
+    ...delegated
 }) => {
     return showSidebar ? (
-        <Wrapper>
+        <Wrapper {...delegated}>
             <LogoWrapper>
                 <Logo full />
             </LogoWrapper>

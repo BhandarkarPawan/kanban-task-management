@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-const Toggle = ({ isOn, onChange }) => {
+const Toggle = ({ isOn, onChange, ...delegated }) => {
     return (
         <Wrapper
+            {...delegated}
             type="button"
             role="switch"
             aria-checked={isOn ? "false" : "true"}

@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import styled from "styled-components";
 import Icon, { ICON } from "../Icon";
 
-const StatusSelect = ({ id, selected, options, onChange }) => {
+const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleModal = () => {
         setIsOpen(!isOpen);
@@ -15,7 +15,7 @@ const StatusSelect = ({ id, selected, options, onChange }) => {
     };
 
     return (
-        <Wrapper id={id}>
+        <Wrapper id={id} {...delegated}>
             <ReactModal
                 isOpen={isOpen}
                 onRequestClose={toggleModal}
