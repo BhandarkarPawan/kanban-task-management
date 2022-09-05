@@ -17,6 +17,7 @@ const Header = ({
     toggleAddModal,
     onChange,
     toggleAddBoard,
+    toggleConfirmModal,
     ...delegated
 }) => {
     const OPTIONS = [
@@ -30,7 +31,7 @@ const Header = ({
         {
             label: "Delete Board",
             cb: () => {
-                console.log("Now Deleted");
+                toggleConfirmModal();
             },
             danger: true,
         },

@@ -7,7 +7,13 @@ import StatusSelect from "../StatusSelect";
 import SubTask from "../SubTask";
 import Text, { BSIZE } from "../Text ";
 
-const TaskInfoPanel = ({ statusOptions, task, onChange, ...delegated }) => {
+const TaskInfoPanel = ({
+    statusOptions,
+    setShowConfirmModal,
+    task,
+    onChange,
+    ...delegated
+}) => {
     const subTasks = task.subtasks;
 
     const completedSubtasks = subTasks.filter((st) => st.isCompleted);
@@ -24,7 +30,7 @@ const TaskInfoPanel = ({ statusOptions, task, onChange, ...delegated }) => {
         {
             label: "Delete Task",
             cb: () => {
-                console.log("Now Deleted");
+                setShowConfirmModal(true);
             },
             danger: true,
         },

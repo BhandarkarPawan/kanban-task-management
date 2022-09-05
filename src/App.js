@@ -3,6 +3,7 @@ import { ThemeProvider } from "styled-components";
 import "./App.css";
 import Board from "./components/Board";
 import BoardModal from "./components/BoardModal";
+import ConfirmModal from "./components/ConfirmModal";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import TaskModal from "./components/TaskModal";
@@ -18,6 +19,7 @@ function App() {
     const [addingTask, setAddingTask] = useState(false);
     const [editingBoard, setEditingBoard] = useState(false);
     const [addingBoard, setAddingBoard] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const toggleTheme = () => {
         theme === lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
@@ -38,7 +40,11 @@ function App() {
     const toggleAddBoard = () => {
         setEditingBoard(!editingBoard);
         setAddingBoard(!addingBoard);
-        console.log("nice");
+    };
+
+    const toggleConfirmModal = () => {
+        setShowConfirmModal(!showConfirmModal);
+        console.log("nice: ", showConfirmModal);
     };
 
     const statusOptions = selectedBoard.columns.map((c) => c.name);
@@ -66,8 +72,6 @@ function App() {
         ],
     };
 
-    console.log(addingBoard, editingBoard);
-
     return (
         <>
             <ResetStyles />
@@ -92,6 +96,7 @@ function App() {
                     toggleAddModal={toggleAddTaskModal}
                     onChange={setEditingBoard}
                     toggleAddBoard={toggleAddBoard}
+                    toggleConfirmModal={toggleConfirmModal}
                 ></Header>
                 <Board statusOptions={statusOptions} board={selectedBoard} />
                 {addingTask && (
@@ -115,6 +120,14 @@ function App() {
                         board={emptyBoard}
                         toggleModal={toggleAddBoard}
                         onChange={toggleAddBoard}
+                    />
+                )}
+                {showConfirmModal && (
+                    <ConfirmModal
+                        name={selectedBoard.name}
+                        board
+                        toggleModal={toggleConfirmModal}
+                        onChange={toggleConfirmModal}
                     />
                 )}
             </ThemeProvider>

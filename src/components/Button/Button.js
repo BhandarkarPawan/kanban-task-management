@@ -27,6 +27,27 @@ const Wrapper = styled.button`
     }
 `;
 
+export const DangerButton = ({ children, onClick, ...delegated }) => {
+    return (
+        <DangerWrapper {...delegated} onClick={onClick}>
+            <Label size={HSIZE.M}>{children}</Label>
+        </DangerWrapper>
+    );
+};
+
+const DangerWrapper = styled.button`
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    padding: 13px 18px 12px 18px;
+    border: none;
+    border-radius: 5000px;
+
+    &:hover {
+        background-color: var(--color-secondary-light);
+        cursor: pointer;
+    }
+`;
+
 const Label = styled(Heading)`
     display: flex;
     align-items: baseline;

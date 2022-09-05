@@ -12,6 +12,7 @@ const TaskModal = ({
     statusOptions,
     add = false,
     toggleModal,
+    setShowConfirmModal,
     ...delegated
 }) => {
     const [editing, setEditing] = useState(false);
@@ -54,6 +55,7 @@ const TaskModal = ({
                     statusOptions={statusOptions}
                     task={task}
                     onChange={handleStartEdit}
+                    setShowConfirmModal={setShowConfirmModal}
                 />
             )}
         </Wrapper>

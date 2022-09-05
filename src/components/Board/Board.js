@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Button from "../Button";
 import Column from "../Column";
+import ConfirmModal from "../ConfirmModal";
 import Heading from "../Heading";
 import { HSIZE } from "../Heading/Heading";
 import TaskModal from "../TaskModal";
@@ -10,11 +11,17 @@ import TaskModal from "../TaskModal";
 const Board = ({ statusOptions, board, ...delegated }) => {
     const isEmpty = board.columns.length === 0;
     const [selectedTask, setSelectedTask] = useState(null);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const [showDetails, setShowDetails] = useState(false);
     const toggleModal = () => {
         setShowDetails(!showDetails);
         setSelectedTask(null);
+    };
+
+    const toggleConfirmModal = () => {
+        setShowConfirmModal(!showConfirmModal);
+        console.log("nice: ", showConfirmModal);
     };
 
     return (
@@ -24,6 +31,14 @@ const Board = ({ statusOptions, board, ...delegated }) => {
                     statusOptions={statusOptions}
                     task={selectedTask}
                     toggleModal={toggleModal}
+                    setShowConfirmModal={setShowConfirmModal}
+                />
+            )}
+            {showConfirmModal && (
+                <ConfirmModal
+                    name={selectedTask.name}
+                    toggleModal={toggleConfirmModal}
+                    onChange={toggleConfirmModal}
                 />
             )}
             {isEmpty ? (
