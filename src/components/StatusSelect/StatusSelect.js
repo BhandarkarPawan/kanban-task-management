@@ -105,6 +105,7 @@ const OptionList = styled.ul`
     display: flex;
     flex-direction: column;
     padding: 8px 0px;
+    margin-bottom: 16px;
 `;
 
 const Option = styled.li`
