@@ -1,23 +1,28 @@
 import styled from "styled-components";
 import Heading, { HSIZE } from "../Heading";
 
-const Button = ({ children, onClick, ...delegated }) => {
+const Button = ({ themed = false, children, onClick, ...delegated }) => {
     return (
-        <Wrapper {...delegated} onClick={onClick}>
+        <Wrapper themed={themed} {...delegated} onClick={onClick}>
             <Label size={HSIZE.M}>{children}</Label>
         </Wrapper>
     );
 };
 
 const Wrapper = styled.button`
-    background-color: var(--color-primary);
-    color: white;
+    background-color: ${(props) =>
+        props.themed ? props.theme.themedButtonColor : `var(--color-primary)`};
+    color: ${(props) =>
+        props.themed ? `var(--color-primary)` : `var(--color-white)`};
     padding: 13px 18px 12px 18px;
     border: none;
     border-radius: 5000px;
 
     &:hover {
-        background-color: var(--color-primary-light);
+        background-color: ${(props) =>
+            props.themed
+                ? `var(--color-themed-button-hover)`
+                : `var(--color-primary-light)`};
         cursor: pointer;
     }
 `;
@@ -25,6 +30,7 @@ const Wrapper = styled.button`
 const Label = styled(Heading)`
     display: flex;
     align-items: baseline;
+    justify-content: center;
     gap: 4px;
 `;
 

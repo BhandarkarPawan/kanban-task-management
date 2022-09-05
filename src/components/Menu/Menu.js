@@ -24,11 +24,13 @@ const Menu = ({ label, options, ...delegated }) => {
             {isOpen && (
                 <FocusLock>
                     <OptionList ref={optionsRef}>
-                        {options.map((opt) => (
-                            <Option onClick={opt.cb()}>
-                                <Text danger={opt.danger} size={BSIZE.L}>
-                                    {opt.text}
-                                </Text>
+                        {options.map((opt, i) => (
+                            <Option
+                                key={i}
+                                danger={opt.danger}
+                                onClick={opt.cb}
+                            >
+                                <Text size={BSIZE.L}>{opt.label}</Text>
                             </Option>
                         ))}
                     </OptionList>
@@ -71,7 +73,7 @@ const OptionList = styled.ul`
     width: 192px;
     border-radius: var(--r-l);
     box-shadow: ${({ theme }) => theme.shadow};
-    padding: 16px 0;
+    padding: 8px 0;
 `;
 
 const Option = styled.button`

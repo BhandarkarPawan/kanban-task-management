@@ -16,8 +16,9 @@ const Modal = ({
             className="_"
             overlayClassName="_"
             ariaHideApp={false}
+            {...delegated}
             contentElement={(props) => (
-                <ModalStyle {...delegated} center={center} {...props}>
+                <ModalStyle center={center} {...props}>
                     {children}
                 </ModalStyle>
             )}
@@ -29,13 +30,6 @@ const Modal = ({
 };
 
 const ModalStyle = styled.div`
-    max-width: fit-content;
-
-    // TODO: Find a better solution
-    position: ${(props) => (props.center ? "initial" : "absolute")};
-    top: 16px;
-    left: 53px;
-
     &:focus {
         // Do not highlight the whole modal
         outline: none;
@@ -46,6 +40,7 @@ const OverlayStyle = styled.div`
     position: absolute;
     display: grid;
     place-items: center;
+
     top: 64px;
     left: 0;
     right: 0;

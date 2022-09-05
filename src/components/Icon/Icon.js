@@ -11,6 +11,7 @@ export const ICON = {
     hideSidebar: "icon-hide-sidebar.svg",
     showSidebar: "icon-show-sidebar.svg",
     menu: "icon-vertical-ellipsis.svg",
+    close: "icon-cross.svg",
 };
 
 const Icon = ({ icon, label, ...delegated }) => {

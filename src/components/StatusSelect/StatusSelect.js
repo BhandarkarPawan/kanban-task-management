@@ -22,7 +22,7 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
 
     const optionsRef = useRef(null);
     useOutsideAlerter(optionsRef, closeModal);
-
+    // TODO: Check the font size here, it's prolly too small
     return (
         <Wrapper id={id} {...delegated}>
             <ModalStyle>

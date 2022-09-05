@@ -58,3 +58,14 @@ export const QUERY = {
     tabletAndUp: `(min-width: ${BREAKPOINT.tablet / 16}rem)`,
     laptopAndUp: `(min-width: ${BREAKPOINT.laptop / 16}rem)`,
 };
+
+export const PLACEHOLDER = {
+    textInput: "e.g. Take coffee break",
+    textArea:
+        "e.g. It’s always good to take a break. This 15 minute break will  recharge the batteries a little.",
+    subTask: [
+        "e.g Make coffee",
+        "e.g. Drink coffee & smile",
+        "e.g. Do my laundry",
+    ],
+};
