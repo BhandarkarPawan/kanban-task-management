@@ -8,6 +8,7 @@ import Menu from "../Menu";
 import Modal from "../Modal";
 import StatusSelect from "../StatusSelect";
 import SubTask from "../SubTask";
+import Text, { BSIZE } from "../Text ";
 
 const TaskModal = ({ task, toggleModal, ...delegated }) => {
     const subTasks = task.subtasks;
@@ -23,7 +24,9 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
                     <Menu label="Task Options Menu" />
                 </TaskTitle>
                 {task.description && (
-                    <TaskDescription>{task.description}</TaskDescription>
+                    <TaskDescription size={BSIZE.L}>
+                        {task.description}
+                    </TaskDescription>
                 )}
                 <SubtaskSection>
                     <Heading size={HSIZE.S}>
@@ -79,9 +82,7 @@ const TaskTitle = styled(Heading)`
     justify-content: space-between;
 `;
 
-const TaskDescription = styled.p`
-    font-size: var(--size-b-l);
-    line-height: var(--line-b-l);
+const TaskDescription = styled(Text)`
     color: var(--color-gray-300);
     font-weight: 500;
 `;

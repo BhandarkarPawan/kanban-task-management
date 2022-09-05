@@ -3,6 +3,7 @@ import FocusLock from "react-focus-lock";
 import styled from "styled-components";
 import useOutsideAlerter from "../../hooks/useOutsideAlerter";
 import Icon, { ICON } from "../Icon";
+import Text, { BSIZE } from "../Text ";
 
 const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,7 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
                                     <OptionButton
                                         onClick={() => handleChange(opt)}
                                     >
-                                        {opt}
+                                        <Text size={BSIZE.L}>{opt}</Text>
                                     </OptionButton>
                                 </Option>
                             ))}
@@ -42,7 +43,7 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
                 )}
             </ModalStyle>
             <Label aria-label="Change Status" onClick={openModal}>
-                {selected}
+                <Text size={BSIZE.L}>{selected}</Text>
                 <IconWrapper icon={ICON.down} label="Show status options" />
             </Label>
         </Wrapper>
@@ -88,8 +89,6 @@ const IconWrapper = styled(Icon)`
 
 const Wrapper = styled.div`
     position: relative;
-    font-size: var(--size-b-l);
-    line-height: var(--line-b-l);
     font-weight: 500;
     overflow: visible;
 
@@ -109,8 +108,6 @@ const OptionList = styled.ul`
 `;
 
 const Option = styled.li`
-    font-size: var(--size-b-l);
-    line-height: var(--line-b-l);
     color: var(--color-gray-300);
 `;
 

@@ -5,22 +5,22 @@ const Heading = ({ size, children, ...delegated }) => {
     return <Wrapper {...delegated}>{children}</Wrapper>;
 };
 
-const H1Wrapper = styled.div`
+const H1Wrapper = styled.h1`
     font-size: var(--size-h-xl);
     line-height: var(--line-h-xl);
 `;
 
-const H2Wrapper = styled.div`
+const H2Wrapper = styled.h2`
     font-size: var(--size-h-l);
     line-height: var(--line-h-l);
 `;
 
-const H3Wrapper = styled.div`
+const H3Wrapper = styled.h3`
     font-size: var(--size-h-m);
     line-height: var(--line-h-m);
 `;
 
-const H4Wrapper = styled.div`
+const H4Wrapper = styled.h4`
     font-size: var(--size-h-s);
     line-height: var(--line-h-s);
 `;

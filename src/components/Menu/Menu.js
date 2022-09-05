@@ -3,8 +3,9 @@ import FocusLock from "react-focus-lock";
 import styled from "styled-components";
 import useOutsideAlerter from "../../hooks/useOutsideAlerter";
 import Icon, { ICON } from "../Icon";
+import Text, { BSIZE } from "../Text ";
 
-const Menu = ({ label, ...delegated }) => {
+const Menu = ({ label, options, ...delegated }) => {
     // eslint-disable-next-line no-undef
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,8 +24,13 @@ const Menu = ({ label, ...delegated }) => {
             {isOpen && (
                 <FocusLock>
                     <OptionList ref={optionsRef}>
-                        <Option>Edit Task</Option>
-                        <Option danger>Delete Task</Option>
+                        {options.map((opt) => (
+                            <Option onClick={opt.cb()}>
+                                <Text danger={opt.danger} size={BSIZE.L}>
+                                    {opt.text}
+                                </Text>
+                            </Option>
+                        ))}
                     </OptionList>
                 </FocusLock>
             )}
@@ -77,8 +83,6 @@ const Option = styled.button`
     padding: 8px 16px;
     cursor: pointer;
 
-    font-size: var(--size-b-l);
-    line-height: var(--line-b-l);
     font-weight: 500;
     color: ${(props) =>
         props.danger ? "var(--color-secondary)" : "var(--color-gray-300)"};

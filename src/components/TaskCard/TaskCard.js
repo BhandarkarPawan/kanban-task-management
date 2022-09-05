@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Heading, { HSIZE } from "../Heading";
+import Text, { BSIZE } from "../Text ";
 
 const TaskCard = ({ task, onClick, ...delegated }) => {
     const completed = task.subtasks.filter(
@@ -17,7 +18,7 @@ const TaskCard = ({ task, onClick, ...delegated }) => {
                 <Heading size={HSIZE.M}>{task.title}</Heading>
             </Title>
             {task.subtasks.length && (
-                <Progress>
+                <Progress size={BSIZE.M}>
                     {completed} of {task.subtasks.length} subtasks
                 </Progress>
             )}
@@ -62,10 +63,8 @@ const Title = styled.button`
     }
 `;
 
-const Progress = styled.div`
+const Progress = styled(Text)`
     margin-top: 8px;
-    font-size: var(--size-b-m);
-    line-height: var(--line-b-m);
     color: var(--color-gray-300);
 `;
 
