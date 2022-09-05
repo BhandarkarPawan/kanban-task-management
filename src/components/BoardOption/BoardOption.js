@@ -1,6 +1,8 @@
 import _uniqueId from "lodash/uniqueId";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
+import Heading from "../Heading";
+import { HSIZE } from "../Heading/Heading";
 import Icon, { ICON } from "../Icon";
 
 const BoardOption = ({
@@ -24,7 +26,7 @@ const BoardOption = ({
             />
             <LabelWrapper htmlFor={uniqueId}>
                 <IconWrapper label={name} icon={ICON.board} />
-                {children}
+                <Heading size={HSIZE.M}>{children}</Heading>
             </LabelWrapper>
         </Wrapper>
     );
@@ -61,8 +63,6 @@ const IconWrapper = styled(Icon)`
 const LabelWrapper = styled.label`
     display: flex;
     align-items: center;
-    font-size: var(--size-h-m);
-    line-height: var(--line-h-m);
     gap: 12px;
     padding: 14px 0px 15px 24px;
     color: var(--color-gray-300);

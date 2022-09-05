@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Heading, { HSIZE } from "../Heading";
 import TaskCard from "../TaskCard";
 
 const Column = ({ column, onTaskSelect, ...delegated }) => {
@@ -6,7 +7,7 @@ const Column = ({ column, onTaskSelect, ...delegated }) => {
 
     return (
         <Wrapper {...delegated}>
-            <Title>
+            <Title size={HSIZE.S}>
                 <Color color={column.color} />
                 {column.name} ({numTasks})
             </Title>
@@ -25,9 +26,7 @@ const Wrapper = styled.section`
     flex-direction: column;
 `;
 
-const Title = styled.h1`
-    font-size: var(--size-h-s);
-    line-height: var(--line-h-s);
+const Title = styled(Heading)`
     text-transform: uppercase;
     letter-spacing: 2.4px;
     color: var(--color-gray-300);

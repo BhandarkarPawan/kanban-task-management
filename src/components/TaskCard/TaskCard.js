@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Heading, { HSIZE } from "../Heading";
 
 const TaskCard = ({ task, onClick, ...delegated }) => {
     const completed = task.subtasks.filter(
@@ -12,7 +13,9 @@ const TaskCard = ({ task, onClick, ...delegated }) => {
                 onClick(task);
             }}
         >
-            <Title onClick={() => onClick(task)}>{task.title}</Title>
+            <Title onClick={() => onClick(task)}>
+                <Heading size={HSIZE.M}>{task.title}</Heading>
+            </Title>
             {task.subtasks.length && (
                 <Progress>
                     {completed} of {task.subtasks.length} subtasks
@@ -46,8 +49,6 @@ const Wrapper = styled.li`
 `;
 
 const Title = styled.button`
-    font-size: var(--size-h-m);
-    line-height: var(--line-h-m);
     border: none;
     background: transparent;
     padding: 0;

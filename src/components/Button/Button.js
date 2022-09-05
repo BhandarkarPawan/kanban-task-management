@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import Heading, { HSIZE } from "../Heading";
 
 const Button = ({ children, onClick, ...delegated }) => {
     return (
         <Wrapper {...delegated} onClick={onClick}>
-            <Label>{children}</Label>
+            <Label size={HSIZE.M}>{children}</Label>
         </Wrapper>
     );
 };
@@ -21,9 +22,7 @@ const Wrapper = styled.button`
     }
 `;
 
-const Label = styled.div`
-    font-size: var(--size-h-m);
-    line-height: var(--line-h-m);
+const Label = styled(Heading)`
     display: flex;
     align-items: baseline;
     gap: 4px;

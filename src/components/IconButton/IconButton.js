@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { QUERY } from "../../constants";
+import Heading, { HSIZE } from "../Heading";
 import Icon from "../Icon";
 
 const IconButton = ({ icon, label, children, ...delegated }) => {
@@ -22,7 +23,7 @@ export const ResponsiveIconButton = ({
             {icon && label && (
                 <ResponsiveIconWrapper icon={icon} label={label} />
             )}
-            <Label responsive aria-hidden>
+            <Label size={HSIZE.M} responsive aria-hidden>
                 {children}
             </Label>
         </ResponsiveWrapper>
@@ -61,10 +62,8 @@ const ResponsiveIconWrapper = styled(Icon)`
     }
 `;
 
-const Label = styled.div`
+const Label = styled(Heading)`
     display: ${(props) => props.responsive && "none"};
-    font-size: var(--size-h-m);
-    line-height: var(--line-h-m);
 
     @media ${QUERY.tabletAndUp} {
         display: initial;

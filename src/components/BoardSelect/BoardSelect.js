@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import BoardGroup from "../BoardGroup";
+import Heading, { HSIZE } from "../Heading";
 import Icon, { ICON } from "../Icon";
 import Modal from "../Modal";
 
@@ -30,7 +31,7 @@ const BoardSelect = ({
     return (
         <Wrapper {...delegated} aria-label="Select Board">
             <Select onClick={toggleModal}>
-                {selectedBoard.name}
+                <Heading size={HSIZE.L}>{selectedBoard.name}</Heading>
                 <IconWrapper icon={icon} label={label} />
             </Select>
             <Label disabled>{selectedBoard.name}</Label>
@@ -63,8 +64,6 @@ const IconWrapper = styled(Icon)`
 const Select = styled.button`
     border: none;
     background-color: transparent;
-    font-size: var(--size-h-l);
-    line-height: var(--line-h-l);
     display: flex;
     align-items: center;
     gap: 9px;

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import Button from "../Button";
 import Column from "../Column";
+import Heading from "../Heading";
+import { HSIZE } from "../Heading/Heading";
 import TaskModal from "../TaskModal";
 
 const Board = ({ board, ...delegated }) => {
@@ -43,7 +45,9 @@ const Board = ({ board, ...delegated }) => {
                             column={column}
                         />
                     ))}
-                    <AddColumnButton>+ New Column</AddColumnButton>
+                    <AddColumnButton>
+                        <Heading size={HSIZE.XL}>+ New Column</Heading>
+                    </AddColumnButton>
                 </>
             )}
         </Wrapper>
@@ -114,8 +118,6 @@ const AddColumnButton = styled.button`
     margin-bottom: 50px;
     border-radius: var(--r-m);
     flex-shrink: 0;
-    font-size: var(--size-h-xl);
-    line-height: var(--line-h-xl);
     color: var(--color-gray-300);
 
     // For an improved scroll experience on mobile

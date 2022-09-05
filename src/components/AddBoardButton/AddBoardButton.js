@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { QUERY } from "../../constants";
+import Heading from "../Heading";
+import { HSIZE } from "../Heading/Heading";
 import Icon, { ICON } from "../Icon";
 
 const AddBoardButton = ({ onClick, ...delegated }) => {
     return (
         <Wrapper {...delegated} aria-label="Create New Board">
-            <IconWrapper icon={ICON.board} label="" />+ Create New Board
+            <IconWrapper icon={ICON.board} label="" />
+            <Heading size={HSIZE.M}>+ Create New Board</Heading>
         </Wrapper>
     );
 };
@@ -22,8 +25,6 @@ const Wrapper = styled.button`
     display: flex;
     align-items: center;
     text-align: start;
-    font-size: var(--size-h-m);
-    line-height: var(--line-h-m);
     gap: 12px;
     padding: 16px 24px;
     border: none;

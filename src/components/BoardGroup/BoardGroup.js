@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { QUERY } from "../../constants";
 import AddBoardButton from "../AddBoardButton";
 import BoardOption from "../BoardOption";
+import Heading from "../Heading";
+import { HSIZE } from "../Heading/Heading";
 
 const BoardGroup = ({
     boards,
@@ -15,7 +17,7 @@ const BoardGroup = ({
 
     return (
         <Wrapper {...delegated} role="radiogroup">
-            <Title aria-label={ARIA_LABEL}>
+            <Title size={HSIZE.S} aria-label={ARIA_LABEL}>
                 {TITLE}({boards.length})
             </Title>
             <Stretched>
@@ -65,9 +67,7 @@ const Stretched = styled.ul`
     margin-right: calc(-1 * var(--space));
 `;
 
-const Title = styled.h3`
-    font-size: var(--size-h-s);
-    line-height: var(--line-h-s);
+const Title = styled(Heading)`
     text-transform: uppercase;
     letter-spacing: 2.4px;
     color: var(--color-gray-300);

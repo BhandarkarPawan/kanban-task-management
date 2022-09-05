@@ -2,6 +2,8 @@ import _uniqueId from "lodash/uniqueId";
 import { useState } from "react";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
+import Heading from "../Heading";
+import { HSIZE } from "../Heading/Heading";
 import Menu from "../Menu";
 import Modal from "../Modal";
 import StatusSelect from "../StatusSelect";
@@ -16,7 +18,7 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
     return (
         <Modal center isOpen={!!task} toggleModal={toggleModal} {...delegated}>
             <Wrapper>
-                <TaskTitle>
+                <TaskTitle size={HSIZE.L}>
                     {task.title}
                     <Menu label="Task Options Menu" />
                 </TaskTitle>
@@ -24,10 +26,10 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
                     <TaskDescription>{task.description}</TaskDescription>
                 )}
                 <SubtaskSection>
-                    <SectionTitle>
+                    <Heading size={HSIZE.S}>
                         Subtasks ({completedSubtasks.length} of
                         {subTasks.length})
-                    </SectionTitle>
+                    </Heading>
                     <SubTaskList>
                         {subTasks.map((st, i) => {
                             const uniqueId = _uniqueId(`${i}`);
@@ -38,7 +40,7 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
                     </SubTaskList>
                 </SubtaskSection>
                 <StatusSection>
-                    <SectionTitle>Current Status</SectionTitle>
+                    <Heading size={HSIZE.S}>Current Status</Heading>
                     <StatusSelect
                         id="statusSelector"
                         selected={currentStatus}
@@ -69,9 +71,7 @@ const Wrapper = styled.div`
     isolation: isolate;
 `;
 
-const TaskTitle = styled.h2`
-    font-size: var(--size-h-l);
-    line-height: var(--line-h-l);
+const TaskTitle = styled(Heading)`
     color: ${({ theme }) => theme.color};
     display: flex;
     align-items: center;
@@ -91,13 +91,6 @@ const SubtaskSection = styled.section`
 `;
 
 const StatusSection = styled.section``;
-
-const SectionTitle = styled.h3`
-    font-size: var(--size-h-s);
-    line-height: var(--line-h-s);
-    margin-bottom: 16px;
-    color: var(--color-gray-300);
-`;
 
 const SubTaskList = styled.ul`
     display: flex;

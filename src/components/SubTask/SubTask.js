@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Heading, { HSIZE } from "../Heading";
 
 // TODO: Return focus wherever relevant
 const SubTask = ({ subtask, id, ...delegated }) => {
@@ -16,7 +17,7 @@ const SubTask = ({ subtask, id, ...delegated }) => {
             ></Checkbox>
             <DummyCheckBox checked={checked} />
             <SubTaskLabel checked={checked} htmlFor={id}>
-                {subtask.title}
+                <Heading size={HSIZE.S}>{subtask.title}</Heading>
             </SubTaskLabel>
         </Wrapper>
     );
@@ -40,8 +41,6 @@ const Wrapper = styled.li`
 `;
 
 const SubTaskLabel = styled.label`
-    font-size: var(--size-h-s);
-    line-height: var(--line-h-s);
     opacity: ${(props) => (props.checked ? 0.5 : 1)};
     text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
     cursor: pointer;
