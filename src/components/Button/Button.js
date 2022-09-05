@@ -21,7 +21,7 @@ const Wrapper = styled.button`
     &:hover {
         background-color: ${(props) =>
             props.themed
-                ? `var(--color-themed-button-hover)`
+                ? props.theme.themedButtonHoverColor
                 : `var(--color-primary-light)`};
         cursor: pointer;
     }

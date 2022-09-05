@@ -7,6 +7,7 @@ export const lightTheme = {
     logo: `assets/logo-dark.svg`,
     shadow: `var(--shadow-light)`,
     themedButtonColor: `var(--color-themed-button-light)`,
+    themedButtonHoverColor: `var(--color-themed-button-hover-light)`,
 };
 
 export const darkTheme = {
@@ -22,4 +23,5 @@ export const darkTheme = {
     logo: `assets/logo-light.svg`,
     shadow: `var(--shadow-dark)`,
     themedButtonColor: `var(--color-themed-button-dark)`,
+    themedButtonHoverColor: `var(--color-themed-button-hover-dark)`,
 };

@@ -45,8 +45,9 @@ html{
 	--color-placeholder-light: hsla(${COLOR.black} / 0.25);
 	--color-input-border: hsla(${COLOR.gray[300]} / 0.25);
 	--color-themed-button-light: hsla(${COLOR.primary} / 0.1);
-	--color-themed-button-hover: hsla(${COLOR.primary} / 0.25);
+	--color-themed-button-hover-light: hsla(${COLOR.primary} / 0.25);
 	--color-themed-button-dark: hsla(${COLOR.white});
+	--color-themed-button-hover-dark: hsla(${COLOR.white});
 	
 	// border radius
 	--r-xs : ${RADIUS.xs}px;

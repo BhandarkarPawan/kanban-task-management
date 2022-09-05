@@ -2,9 +2,11 @@ import { useState } from "react";
 import styled from "styled-components";
 import { PLACEHOLDER } from "../../constants";
 import Button from "../Button";
+import DynamicTextInput from "../DynamicTextInput";
 import Heading, { HSIZE } from "../Heading";
-import Icon, { ICON } from "../Icon";
 import StatusSelect from "../StatusSelect";
+import TextArea from "../TextArea";
+import TextInput from "../TextInput";
 
 const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
     const subTasks = task.subtasks;
@@ -15,30 +17,30 @@ const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
             <EditTitle size={HSIZE.L}>Edit Task</EditTitle>
             <EditSection>
                 <SectionTitle size={HSIZE.S}>Title</SectionTitle>
-                <TextInput placeholder={PLACEHOLDER.textInput}></TextInput>
+                <TextInput
+                    value={task.title}
+                    placeholder={PLACEHOLDER.textInput}
+                    onChange={undefined}
+                />
             </EditSection>
             <EditSection>
                 <SectionTitle size={HSIZE.S}>Description</SectionTitle>
                 <TextArea
                     rows={4}
+                    value={task.description}
                     placeholder={PLACEHOLDER.textArea}
+                    onChange={undefined}
                 ></TextArea>
             </EditSection>
             <EditSection>
                 <SectionTitle size={HSIZE.S}>Subtasks</SectionTitle>
                 <SubTaskEditList>
                     {subTasks.map((st, i) => (
-                        <DynamicTextInput key={i}>
-                            <TextInput
-                                placeholder={PLACEHOLDER.subTask[i]}
-                            ></TextInput>
-                            <DeleteButton>
-                                <CloseIconWrapper
-                                    icon={ICON.close}
-                                    label="Delete Subtask"
-                                />
-                            </DeleteButton>
-                        </DynamicTextInput>
+                        <DynamicTextInput
+                            key={i}
+                            value={st.title}
+                            onChange={undefined}
+                        />
                     ))}
                     <Button themed onClick={undefined}>
                         +Add New Subtask
@@ -72,65 +74,14 @@ const SectionTitle = styled(Heading)`
 
 const EditSection = styled.section``;
 
-const CloseIconWrapper = styled(Icon)`
-    height: 15px;
-    width: 15px;
-`;
-
-const DeleteButton = styled.button`
-    flex-shrink: 0;
-    border: none;
-    background-color: transparent;
-    padding: 0;
-`;
-
 const EditTitle = styled(Heading)`
     color: ${({ theme }) => theme.color};
-`;
-
-const DynamicTextInput = styled.li`
-    display: flex;
-    gap: 16px;
 `;
 
 const SubTaskEditList = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 12px;
-`;
-
-const TextInput = styled.input`
-    border: 1px solid var(--color-input-border);
-    border-radius: var(--r-s);
-    padding: 8px 16px;
-    background-color: ${({ theme }) => theme.backgroundLight};
-    font-weight: 500;
-    color: ${({ theme }) => theme.color};
-    width: 100%;
-
-    &::placeholder {
-        font-weight: 500;
-        font-size: var(--size-b-l);
-        line-height: var(--line-b-l);
-        color: ${({ theme }) => theme.placeholderColor};
-    }
-`;
-
-const TextArea = styled.textarea`
-    border: 1px solid var(--color-input-border);
-    border-radius: var(--r-s);
-    padding: 8px 16px;
-    background-color: ${({ theme }) => theme.backgroundLight};
-    font-weight: 500;
-    color: ${({ theme }) => theme.color};
-    width: 100%;
-
-    &::placeholder {
-        font-weight: 500;
-        font-size: var(--size-b-l);
-        line-height: var(--line-b-l);
-        color: ${({ theme }) => theme.placeholderColor};
-    }
 `;
 
 export default TaskEditPanel;

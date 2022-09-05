@@ -5,12 +5,12 @@ const Text = ({ size, children, ...delegated }) => {
     return <Wrapper {...delegated}>{children}</Wrapper>;
 };
 
-const LWrapper = styled.p`
+const MWrapper = styled.p`
     font-size: var(--size-b-m);
     line-height: var(--line-b-m);
 `;
 
-const MWrapper = styled.p`
+const LWrapper = styled.p`
     font-size: var(--size-b-l);
     line-height: var(--line-b-l);
 `;

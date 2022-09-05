@@ -8,10 +8,6 @@ import TaskEditPanel from "../TaskEditPanel";
 import TaskInfoPanel from "../TaskInfoPanel";
 
 const TaskModal = ({ task, toggleModal, ...delegated }) => {
-    const subTasks = task.subtasks;
-
-    const completedSubtasks = subTasks.filter((st) => st.isCompleted);
-    const [currentStatus, setCurrentStatus] = useState(task.status);
     const [editing, setEditing] = useState(false);
 
     return (
