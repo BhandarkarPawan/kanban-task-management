@@ -16,6 +16,7 @@ const Header = ({
     showLogo,
     toggleAddModal,
     onChange,
+    toggleAddBoard,
     ...delegated
 }) => {
     const OPTIONS = [
@@ -43,6 +44,7 @@ const Header = ({
                 boards={boards}
                 selectedBoard={selectedBoard}
                 setSelectedBoard={setSelectedBoard}
+                toggleAddBoard={toggleAddBoard}
             >
                 <ThemeToggle toggleTheme={toggleTheme} />
             </BoardSelectWrapper>

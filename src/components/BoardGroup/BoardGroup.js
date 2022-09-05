@@ -10,6 +10,7 @@ const BoardGroup = ({
     selectedBoard,
     setSelectedBoard,
     children,
+    toggleAddBoard,
     ...delegated
 }) => {
     const TITLE = "All Boards  ";
@@ -34,11 +35,7 @@ const BoardGroup = ({
                         </BoardOption>
                     );
                 })}
-                <AddBoardButton
-                    onClick={() => {
-                        console.log("TODO: Adds new board");
-                    }}
-                />
+                <AddBoardButton onClick={toggleAddBoard} />
             </Stretched>
             {children}
         </Wrapper>

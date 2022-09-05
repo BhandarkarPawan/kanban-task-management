@@ -6,7 +6,7 @@ import Icon, { ICON } from "../Icon";
 
 const AddBoardButton = ({ onClick, ...delegated }) => {
     return (
-        <Wrapper {...delegated} aria-label="Create New Board">
+        <Wrapper onClick={onClick} {...delegated} aria-label="Create New Board">
             <IconWrapper icon={ICON.board} label="" />
             <Heading size={HSIZE.M}>+ Create New Board</Heading>
         </Wrapper>

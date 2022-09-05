@@ -14,6 +14,7 @@ const Sidebar = ({
     selectedBoard,
     setSelectedBoard,
     toggleTheme,
+    toggleAddBoard,
     ...delegated
 }) => {
     return showSidebar ? (
@@ -24,6 +25,7 @@ const Sidebar = ({
                     boards={boards}
                     selectedBoard={selectedBoard}
                     setSelectedBoard={setSelectedBoard}
+                    toggleAddBoard={toggleAddBoard}
                 />
             </Stretched>
             <Spacer />

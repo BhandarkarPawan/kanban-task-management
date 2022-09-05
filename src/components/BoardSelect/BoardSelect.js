@@ -11,6 +11,7 @@ const BoardSelect = ({
     selectedBoard,
     setSelectedBoard,
     children,
+    toggleAddBoard,
     ...delegated
 }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,6 +49,7 @@ const BoardSelect = ({
                             boards={boards}
                             selectedBoard={selectedBoard}
                             setSelectedBoard={handleSelectBoard}
+                            toggleAddBoard={toggleAddBoard}
                         >
                             {children}
                         </BoardGroupWrapper>

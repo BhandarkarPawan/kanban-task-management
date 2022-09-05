@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import "./App.css";
 import Board from "./components/Board";
+import BoardModal from "./components/BoardModal";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import TaskModal from "./components/TaskModal";
@@ -15,6 +16,8 @@ function App() {
     const [selectedBoard, setSelectedBoard] = useState(data.boards[0]);
     const [showSidebar, setShowsSidebar] = useState(false);
     const [addingTask, setAddingTask] = useState(false);
+    const [editingBoard, setEditingBoard] = useState(false);
+    const [addingBoard, setAddingBoard] = useState(false);
 
     const toggleTheme = () => {
         theme === lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
@@ -26,6 +29,16 @@ function App() {
 
     const toggleAddTaskModal = () => {
         setAddingTask(!addingTask);
+    };
+
+    const toggleEditBoard = () => {
+        setEditingBoard(!editingBoard);
+    };
+
+    const toggleAddBoard = () => {
+        setEditingBoard(!editingBoard);
+        setAddingBoard(!addingBoard);
+        console.log("nice");
     };
 
     const statusOptions = selectedBoard.columns.map((c) => c.name);
@@ -42,6 +55,19 @@ function App() {
         ],
     };
 
+    const emptyBoard = {
+        name: "",
+        columns: [
+            {
+                name: "",
+                color: "#49C4E5",
+                tasks: [],
+            },
+        ],
+    };
+
+    console.log(addingBoard, editingBoard);
+
     return (
         <>
             <ResetStyles />
@@ -54,6 +80,7 @@ function App() {
                     boards={data.boards}
                     toggleTheme={toggleTheme}
                     toggleSidebar={toggleSidebar}
+                    toggleAddBoard={toggleAddBoard}
                 />
                 <Header
                     boards={data.boards}
@@ -63,7 +90,8 @@ function App() {
                     fullLogo={true}
                     showLogo={!showSidebar}
                     toggleAddModal={toggleAddTaskModal}
-                    onChange={undefined}
+                    onChange={setEditingBoard}
+                    toggleAddBoard={toggleAddBoard}
                 ></Header>
                 <Board statusOptions={statusOptions} board={selectedBoard} />
                 {addingTask && (
@@ -72,6 +100,21 @@ function App() {
                         statusOptions={statusOptions}
                         task={emptyTask}
                         toggleModal={toggleAddTaskModal}
+                    />
+                )}
+                {editingBoard && !addingBoard && (
+                    <BoardModal
+                        board={selectedBoard}
+                        toggleModal={toggleEditBoard}
+                        onChange={setEditingBoard}
+                    />
+                )}
+                {addingBoard && (
+                    <BoardModal
+                        add={addingBoard}
+                        board={emptyBoard}
+                        toggleModal={toggleAddBoard}
+                        onChange={toggleAddBoard}
                     />
                 )}
             </ThemeProvider>
