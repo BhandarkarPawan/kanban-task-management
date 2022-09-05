@@ -64,7 +64,7 @@ function App() {
                     showLogo={!showSidebar}
                     toggleAddModal={toggleAddModal}
                 ></Header>
-                <Board statusOptions={statusOptions} board={data.boards[0]} />
+                <Board statusOptions={statusOptions} board={selectedBoard} />
                 {addingBoard && (
                     <TaskModal
                         add

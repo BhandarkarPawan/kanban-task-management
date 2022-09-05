@@ -34,7 +34,7 @@ const Wrapper = styled.li`
     color: ${({ theme }) => theme.color};
     box-shadow: ${({ theme }) => theme.shadow};
     border-radius: var(--r-l);
-    width: 280px;
+    width: 100%;
     padding: 23px 16px;
     scroll-snap-align: start;
     cursor: pointer;

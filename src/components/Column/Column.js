@@ -24,6 +24,8 @@ const Wrapper = styled.section`
     /* flex-shrink: 0; */
     display: flex;
     flex-direction: column;
+    width: 280px;
+    flex-shrink: 0;
 `;
 
 const Title = styled(Heading)`
