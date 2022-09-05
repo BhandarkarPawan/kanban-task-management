@@ -11,7 +11,6 @@ import TextInput from "../TextInput";
 
 const TaskEditPanel = ({
     add = false,
-    children,
     task,
     onChange,
     statusOptions,

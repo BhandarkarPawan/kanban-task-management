@@ -63,19 +63,17 @@ const TaskModal = ({
 const Wrapper = styled(Modal)`
     background-color: ${({ theme }) => theme.backgroundLight};
     padding: 24px;
-    @media ${QUERY.tabletAndUp} {
-        padding: 32px;
-    }
-
     display: flex;
-
     flex-direction: column;
     gap: 24px;
     max-width: 480px;
     border-radius: var(--r-m);
     isolation: isolate;
-
     width: min(100%, 480px);
+
+    @media ${QUERY.tabletAndUp} {
+        padding: 32px;
+    }
 `;
 
 // TODO: Use drop down

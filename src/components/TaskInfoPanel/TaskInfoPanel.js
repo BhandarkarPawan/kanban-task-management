@@ -7,13 +7,7 @@ import StatusSelect from "../StatusSelect";
 import SubTask from "../SubTask";
 import Text, { BSIZE } from "../Text ";
 
-const TaskInfoPanel = ({
-    children,
-    statusOptions,
-    task,
-    onChange,
-    ...delegated
-}) => {
+const TaskInfoPanel = ({ statusOptions, task, onChange, ...delegated }) => {
     const subTasks = task.subtasks;
 
     const completedSubtasks = subTasks.filter((st) => st.isCompleted);

@@ -14,7 +14,7 @@ function App() {
     const [theme, setTheme] = useState(lightTheme);
     const [selectedBoard, setSelectedBoard] = useState(data.boards[0]);
     const [showSidebar, setShowsSidebar] = useState(false);
-    const [addingBoard, setAddingBoard] = useState(false);
+    const [addingTask, setAddingTask] = useState(false);
 
     const toggleTheme = () => {
         theme === lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
@@ -24,8 +24,8 @@ function App() {
         setShowsSidebar(!showSidebar);
     };
 
-    const toggleAddModal = () => {
-        setAddingBoard(!addingBoard);
+    const toggleAddTaskModal = () => {
+        setAddingTask(!addingTask);
     };
 
     const statusOptions = selectedBoard.columns.map((c) => c.name);
@@ -62,15 +62,16 @@ function App() {
                     toggleTheme={toggleTheme}
                     fullLogo={true}
                     showLogo={!showSidebar}
-                    toggleAddModal={toggleAddModal}
+                    toggleAddModal={toggleAddTaskModal}
+                    onChange={undefined}
                 ></Header>
                 <Board statusOptions={statusOptions} board={selectedBoard} />
-                {addingBoard && (
+                {addingTask && (
                     <TaskModal
                         add
                         statusOptions={statusOptions}
                         task={emptyTask}
-                        toggleModal={toggleAddModal}
+                        toggleModal={toggleAddTaskModal}
                     />
                 )}
             </ThemeProvider>
