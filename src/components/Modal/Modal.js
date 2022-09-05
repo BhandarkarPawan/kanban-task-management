@@ -42,6 +42,18 @@ const OverlayStyle = styled.div`
     place-items: center;
     overflow: auto;
 
+    /* Improve Scrollbar styles */
+    &::-webkit-scrollbar {
+        /* ... */
+        background-color: transparent;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary-light);
+        border-radius: 5000px;
+        /* ... */
+    }
+
     top: 64px;
     left: 0;
     right: 0;
