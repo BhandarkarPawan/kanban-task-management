@@ -46,7 +46,7 @@ const OverlayStyle = styled.div`
     right: 0;
     bottom: 0;
     background: var(--color-overlay);
-    padding: 0px 16px;
+    padding: 16px;
 
     @media ${QUERY.tabletAndUp} {
         top: 75px;
