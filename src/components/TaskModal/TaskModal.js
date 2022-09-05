@@ -29,10 +29,10 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
                     </TaskDescription>
                 )}
                 <SubtaskSection>
-                    <Heading size={HSIZE.S}>
+                    <SectionTitle size={HSIZE.S}>
                         Subtasks ({completedSubtasks.length} of
                         {subTasks.length})
-                    </Heading>
+                    </SectionTitle>
                     <SubTaskList>
                         {subTasks.map((st, i) => {
                             const uniqueId = _uniqueId(`${i}`);
@@ -43,7 +43,7 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
                     </SubTaskList>
                 </SubtaskSection>
                 <StatusSection>
-                    <Heading size={HSIZE.S}>Current Status</Heading>
+                    <SectionTitle size={HSIZE.S}>Current Status</SectionTitle>
                     <StatusSelect
                         id="statusSelector"
                         selected={currentStatus}
@@ -92,6 +92,11 @@ const SubtaskSection = styled.section`
 `;
 
 const StatusSection = styled.section``;
+
+const SectionTitle = styled(Heading)`
+    color: var(--color-gray-300);
+    margin-bottom: 16px;
+`;
 
 const SubTaskList = styled.ul`
     display: flex;
