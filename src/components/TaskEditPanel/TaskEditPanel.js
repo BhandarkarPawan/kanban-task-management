@@ -4,36 +4,43 @@ import { PLACEHOLDER } from "../../constants";
 import Button from "../Button";
 import DynamicTextInput from "../DynamicTextInput";
 import Heading, { HSIZE } from "../Heading";
+import LabeledInput from "../LabeledInput";
 import StatusSelect from "../StatusSelect";
 import TextArea from "../TextArea";
 import TextInput from "../TextInput";
 
-const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
+const TaskEditPanel = ({
+    add = false,
+    children,
+    task,
+    onChange,
+    statusOptions,
+    ...delegated
+}) => {
     const subTasks = task.subtasks;
     const [currentStatus, setCurrentStatus] = useState(task.status);
 
     return (
         <>
-            <EditTitle size={HSIZE.L}>Edit Task</EditTitle>
-            <EditSection>
-                <SectionTitle size={HSIZE.S}>Title</SectionTitle>
+            <EditTitle size={HSIZE.L}>
+                {add ? "Add Task" : "Edit Task"}
+            </EditTitle>
+            <LabeledInput label="Title">
                 <TextInput
                     value={task.title}
                     placeholder={PLACEHOLDER.textInput}
                     onChange={() => {}}
                 />
-            </EditSection>
-            <EditSection>
-                <SectionTitle size={HSIZE.S}>Description</SectionTitle>
+            </LabeledInput>
+            <LabeledInput label="Description">
                 <TextArea
                     rows={4}
                     value={task.description}
                     placeholder={PLACEHOLDER.textArea}
                     onChange={() => {}}
                 ></TextArea>
-            </EditSection>
-            <EditSection>
-                <SectionTitle size={HSIZE.S}>Subtasks</SectionTitle>
+            </LabeledInput>
+            <LabeledInput label="Subtasks">
                 <SubTaskEditList>
                     {subTasks.map((st, i) => (
                         <DynamicTextInput
@@ -46,33 +53,25 @@ const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
                         +Add New Subtask
                     </Button>
                 </SubTaskEditList>
-            </EditSection>
-            <EditSection>
-                <SectionTitle size={HSIZE.S}>Status</SectionTitle>
+            </LabeledInput>
+            <LabeledInput label="Status">
                 <StatusSelect
                     id="statusSelector"
-                    selected={currentStatus}
-                    options={["Todo", "Doing", "Done"]}
+                    value={currentStatus}
+                    options={statusOptions}
                     onChange={setCurrentStatus}
                 />
-            </EditSection>
+            </LabeledInput>
             <Button
                 onClick={() => {
-                    setEditing(false);
+                    onChange(false);
                 }}
             >
-                Save Changes
+                {add ? "Create Task" : "Save Changes"}
             </Button>
         </>
     );
 };
-
-const SectionTitle = styled(Heading)`
-    color: var(--color-gray-300);
-    margin-bottom: 8px;
-`;
-
-const EditSection = styled.section``;
 
 const EditTitle = styled(Heading)`
     color: ${({ theme }) => theme.color};

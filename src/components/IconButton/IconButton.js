@@ -16,10 +16,11 @@ export const ResponsiveIconButton = ({
     icon,
     label,
     children,
+    onClick,
     ...delegated
 }) => {
     return (
-        <ResponsiveWrapper {...delegated}>
+        <ResponsiveWrapper {...delegated} onClick={onClick}>
             {icon && label && (
                 <ResponsiveIconWrapper icon={icon} label={label} />
             )}

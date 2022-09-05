@@ -13,6 +13,7 @@ const Header = ({
     toggleTheme,
     fullLogo,
     showLogo,
+    toggleAddModal,
     ...delegated
 }) => {
     return (
@@ -26,7 +27,11 @@ const Header = ({
                 <ThemeToggle toggleTheme={toggleTheme} />
             </BoardSelect>
             <Spacer />
-            <ResponsiveIconButton icon={ICON.add} label="Add New Task">
+            <ResponsiveIconButton
+                onClick={toggleAddModal}
+                icon={ICON.add}
+                label="Add New Task"
+            >
                 Add New Task
             </ResponsiveIconButton>
         </Wrapper>

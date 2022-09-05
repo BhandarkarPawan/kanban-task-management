@@ -7,8 +7,27 @@ import Modal from "../Modal";
 import TaskEditPanel from "../TaskEditPanel";
 import TaskInfoPanel from "../TaskInfoPanel";
 
-const TaskModal = ({ task, toggleModal, ...delegated }) => {
+const TaskModal = ({
+    task,
+    statusOptions,
+    add = false,
+    toggleModal,
+    ...delegated
+}) => {
     const [editing, setEditing] = useState(false);
+
+    const handleStartEdit = () => {
+        setEditing(true);
+    };
+
+    const handleEndEdit = () => {
+        setEditing(false);
+    };
+
+    const handleEndAdd = () => {
+        console.log("New Task Will be Added");
+        toggleModal(false);
+    };
 
     return (
         <Wrapper
@@ -17,10 +36,25 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
             toggleModal={toggleModal}
             {...delegated}
         >
-            {editing ? (
-                <TaskEditPanel task={task} setEditing={setEditing} />
+            {add ? (
+                <TaskEditPanel
+                    statusOptions={statusOptions}
+                    add
+                    task={task}
+                    onChange={handleEndAdd}
+                />
+            ) : editing ? (
+                <TaskEditPanel
+                    statusOptions={statusOptions}
+                    task={task}
+                    onChange={handleEndEdit}
+                />
             ) : (
-                <TaskInfoPanel task={task} setEditing={setEditing} />
+                <TaskInfoPanel
+                    statusOptions={statusOptions}
+                    task={task}
+                    onChange={handleStartEdit}
+                />
             )}
         </Wrapper>
     );

@@ -7,7 +7,13 @@ import StatusSelect from "../StatusSelect";
 import SubTask from "../SubTask";
 import Text, { BSIZE } from "../Text ";
 
-const TaskInfoPanel = ({ children, task, setEditing, ...delegated }) => {
+const TaskInfoPanel = ({
+    children,
+    statusOptions,
+    task,
+    onChange,
+    ...delegated
+}) => {
     const subTasks = task.subtasks;
 
     const completedSubtasks = subTasks.filter((st) => st.isCompleted);
@@ -17,7 +23,7 @@ const TaskInfoPanel = ({ children, task, setEditing, ...delegated }) => {
         {
             label: "Edit Task",
             cb: () => {
-                setEditing(true);
+                onChange(true);
             },
             danger: false,
         },
@@ -57,8 +63,8 @@ const TaskInfoPanel = ({ children, task, setEditing, ...delegated }) => {
                 <SectionTitle size={HSIZE.S}>Current Status</SectionTitle>
                 <StatusSelect
                     id="statusSelector"
-                    selected={currentStatus}
-                    options={["Todo", "Doing", "Done"]}
+                    value={currentStatus}
+                    options={statusOptions}
                     onChange={setCurrentStatus}
                 />
             </StatusSection>

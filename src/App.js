@@ -4,6 +4,7 @@ import "./App.css";
 import Board from "./components/Board";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import TaskModal from "./components/TaskModal";
 import data from "./data.json";
 import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
@@ -13,13 +14,32 @@ function App() {
     const [theme, setTheme] = useState(lightTheme);
     const [selectedBoard, setSelectedBoard] = useState(data.boards[0]);
     const [showSidebar, setShowsSidebar] = useState(false);
+    const [addingBoard, setAddingBoard] = useState(false);
 
     const toggleTheme = () => {
         theme === lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
     };
 
     const toggleSidebar = () => {
-        showSidebar ? setShowsSidebar(false) : setShowsSidebar(true);
+        setShowsSidebar(!showSidebar);
+    };
+
+    const toggleAddModal = () => {
+        setAddingBoard(!addingBoard);
+    };
+
+    const statusOptions = selectedBoard.columns.map((c) => c.name);
+
+    const emptyTask = {
+        title: "",
+        description: "",
+        status: statusOptions[0],
+        subtasks: [
+            {
+                title: "",
+                isCompleted: false,
+            },
+        ],
     };
 
     return (
@@ -42,8 +62,17 @@ function App() {
                     toggleTheme={toggleTheme}
                     fullLogo={false}
                     showLogo={!showSidebar}
+                    toggleAddModal={toggleAddModal}
                 ></Header>
-                <Board board={data.boards[0]} />
+                <Board statusOptions={statusOptions} board={data.boards[0]} />
+                {addingBoard && (
+                    <TaskModal
+                        add
+                        statusOptions={statusOptions}
+                        task={emptyTask}
+                        toggleModal={toggleAddModal}
+                    />
+                )}
             </ThemeProvider>
         </>
     );

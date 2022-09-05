@@ -7,7 +7,7 @@ import Heading from "../Heading";
 import { HSIZE } from "../Heading/Heading";
 import TaskModal from "../TaskModal";
 
-const Board = ({ board, ...delegated }) => {
+const Board = ({ statusOptions, board, ...delegated }) => {
     const isEmpty = board.columns.length === 0;
     const [selectedTask, setSelectedTask] = useState(null);
 
@@ -20,7 +20,11 @@ const Board = ({ board, ...delegated }) => {
     return (
         <Wrapper {...delegated}>
             {selectedTask && (
-                <TaskModal task={selectedTask} toggleModal={toggleModal} />
+                <TaskModal
+                    statusOptions={statusOptions}
+                    task={selectedTask}
+                    toggleModal={toggleModal}
+                />
             )}
             {isEmpty ? (
                 <EmptyWrapper>

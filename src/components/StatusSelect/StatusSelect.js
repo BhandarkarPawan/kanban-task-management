@@ -5,7 +5,7 @@ import useOutsideAlerter from "../../hooks/useOutsideAlerter";
 import Icon, { ICON } from "../Icon";
 import Text, { BSIZE } from "../Text ";
 
-const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
+const StatusSelect = ({ id, value, options, onChange, ...delegated }) => {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => {
         setIsOpen(true);
@@ -43,7 +43,7 @@ const StatusSelect = ({ id, selected, options, onChange, ...delegated }) => {
                 )}
             </ModalStyle>
             <Label aria-label="Change Status" onClick={openModal}>
-                <Text size={BSIZE.L}>{selected}</Text>
+                <Text size={BSIZE.L}>{value}</Text>
                 <IconWrapper icon={ICON.down} label="Show status options" />
             </Label>
         </Wrapper>
