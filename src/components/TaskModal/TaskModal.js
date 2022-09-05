@@ -29,13 +29,6 @@ const TaskModal = ({ task, toggleModal, ...delegated }) => {
 const Wrapper = styled(Modal)`
     background-color: ${({ theme }) => theme.backgroundLight};
     padding: 24px;
-    position: relative;
-
-    // TODO: Deal with LONG modal
-    /* overflow: visible; */
-    /* overflow-y: auto;
-    max-height: 100%; */
-
     @media ${QUERY.tabletAndUp} {
         padding: 32px;
     }

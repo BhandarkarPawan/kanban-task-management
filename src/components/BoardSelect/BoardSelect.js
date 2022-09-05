@@ -1,10 +1,10 @@
 import { useState } from "react";
+import ReactModal from "react-modal";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 import BoardGroup from "../BoardGroup";
 import Heading, { HSIZE } from "../Heading";
 import Icon, { ICON } from "../Icon";
-import Modal from "../Modal";
 
 const BoardSelect = ({
     boards,
@@ -35,18 +35,80 @@ const BoardSelect = ({
                 <IconWrapper icon={icon} label={label} />
             </Select>
             <Label disabled>{selectedBoard.name}</Label>
-            <Modal isOpen={isOpen} toggleModal={toggleModal}>
-                <BoardGroup
-                    boards={boards}
-                    selectedBoard={selectedBoard}
-                    setSelectedBoard={handleSelectBoard}
-                >
-                    {children}
-                </BoardGroup>
-            </Modal>
+            <ReactModal
+                isOpen={isOpen}
+                onRequestClose={toggleModal}
+                className="_"
+                overlayClassName="_"
+                ariaHideApp={false}
+                contentElement={(props) => (
+                    <ModalStyle {...props}>
+                        {" "}
+                        <BoardGroupWrapper
+                            boards={boards}
+                            selectedBoard={selectedBoard}
+                            setSelectedBoard={handleSelectBoard}
+                        >
+                            {children}
+                        </BoardGroupWrapper>
+                    </ModalStyle>
+                )}
+                overlayElement={(props, contentElement) => (
+                    <OverlayStyle {...props}>{contentElement}</OverlayStyle>
+                )}
+            ></ReactModal>
         </Wrapper>
     );
 };
+
+const ModalStyle = styled.div`
+    position: absolute;
+    top: 16px;
+    left: 53px;
+
+    &:focus {
+        // Do not highlight the whole modal
+        outline: none;
+    }
+`;
+
+const OverlayStyle = styled.div`
+    position: absolute;
+    display: grid;
+    place-items: center;
+    overflow: auto;
+
+    /* Improve Scrollbar styles */
+    &::-webkit-scrollbar {
+        /* ... */
+        background-color: transparent;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary-light);
+        border-radius: 5000px;
+        /* ... */
+    }
+
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-overlay);
+    padding: 16px;
+
+    @media ${QUERY.tabletAndUp} {
+        top: 75px;
+    }
+
+    @media ${QUERY.laptopAndUp} {
+        top: 91px;
+    }
+`;
+
+const BoardGroupWrapper = styled(BoardGroup)`
+    position: absolute;
+`;
 
 const Wrapper = styled.div`
     position: relative;

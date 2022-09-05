@@ -1,6 +1,5 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
-import { QUERY } from "../../constants";
 
 const Modal = ({
     isOpen,
@@ -18,9 +17,7 @@ const Modal = ({
             ariaHideApp={false}
             {...delegated}
             contentElement={(props) => (
-                <ModalStyle center={center} {...props}>
-                    {children}
-                </ModalStyle>
+                <ModalStyle {...props}>{children}</ModalStyle>
             )}
             overlayElement={(props, contentElement) => (
                 <OverlayStyle {...props}>{contentElement}</OverlayStyle>
@@ -54,20 +51,12 @@ const OverlayStyle = styled.div`
         /* ... */
     }
 
-    top: 64px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: var(--color-overlay);
     padding: 16px;
-
-    @media ${QUERY.tabletAndUp} {
-        top: 75px;
-    }
-
-    @media ${QUERY.laptopAndUp} {
-        top: 91px;
-    }
 `;
 
 export default Modal;
