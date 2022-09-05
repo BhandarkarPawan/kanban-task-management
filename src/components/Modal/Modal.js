@@ -40,6 +40,7 @@ const OverlayStyle = styled.div`
     position: absolute;
     display: grid;
     place-items: center;
+    overflow: auto;
 
     top: 64px;
     left: 0;

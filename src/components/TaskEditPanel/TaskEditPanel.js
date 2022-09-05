@@ -20,7 +20,7 @@ const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
                 <TextInput
                     value={task.title}
                     placeholder={PLACEHOLDER.textInput}
-                    onChange={undefined}
+                    onChange={() => {}}
                 />
             </EditSection>
             <EditSection>
@@ -29,7 +29,7 @@ const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
                     rows={4}
                     value={task.description}
                     placeholder={PLACEHOLDER.textArea}
-                    onChange={undefined}
+                    onChange={() => {}}
                 ></TextArea>
             </EditSection>
             <EditSection>
@@ -39,7 +39,7 @@ const TaskEditPanel = ({ children, task, setEditing, ...delegated }) => {
                         <DynamicTextInput
                             key={i}
                             value={st.title}
-                            onChange={undefined}
+                            onChange={() => {}}
                         />
                     ))}
                     <Button themed onClick={undefined}>
