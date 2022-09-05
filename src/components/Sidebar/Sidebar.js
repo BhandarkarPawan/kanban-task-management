@@ -60,6 +60,8 @@ const Wrapper = styled.nav`
         height: 100%;
         overflow: auto;
     }
+
+    border-right: ${({ theme }) => theme.border};
 `;
 
 const LogoWrapper = styled(Logo)`

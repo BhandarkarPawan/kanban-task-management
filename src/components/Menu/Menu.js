@@ -17,13 +17,13 @@ const Menu = ({ label, options, ...delegated }) => {
     useOutsideAlerter(optionsRef, toggleMenu);
 
     return (
-        <Wrapper {...delegated}>
+        <Wrapper>
             <MenuButton onClick={toggleMenu}>
                 <IconWrapper icon={ICON.menu} label={label} />
             </MenuButton>
             {isOpen && (
                 <FocusLock>
-                    <OptionList ref={optionsRef}>
+                    <OptionList {...delegated} ref={optionsRef}>
                         {options.map((opt, i) => (
                             <Option
                                 key={i}

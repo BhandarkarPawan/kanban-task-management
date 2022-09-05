@@ -8,6 +8,7 @@ export const lightTheme = {
     shadow: `var(--shadow-light)`,
     themedButtonColor: `var(--color-themed-button-light)`,
     themedButtonHoverColor: `var(--color-themed-button-hover-light)`,
+    border: `1px solid var(--color-line-light)`,
 };
 
 export const darkTheme = {
@@ -24,4 +25,5 @@ export const darkTheme = {
     shadow: `var(--shadow-dark)`,
     themedButtonColor: `var(--color-themed-button-dark)`,
     themedButtonHoverColor: `var(--color-themed-button-hover-dark)`,
+    border: `1px solid  var(--color-line-dark)`,
 };

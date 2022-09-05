@@ -60,7 +60,7 @@ function App() {
                     selectedBoard={selectedBoard}
                     setSelectedBoard={setSelectedBoard}
                     toggleTheme={toggleTheme}
-                    fullLogo={false}
+                    fullLogo={true}
                     showLogo={!showSidebar}
                     toggleAddModal={toggleAddModal}
                 ></Header>

@@ -41,6 +41,9 @@ html{
     --color-gray-600: hsl(${COLOR.gray[600]});
 	--color-overlay: hsla(${COLOR.black} / 0.6);
 
+	--color-line-light: hsl(${COLOR.gray[200]});
+	--color-line-dark: hsl(${COLOR.gray[400]});
+
 	--color-placeholder-dark: hsla(${COLOR.white} / 0.25);
 	--color-placeholder-light: hsla(${COLOR.black} / 0.25);
 	--color-input-border: hsla(${COLOR.gray[300]} / 0.25);
