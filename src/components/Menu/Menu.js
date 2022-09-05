@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import FocusLock from "react-focus-lock";
 import styled from "styled-components";
 import useOutsideAlerter from "../../hooks/useOutsideAlerter";
@@ -12,6 +12,21 @@ const Menu = ({ label, options, ...delegated }) => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    // Hide the menu when esc is pressed
+    const escFunction = useCallback((event) => {
+        if (event.key === "Escape") {
+            setIsOpen(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener("keydown", escFunction, false);
+
+        return () => {
+            document.removeEventListener("keydown", escFunction, false);
+        };
+    }, [escFunction]);
 
     const optionsRef = useRef(null);
     useOutsideAlerter(optionsRef, toggleMenu);
