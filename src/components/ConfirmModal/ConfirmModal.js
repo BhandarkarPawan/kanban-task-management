@@ -56,6 +56,7 @@ const Wrapper = styled(Modal)`
     max-width: 480px;
     border-radius: var(--r-m);
     width: min(100%, 480px);
+    color: ${({theme}) => theme.color};
 
     @media ${QUERY.tabletAndUp} {
         padding: 32px;
