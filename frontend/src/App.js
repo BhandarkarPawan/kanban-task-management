@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import "./App.css";
 import Board from "./components/Board";
@@ -7,10 +7,17 @@ import ConfirmModal from "./components/ConfirmModal";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import TaskModal from "./components/TaskModal";
-import data from "./data.json";
 import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
 import { darkTheme, lightTheme } from "./styles/themes";
+import data from "./data.json";
+
+async function getData() {
+    const data = await fetch("http://localhost:3000/boards", {
+        mode: "cors",
+    })
+    return data.json();
+}
 
 function App() {
     const [theme, setTheme] = useState(lightTheme);
@@ -72,10 +79,19 @@ function App() {
         ],
     };
 
+    useEffect(()=>{
+        async function fetchData() {
+            data = await getData();
+            setSelectedBoard(data.boards[0]);
+        };
+        fetchData();
+    })
+
     return (
+        !data?<></>:
         <>
-            <ResetStyles />
-            <GlobalStyles />
+            <ResetStyles/>
+            <GlobalStyles/>
             <ThemeProvider theme={theme}>
                 <Sidebar
                     selectedBoard={selectedBoard}
@@ -98,7 +114,7 @@ function App() {
                     toggleAddBoard={toggleAddBoard}
                     toggleConfirmModal={toggleConfirmModal}
                 ></Header>
-                <Board statusOptions={statusOptions} board={selectedBoard} />
+                <Board statusOptions={statusOptions} board={selectedBoard}/>
                 {addingTask && (
                     <TaskModal
                         add
