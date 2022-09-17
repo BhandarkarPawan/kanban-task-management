@@ -9,7 +9,7 @@ import { HSIZE } from "../Heading/Heading";
 import TaskModal from "../TaskModal";
 
 const Board = ({ statusOptions, board, ...delegated }) => {
-    const isEmpty = board.columns.length === 0;
+    const isEmpty = board && board.columns.length === 0;
     const [selectedTask, setSelectedTask] = useState(null);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -57,13 +57,14 @@ const Board = ({ statusOptions, board, ...delegated }) => {
                 </EmptyWrapper>
             ) : (
                 <>
-                    {board.columns.map((column, i) => (
-                        <Column
-                            onTaskSelect={setSelectedTask}
-                            key={i}
-                            column={column}
-                        />
-                    ))}
+                    {board &&
+                        board.columns.map((column, i) => (
+                            <Column
+                                onTaskSelect={setSelectedTask}
+                                key={i}
+                                column={column}
+                            />
+                        ))}
                     <AddColumnButton>
                         <Heading size={HSIZE.XL}>+ New Column</Heading>
                     </AddColumnButton>

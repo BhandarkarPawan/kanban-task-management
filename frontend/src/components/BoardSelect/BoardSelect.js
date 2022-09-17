@@ -32,10 +32,15 @@ const BoardSelect = ({
     return (
         <Wrapper {...delegated} aria-label="Select Board">
             <Select onClick={toggleModal}>
-                <Heading size={HSIZE.L}>{selectedBoard.name}</Heading>
+                <Heading size={HSIZE.L}>
+                    {/* TODO: Refactor */}
+                    {selectedBoard ? selectedBoard.name : "Select Board"}
+                </Heading>
                 <IconWrapper icon={icon} label={label} />
             </Select>
-            <Label disabled>{selectedBoard.name}</Label>
+            <Label disabled>
+                {selectedBoard ? selectedBoard.name : "Select Board"}
+            </Label>
             <ReactModal
                 isOpen={isOpen}
                 onRequestClose={toggleModal}

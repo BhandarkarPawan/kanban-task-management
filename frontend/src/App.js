@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
+import AppContext from "./app-context";
 import "./App.css";
 import Board from "./components/Board";
 import BoardModal from "./components/BoardModal";
@@ -10,18 +11,21 @@ import TaskModal from "./components/TaskModal";
 import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
 import { darkTheme, lightTheme } from "./styles/themes";
-import data from "./data.json";
 
-async function getData() {
-    const data = await fetch("http://localhost:3000/boards", {
-        mode: "cors",
-    })
-    return data.json();
-}
+// async function getData() {
+//     const data = await fetch("http://localhost:3000/boards", {
+//         mode: "cors",
+//     });
+//     return data.json();
+// }
 
 function App() {
+    const context = useContext(AppContext);
+
+    const [boards, setBoards] = useState(null);
+    const [selectedBoard, setSelectedBoard] = useState(null);
+
     const [theme, setTheme] = useState(lightTheme);
-    const [selectedBoard, setSelectedBoard] = useState(data.boards[0]);
     const [showSidebar, setShowsSidebar] = useState(false);
     const [addingTask, setAddingTask] = useState(false);
     const [editingBoard, setEditingBoard] = useState(false);
@@ -54,7 +58,9 @@ function App() {
         console.log("nice: ", showConfirmModal);
     };
 
-    const statusOptions = selectedBoard.columns.map((c) => c.name);
+    const statusOptions = selectedBoard
+        ? selectedBoard.columns.map((c) => c.name)
+        : [];
 
     const emptyTask = {
         title: "",
@@ -79,31 +85,38 @@ function App() {
         ],
     };
 
-    useEffect(()=>{
-        async function fetchData() {
-            data = await getData();
-            setSelectedBoard(data.boards[0]);
-        };
-        fetchData();
-    })
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         data = await getData();
+    //         setSelectedBoard(data.boards[0]);
+    //     }
+    //     fetchData();
+    // });
+
+    if (!boards) {
+        context.apiClient &&
+            context.apiClient.getBoards().then((res) => {
+                setBoards(res.data.boards);
+                res.data.boards.length && setSelectedBoard(res.data.boards[0]);
+            });
+    }
 
     return (
-        !data?<></>:
         <>
-            <ResetStyles/>
-            <GlobalStyles/>
+            <ResetStyles />
+            <GlobalStyles />
             <ThemeProvider theme={theme}>
                 <Sidebar
                     selectedBoard={selectedBoard}
                     setSelectedBoard={setSelectedBoard}
                     showSidebar={showSidebar}
-                    boards={data.boards}
+                    boards={boards || []}
                     toggleTheme={toggleTheme}
                     toggleSidebar={toggleSidebar}
                     toggleAddBoard={toggleAddBoard}
                 />
                 <Header
-                    boards={data.boards}
+                    boards={boards || []}
                     selectedBoard={selectedBoard}
                     setSelectedBoard={setSelectedBoard}
                     toggleTheme={toggleTheme}
@@ -114,13 +127,14 @@ function App() {
                     toggleAddBoard={toggleAddBoard}
                     toggleConfirmModal={toggleConfirmModal}
                 ></Header>
-                <Board statusOptions={statusOptions} board={selectedBoard}/>
+                <Board statusOptions={statusOptions} board={selectedBoard} />
                 {addingTask && (
                     <TaskModal
                         add
                         statusOptions={statusOptions}
                         task={emptyTask}
                         toggleModal={toggleAddTaskModal}
+                        setShowConfirmModal={setShowConfirmModal}
                     />
                 )}
                 {editingBoard && !addingBoard && (

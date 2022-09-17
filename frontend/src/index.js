@@ -1,15 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import { AppContextProvider } from "./app-context";
+import makeAppContextValue from "./factories/make-app-context-value";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-);
+
+makeAppContextValue().then((appContextValue) => {
+    root.render(
+        <AppContextProvider value={appContextValue}>
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        </AppContextProvider>
+    );
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
