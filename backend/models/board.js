@@ -1,4 +1,4 @@
-const {mongoose} = require('mongoose');
+const { mongoose } = require("mongoose");
 const Schema = mongoose.Schema;
 
 const boardSchema = new Schema({
@@ -8,13 +8,15 @@ const boardSchema = new Schema({
     },
     owner: {
         type: String,
-        required: true,
     },
-    columns: {
-        //n to n relationship
-    }
 });
 
-const Board = mongoose.model('board', boardSchema);
+boardSchema.virtual("columns", {
+    ref: "Column",
+    localField: "_id",
+    foreignField: "board",
+});
+
+const Board = mongoose.model("Board", boardSchema);
 
 module.exports = Board;

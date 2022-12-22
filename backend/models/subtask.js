@@ -1,25 +1,23 @@
-const {mongoose} = require('mongoose');
+const { mongoose } = require("mongoose");
 const Schema = mongoose.Schema;
 
-const taskSchema = new Schema({
+const subTaskSchema = new Schema({
     title: {
         type: String,
         required: true,
     },
-    description: {
-        type: String,
+    isCompleted: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    task: {
+        type: Schema.Types.ObjectId,
+        ref: "Task",
         required: true,
     },
-    status: {
-        type: String,
-        required: true,
-        //n to n relationship
-    },
-    subtasks: {
-
-    }
 });
 
-const Task = mongoose.model('task', taskSchema);
+const SubTask = mongoose.model("SubTask", subTaskSchema);
 
-module.exports = Task;
+module.exports = SubTask;

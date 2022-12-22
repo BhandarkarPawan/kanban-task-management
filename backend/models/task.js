@@ -1,7 +1,7 @@
-const {mongoose} = require('mongoose');
+const { mongoose } = require("mongoose");
 const Schema = mongoose.Schema;
 
-const subtaskSchema = new Schema({
+const taskSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -13,13 +13,20 @@ const subtaskSchema = new Schema({
     status: {
         type: String,
         required: true,
-        //n to n relationship
     },
-    subtasks: {
-
-    }
+    column: {
+        type: Schema.Types.ObjectId,
+        ref: "Column",
+        required: true,
+    },
 });
 
-const Subtask = mongoose.model('subtask', subtaskSchema);
+taskSchema.virtual("subtasks", {
+    ref: "SubTask",
+    localField: "_id",
+    foreignField: "task",
+});
 
-module.exports = Subtask;
+const Task = mongoose.model("Task", taskSchema);
+
+module.exports = Task;
