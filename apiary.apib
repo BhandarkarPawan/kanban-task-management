@@ -1,0 +1,114 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# Kanban
+
+Polls is a simple API allowing consumers to view polls and vote in them.
+
+## Questions Collection [/questions]
+
+### List All Questions [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 2048
+                    }, {
+                        "choice": "Python",
+                        "votes": 1024
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 512
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 256
+                    }
+                ]
+            }
+        ]
+
+### Create a New Question [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
+
++ Request (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
+
+
+# Data Structures 
+
+## JSONResponse
+
+## Column 
++ name: Todo (string) - Name of the column
++ color: #49C4E5 (string) - Hex code of the column color
++ tasks (array[Task])
+
+## Board 
++ name: Platform Launch (string) - Name of the board 
++ columns (array[Column])
+
+## Task 
++ name: Buy Eggs (string) - Name of the task
++ description: Buy a dozen eggs for the week (string, optional) - Detailed description of the task
++ status: Todo (string) - Name of the column to which it belongs 
++ subtasks (array[SubTask])
+
+## SubTask
++ title: Search for deals on eggs (string) - Name of the sub task
++ isCompleted: true (boolean) - Whether or not the task is complete
+
+## CreateBoardRequest 
++ name: Personal Board (string) - Name of the board 
++ columns (array[string]) 
+
+## BoardsResponse 
+
+## Board Response 
+
+## BoardListResponse
