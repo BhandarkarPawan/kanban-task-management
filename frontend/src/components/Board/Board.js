@@ -13,10 +13,6 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-    const columnNameSet = board
-        ? new Set(board.columns.map((c) => c.name))
-        : [];
-
     const [showDetails, setShowDetails] = useState(false);
     const toggleModal = () => {
         setShowDetails(!showDetails);
@@ -82,10 +78,11 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
                     {board &&
                         board.columns.map((column, i) => (
                             <Column
-                                allColumns={columnNameSet}
+                                board={board}
+                                setBoard={setBoard}
+                                columnIndex={i}
                                 onTaskSelect={setSelectedTask}
                                 key={i}
-                                column={column}
                             />
                         ))}
                     <AddColumnButton onClick={() => addColumn()}>

@@ -5,20 +5,38 @@ import Heading, { HSIZE } from "../Heading";
 import TaskCard from "../TaskCard";
 import TextInput from "../TextInput";
 
-const Column = ({ allColumns, column, onTaskSelect, ...delegated }) => {
+const Column = ({
+    board,
+    setBoard,
+    columnIndex,
+    onTaskSelect,
+    ...delegated
+}) => {
+    const column = board.columns[columnIndex];
+    const allColumns = new Set(board.columns.map((c) => c.name));
+
     const numTasks = column.tasks.length;
     const [editingName, setEditingName] = useState(false);
     const [columnName, setColumnName] = useState(column.name);
     const [renamingErrorString, setRenamingErrorString] = useState("");
 
-    const updateColumnName = (newName) => {
+    const updateColumnName = (originalName, newName) => {
         const isDuplicate = allColumns.has(newName);
-        if (isDuplicate) {
+        setColumnName(newName);
+
+        if (isDuplicate && originalName !== newName) {
             setRenamingErrorString("Column name already exists");
             return;
+        } else {
+            setRenamingErrorString("");
         }
-        setRenamingErrorString("");
-        setColumnName(newName);
+
+        setBoard({
+            ...board,
+            columns: board.columns.map((c, i) =>
+                i === columnIndex ? { ...c, name: newName } : c
+            ),
+        });
     };
 
     return (
@@ -29,20 +47,25 @@ const Column = ({ allColumns, column, onTaskSelect, ...delegated }) => {
                     <NameEditForm>
                         <TextInput
                             value={columnName}
-                            onChange={(e) => updateColumnName(e.target.value)}
+                            onChange={(e) =>
+                                updateColumnName(columnName, e.target.value)
+                            }
                         />
-                        <ErrorMessage show={renamingErrorString !== ""}>
-                            {renamingErrorString}
-                        </ErrorMessage>
+                        {renamingErrorString !== "" && (
+                            <ErrorMessage>{renamingErrorString}</ErrorMessage>
+                        )}
                     </NameEditForm>
                 ) : (
                     <span onClick={() => setEditingName(!editingName)}>
-                        {columnName}
+                        {column.name}
                     </span>
                 )}
             </Title>
             {editingName && (
-                <SaveButton onClick={() => setEditingName(!editingName)}>
+                <SaveButton
+                    onClick={() => setEditingName(!editingName)}
+                    disabled={renamingErrorString !== ""}
+                >
                     Save
                 </SaveButton>
             )}
@@ -82,12 +105,18 @@ const SaveButton = styled(Button)`
     border-radius: 4px;
     margin-top: -8px;
     margin-left: 27px;
+
+    &:disabled {
+        background-color: var(--color-gray-200);
+        color: var(--color-gray-300);
+    }
 `;
 
 const ErrorMessage = styled.p`
     font-size: 12px;
     color: var(--color-secondary);
     font-weight: 500;
+    margin-top: 4px;
 `;
 
 const TaskList = styled.ul`
