@@ -1,15 +1,36 @@
+import { useState } from "react";
 import styled from "styled-components";
+import Button from "../Button";
 import Heading, { HSIZE } from "../Heading";
 import TaskCard from "../TaskCard";
+import TextInput from "../TextInput";
 
 const Column = ({ column, onTaskSelect, ...delegated }) => {
     const numTasks = column.tasks.length;
+    const [editingName, setEditingName] = useState(false);
+    const [columnName, setColumnName] = useState(column.name);
 
     return (
         <Wrapper {...delegated}>
             <Title size={HSIZE.S}>
                 <Color color={column.color} />
-                {column.name} ({numTasks})
+                {editingName ? (
+                    <NameEditForm>
+                        <TextInput
+                            value={columnName}
+                            onChange={setColumnName}
+                        />
+                        <SaveButton
+                            onClick={() => setEditingName(!editingName)}
+                        >
+                            Save
+                        </SaveButton>
+                    </NameEditForm>
+                ) : (
+                    <span onClick={() => setEditingName(!editingName)}>
+                        {columnName}
+                    </span>
+                )}
             </Title>
             <TaskList>
                 {column.tasks.map((task, i) => (
@@ -37,6 +58,18 @@ const Title = styled(Heading)`
     gap: 12px;
     padding-top: 24px;
     padding-bottom: 18px;
+`;
+
+const NameEditForm = styled.div`
+    margin-top: -13px;
+`;
+
+const SaveButton = styled(Button)`
+    padding: 8px 16px;
+    font-size: 10px;
+    margin-top: 8px;
+    margin-bottom: -4px;
+    border-radius: 4px;
 `;
 
 const TaskList = styled.ul`
@@ -70,6 +103,7 @@ const Color = styled.div`
     height: 15px;
     width: 15px;
     border-radius: 50%;
+    flex-shrink: 0;
 `;
 
 export default Column;

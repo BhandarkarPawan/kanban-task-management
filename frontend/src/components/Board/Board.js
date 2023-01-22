@@ -21,7 +21,6 @@ const Board = ({ statusOptions, board, ...delegated }) => {
 
     const toggleConfirmModal = () => {
         setShowConfirmModal(!showConfirmModal);
-        console.log("nice: ", showConfirmModal);
     };
 
     return (
@@ -142,6 +141,7 @@ const AddColumnButton = styled.button`
 
     // For an improved scroll experience on mobile
     scroll-snap-align: start;
+    cursor: pointer;
 `;
 
 export default Board;
