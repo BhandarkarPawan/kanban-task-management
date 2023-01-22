@@ -30,7 +30,6 @@ const BoardModal = ({
         const newColumns = [...columns];
         newColumns[i].name = value;
         setColumns(newColumns);
-        console.log(newColumns);
     };
 
     const deleteColumn = (i) => {
