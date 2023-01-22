@@ -24,6 +24,11 @@ const Column = ({
         const isDuplicate = allColumns.has(newName);
         setColumnName(newName);
 
+        if (newName === "") {
+            setRenamingErrorString("Column name cannot be empty");
+            return;
+        }
+
         if (isDuplicate && originalName !== newName) {
             setRenamingErrorString("Column name already exists");
             return;
