@@ -5,26 +5,35 @@ import Heading, { HSIZE } from "../Heading";
 import TaskCard from "../TaskCard";
 import TextInput from "../TextInput";
 
-const Column = ({ column, onTaskSelect, ...delegated }) => {
+const Column = ({ allColumns, column, onTaskSelect, ...delegated }) => {
     const numTasks = column.tasks.length;
     const [editingName, setEditingName] = useState(false);
     const [columnName, setColumnName] = useState(column.name);
+    const [renamingErrorString, setRenamingErrorString] = useState("");
+
+    const updateColumnName = (newName) => {
+        const isDuplicate = allColumns.has(newName);
+        if (isDuplicate) {
+            setRenamingErrorString("Column name already exists");
+            return;
+        }
+        setRenamingErrorString("");
+        setColumnName(newName);
+    };
 
     return (
         <Wrapper {...delegated}>
-            <Title size={HSIZE.S}>
+            <Title size={HSIZE.L}>
                 <Color color={column.color} />
                 {editingName ? (
                     <NameEditForm>
                         <TextInput
                             value={columnName}
-                            onChange={setColumnName}
+                            onChange={(e) => updateColumnName(e.target.value)}
                         />
-                        <SaveButton
-                            onClick={() => setEditingName(!editingName)}
-                        >
-                            Save
-                        </SaveButton>
+                        <ErrorMessage show={renamingErrorString !== ""}>
+                            {renamingErrorString}
+                        </ErrorMessage>
                     </NameEditForm>
                 ) : (
                     <span onClick={() => setEditingName(!editingName)}>
@@ -32,6 +41,11 @@ const Column = ({ column, onTaskSelect, ...delegated }) => {
                     </span>
                 )}
             </Title>
+            {editingName && (
+                <SaveButton onClick={() => setEditingName(!editingName)}>
+                    Save
+                </SaveButton>
+            )}
             <TaskList>
                 {column.tasks.map((task, i) => (
                     <TaskCard onClick={onTaskSelect} key={i} task={task} />
@@ -50,26 +64,30 @@ const Wrapper = styled.section`
 `;
 
 const Title = styled(Heading)`
-    text-transform: uppercase;
-    letter-spacing: 2.4px;
     color: var(--color-gray-300);
 
     display: flex;
+    align-items: center;
     gap: 12px;
     padding-top: 24px;
     padding-bottom: 18px;
 `;
 
-const NameEditForm = styled.div`
-    margin-top: -13px;
-`;
+const NameEditForm = styled.div``;
 
 const SaveButton = styled(Button)`
     padding: 8px 16px;
+    align-self: flex-start;
     font-size: 10px;
-    margin-top: 8px;
-    margin-bottom: -4px;
     border-radius: 4px;
+    margin-top: -8px;
+    margin-left: 27px;
+`;
+
+const ErrorMessage = styled.p`
+    font-size: 12px;
+    color: var(--color-secondary);
+    font-weight: 500;
 `;
 
 const TaskList = styled.ul`

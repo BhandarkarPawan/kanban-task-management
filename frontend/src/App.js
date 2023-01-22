@@ -111,7 +111,11 @@ function App() {
                     toggleAddBoard={toggleAddBoard}
                     toggleConfirmModal={toggleConfirmModal}
                 ></Header>
-                <Board statusOptions={statusOptions} board={selectedBoard} />
+                <Board
+                    statusOptions={statusOptions}
+                    board={selectedBoard}
+                    setBoard={setSelectedBoard}
+                />
                 {addingTask && (
                     <TaskModal
                         add

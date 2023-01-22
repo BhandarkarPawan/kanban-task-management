@@ -8,10 +8,14 @@ import Heading from "../Heading";
 import { HSIZE } from "../Heading/Heading";
 import TaskModal from "../TaskModal";
 
-const Board = ({ statusOptions, board, ...delegated }) => {
+const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
     const isEmpty = board && board.columns.length === 0;
     const [selectedTask, setSelectedTask] = useState(null);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+    const columnNameSet = board
+        ? new Set(board.columns.map((c) => c.name))
+        : [];
 
     const [showDetails, setShowDetails] = useState(false);
     const toggleModal = () => {
@@ -21,6 +25,25 @@ const Board = ({ statusOptions, board, ...delegated }) => {
 
     const toggleConfirmModal = () => {
         setShowConfirmModal(!showConfirmModal);
+    };
+
+    const getRandomHexColor = () =>
+        `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
+    const addColumn = () => {
+        const newColumnName = `Status ${board.columns.length + 1}`;
+
+        setBoard({
+            ...board,
+            columns: [
+                ...board.columns,
+                {
+                    name: newColumnName,
+                    color: getRandomHexColor(),
+                    tasks: [],
+                },
+            ],
+        });
     };
 
     return (
@@ -59,12 +82,13 @@ const Board = ({ statusOptions, board, ...delegated }) => {
                     {board &&
                         board.columns.map((column, i) => (
                             <Column
+                                allColumns={columnNameSet}
                                 onTaskSelect={setSelectedTask}
                                 key={i}
                                 column={column}
                             />
                         ))}
-                    <AddColumnButton>
+                    <AddColumnButton onClick={() => addColumn()}>
                         <Heading size={HSIZE.XL}>+ New Column</Heading>
                     </AddColumnButton>
                 </>
