@@ -18,7 +18,7 @@ function App() {
     const [boards, setBoards] = useState(null);
     const [selectedBoard, setSelectedBoard] = useState(null);
     const [theme, setTheme] = useState(lightTheme);
-    const [showSidebar, setShowsSidebar] = useState(false);
+    const [showSidebar, setShowsSidebar] = useState(true);
     const [addingTask, setAddingTask] = useState(false);
     const [editingBoard, setEditingBoard] = useState(false);
     const [addingBoard, setAddingBoard] = useState(false);

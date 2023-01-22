@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Icon, { ICON } from "../Icon";
 import TextInput from "../TextInput";
 
-const DynamicTextInput = ({ value, onChange, ...delegated }) => {
+const DynamicTextInput = ({ value, onChange, clearInput, ...delegated }) => {
     const [hoverDelete, setHoverDelete] = useState(false);
     const handleMouseEnter = () => {
         setHoverDelete(true);
@@ -22,6 +22,7 @@ const DynamicTextInput = ({ value, onChange, ...delegated }) => {
             <DeleteButton
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                onClick={clearInput}
             >
                 <CloseIconWrapper icon={ICON.close} label="Delete Subtask" />
             </DeleteButton>
