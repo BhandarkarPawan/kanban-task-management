@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import AppContext from "./app-context";
 import "./App.css";
+import AppContext from "./app-context";
 import Board from "./components/Board";
 import BoardModal from "./components/BoardModal";
 import ConfirmModal from "./components/ConfirmModal";
@@ -12,19 +12,11 @@ import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
 import { darkTheme, lightTheme } from "./styles/themes";
 
-// async function getData() {
-//     const data = await fetch("http://localhost:3000/boards", {
-//         mode: "cors",
-//     });
-//     return data.json();
-// }
-
 function App() {
     const context = useContext(AppContext);
 
     const [boards, setBoards] = useState(null);
     const [selectedBoard, setSelectedBoard] = useState(null);
-
     const [theme, setTheme] = useState(lightTheme);
     const [showSidebar, setShowsSidebar] = useState(false);
     const [addingTask, setAddingTask] = useState(false);
@@ -84,14 +76,6 @@ function App() {
             },
         ],
     };
-
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         data = await getData();
-    //         setSelectedBoard(data.boards[0]);
-    //     }
-    //     fetchData();
-    // });
 
     if (!boards) {
         context.apiClient &&
