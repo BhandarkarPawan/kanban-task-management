@@ -80,8 +80,8 @@ function App() {
     if (!boards) {
         context.apiClient &&
             context.apiClient.getBoards().then((res) => {
-                setBoards(res.data.boards);
-                res.data.boards.length && setSelectedBoard(res.data.boards[0]);
+                setBoards(res.data);
+                res.data.length && setSelectedBoard(res.data.boards[0]);
             });
     }
 
