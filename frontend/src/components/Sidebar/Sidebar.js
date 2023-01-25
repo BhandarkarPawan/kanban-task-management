@@ -84,6 +84,7 @@ const HideSidebarButton = styled.button`
     align-items: center;
     gap: 10px;
     border-radius: var(--r-s);
+    cursor: pointer;
 `;
 
 const ShowSidebarButton = styled.button`
@@ -100,6 +101,7 @@ const ShowSidebarButton = styled.button`
         border-radius: 0 5000px 5000px 0;
         bottom: 32px;
         left: 0px;
+        cursor: pointer;
     }
 `;
 
@@ -117,6 +119,7 @@ const ShowIconWrapper = styled(Icon)`
 
 const Label = styled.label`
     color: var(--color-gray-300);
+    cursor: pointer;
 `;
 
 const Spacer = styled.div`
