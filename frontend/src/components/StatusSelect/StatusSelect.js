@@ -63,6 +63,7 @@ const Label = styled.button`
     padding: 8px 16px;
     border-radius: var(--r-s);
     border: 1px solid var(--color-input-border);
+    cursor: pointer;
 
     // TODO: Switch to focus visible
     /* &:focus {
@@ -79,6 +80,7 @@ const OptionButton = styled.button`
     text-align: start;
     padding: 4px 16px;
     border-radius: var(--r-xs);
+    cursor: pointer;
 `;
 
 const IconWrapper = styled(Icon)`

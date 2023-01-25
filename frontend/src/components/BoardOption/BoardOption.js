@@ -67,6 +67,7 @@ const LabelWrapper = styled.label`
     padding: 14px 0px 15px 24px;
     color: var(--color-gray-300);
     border-radius: 0px 5000px 5000px 0px;
+    cursor: pointer;
 
     @media ${QUERY.laptopAndUp} {
         padding-left: 32px;
@@ -75,6 +76,7 @@ const LabelWrapper = styled.label`
     ${Input}:checked + & {
         color: var(--color-white);
         background-color: var(--color-primary);
+        cursor: default;
     }
 
     ${Input}:focus-visible + & {

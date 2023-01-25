@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { PLACEHOLDER, QUERY } from "../../constants";
 import Button from "../Button";
@@ -14,6 +15,73 @@ const BoardModal = ({
     onChange,
     ...delegated
 }) => {
+    const [name, setName] = useState(board.name);
+    const [columns, setColumns] = useState(board.columns);
+    const [nameErrorString, setNameErrorString] = useState("");
+    const [columnErrorString, setColumnErrorString] = useState("");
+
+    const updateName = (value) => {
+        setName(value);
+        setNameErrorString("");
+    };
+
+    const updateColumns = (i, value) => {
+        setColumnErrorString("");
+        const newColumns = [...columns];
+        newColumns[i].name = value;
+        setColumns(newColumns);
+    };
+
+    const deleteColumn = (i) => {
+        setColumnErrorString("");
+        if (columns.length === 1) {
+            setColumnErrorString("Cannot delete last column");
+            return;
+        }
+        setColumns(columns.filter((c, index) => index !== i));
+    };
+
+    const addNewColumn = () => {
+        if (columns[columns.length - 1].name === "") {
+            setColumnErrorString("Cannot add empty column");
+            return;
+        }
+
+        setColumns([
+            ...columns,
+            {
+                name: "",
+                color: "#49C4E5",
+                tasks: [],
+            },
+        ]);
+    };
+
+    const createBoard = () => {
+        var error = false;
+        if (name === "") {
+            setNameErrorString("Name cannot be empty");
+            error = true;
+        }
+        if (columns.length === 1 && columns[0].name === "") {
+            setColumnErrorString("Cannot create board with empty column");
+            error = true;
+        }
+
+        if (error) {
+            return;
+        }
+
+        if (columns[columns.length - 1].name === "") {
+            deleteColumn(columns.length - 1);
+        }
+        console.log("create board: ", {
+            name,
+            columns,
+        });
+        onChange(false);
+    };
+
     return (
         <Wrapper
             center
@@ -24,30 +92,44 @@ const BoardModal = ({
             <EditTitle size={HSIZE.L}>
                 {add ? "Add New Board" : "Edit Board"}
             </EditTitle>
-            <LabeledInput label="Name">
-                <TextInput
-                    value={board.name}
-                    placeholder={PLACEHOLDER.textInput}
-                    onChange={() => {}}
-                />
-            </LabeledInput>
+            <FieldWithError>
+                <LabeledInput label="Name">
+                    <TextInput
+                        value={name}
+                        placeholder={PLACEHOLDER.textInput}
+                        onChange={(e) => updateName(e.target.value)}
+                    />
+                </LabeledInput>
+                <ErrorMessage show={nameErrorString !== ""}>
+                    {nameErrorString}
+                </ErrorMessage>
+            </FieldWithError>
             <LabeledInput label="Columns">
-                <SubTaskEditList>
-                    {board.columns.map((c, i) => (
-                        <DynamicTextInput
-                            key={i}
-                            value={c.name}
-                            onChange={() => {}}
-                        />
-                    ))}
-                    <Button themed onClick={undefined}>
-                        +Add New Column
-                    </Button>
-                </SubTaskEditList>
+                <FieldWithError>
+                    <SubTaskEditList>
+                        {columns.map((c, i) => (
+                            <DynamicTextInput
+                                key={i}
+                                value={c.name}
+                                onChange={(e) =>
+                                    updateColumns(i, e.target.value)
+                                }
+                                clearInput={() => deleteColumn(i)}
+                            />
+                        ))}
+                        <ErrorMessage show={columnErrorString !== ""}>
+                            {columnErrorString}
+                        </ErrorMessage>
+                    </SubTaskEditList>
+                </FieldWithError>
+                <AddColumnButton themed onClick={addNewColumn}>
+                    +Add New Column
+                </AddColumnButton>
             </LabeledInput>
+
             <Button
                 onClick={() => {
-                    onChange(false);
+                    createBoard();
                 }}
             >
                 {add ? "Create New Board" : "Save Changes"}
@@ -81,6 +163,20 @@ const SubTaskEditList = styled.ul`
     flex-direction: column;
     gap: 12px;
 `;
+
+const ErrorMessage = styled.p`
+    font-size: 12px;
+    color: var(--color-secondary);
+    font-weight: 500;
+`;
+
+const AddColumnButton = styled(Button)`
+    margin-top: 12px;
+    text-align: center;
+    width: 100%;
+`;
+
+const FieldWithError = styled.div``;
 
 // TODO: Use drop down
 

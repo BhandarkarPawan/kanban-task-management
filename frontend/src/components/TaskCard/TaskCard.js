@@ -15,7 +15,7 @@ const TaskCard = ({ task, onClick, ...delegated }) => {
             }}
         >
             <Title onClick={() => onClick(task)}>
-                <Heading size={HSIZE.M}>{task.title}</Heading>
+                <ClickableHeading size={HSIZE.M}>{task.title}</ClickableHeading>
             </Title>
             {task.subtasks.length && (
                 <Progress size={BSIZE.M}>
@@ -47,6 +47,10 @@ const Wrapper = styled.li`
 
     // Prevent card flashing on click
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+`;
+
+const ClickableHeading = styled(Heading)`
+    cursor: pointer;
 `;
 
 const Title = styled.button`
