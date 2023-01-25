@@ -1,7 +1,7 @@
 const { mongoose } = require("mongoose");
 const Schema = mongoose.Schema;
 
-const boardSchema = new Schema({
+const BoardSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -11,12 +11,10 @@ const boardSchema = new Schema({
     },
 });
 
-boardSchema.virtual("columns", {
+BoardSchema.virtual("columns", {
     ref: "Column",
     localField: "_id",
     foreignField: "board",
 });
 
-const Board = mongoose.model("Board", boardSchema);
-
-module.exports = Board;
+module.exports = BoardSchema;
