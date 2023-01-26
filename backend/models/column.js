@@ -13,6 +13,7 @@ const columnSchema = new Schema({
     board: {
         type: Schema.Types.ObjectId,
         ref: "Board",
+        required: true,
     },
 });
 

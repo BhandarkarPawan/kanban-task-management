@@ -3,9 +3,17 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const { connectToDatabase } = require("./services/database");
+
 const boardRouter = require("./routes/board");
+const columnsRouter = require("./routes/column");
+const tasksRouter = require("./routes/task");
 
 const app = express();
+connectToDatabase().catch((err) => {
+    console.log("Error connecting to database", err);
+    process.exit(1);
+});
 
 const corsOptions = {
     origin: "http://localhost:3001",
@@ -21,5 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/boards", boardRouter);
+app.use("/boards/:boardId/columns", columnsRouter);
+app.use("/boards/:boardId/columns/:columnId/tasks", tasksRouter);
 
 module.exports = app;

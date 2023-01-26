@@ -17,4 +17,5 @@ BoardSchema.virtual("columns", {
     foreignField: "board",
 });
 
-module.exports = BoardSchema;
+const Board = mongoose.model("Board", BoardSchema);
+module.exports = Board;
