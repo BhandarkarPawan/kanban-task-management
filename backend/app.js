@@ -3,23 +3,22 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const {connectToDatabase} = require("./services/database");
+const { connectToDatabase } = require("./services/database");
 
 const boardRouter = require("./routes/board");
 const columnsRouter = require("./routes/column");
 const tasksRouter = require("./routes/task");
 
 const app = express();
-connectToDatabase().catch((err)=>{
+connectToDatabase().catch((err) => {
     console.log("Error connecting to database", err);
     process.exit(1);
-})
+});
 
 const corsOptions = {
     origin: "http://localhost:3001",
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-
 
 app.use(cors(corsOptions));
 

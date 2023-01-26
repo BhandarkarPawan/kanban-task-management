@@ -1,28 +1,30 @@
 const express = require("express");
 const Column = require("../models/column");
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.post("/", async function (req, res, next) {
-    let {name, color, tasks} = req.body;
-    let {boardId} = req.params;
+    let { name, color, tasks } = req.body;
+    let { boardId } = req.params;
     if (!tasks) {
         tasks = [];
     }
     if (!name) {
         // error
-        res.status(400).json({error: "Column name is required"});
+        res.status(400).json({ error: "Column name is required" });
     }
     if (!color) {
         color = "#49C4E5";
     }
 
-    const column = new Column({name, color, tasks, board: boardId});
+    const column = new Column({ name, color, tasks, board: boardId });
     try {
         await column.save();
     } catch (err) {
-        console.log(err)
-        return res.status(500).json({message: "Error saving column", error: err.toString()});
+        console.log(err);
+        return res
+            .status(500)
+            .json({ message: "Error saving column", error: err.toString() });
     }
     res.status(200).json(column);
 });
@@ -37,7 +39,10 @@ router.put("/:columnId", async function (req, res, next) {
 
     Column.findById(columnId, (err, column) => {
         if (err) {
-            return res.status(500).json({ message: "Error updating column", error: err.toString() });
+            return res.status(500).json({
+                message: "Error updating column",
+                error: err.toString(),
+            });
         }
         if (!column) {
             return res.status(404).json({ message: "Column not found" });
@@ -57,7 +62,10 @@ router.delete("/:columnId", async function (req, res, next) {
     const { boardId, columnId } = req.params;
     Column.findByIdAndDelete(columnId, (err, column) => {
         if (err) {
-            return res.status(500).json({ message: "Error deleting column", error: err.toString() });
+            return res.status(500).json({
+                message: "Error deleting column",
+                error: err.toString(),
+            });
         }
         res.status(200).json(column);
     });
