@@ -81,7 +81,7 @@ function App() {
         context.apiClient &&
             context.apiClient.getBoards().then((res) => {
                 setBoards(res.data);
-                res.data.length && setSelectedBoard(res.data.boards[0]);
+                res.data.length && setSelectedBoard(res.data[0]);
             });
     }
 

@@ -1,7 +1,7 @@
 const { mongoose } = require("mongoose");
 const Schema = mongoose.Schema;
 
-const subTaskSchema = new Schema({
+const SubTaskSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -18,6 +18,4 @@ const subTaskSchema = new Schema({
     },
 });
 
-const SubTask = mongoose.model("SubTask", subTaskSchema);
-
-module.exports = SubTask;
+module.exports = SubTaskSchema;

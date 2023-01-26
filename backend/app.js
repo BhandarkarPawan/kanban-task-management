@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 const { connectToDatabase } = require("./services/database");
-
 const boardRouter = require("./routes/board");
 const columnsRouter = require("./routes/column");
 const tasksRouter = require("./routes/task");

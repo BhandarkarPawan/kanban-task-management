@@ -6,16 +6,12 @@ const BoardSchema = new Schema({
         type: String,
         required: true,
     },
-    owner: {
-        type: String,
-    },
+    columns: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Column",
+        },
+    ],
 });
 
-BoardSchema.virtual("columns", {
-    ref: "Column",
-    localField: "_id",
-    foreignField: "board",
-});
-
-const Board = mongoose.model("Board", BoardSchema);
-module.exports = Board;
+module.exports = BoardSchema;

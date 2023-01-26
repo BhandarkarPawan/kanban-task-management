@@ -1,7 +1,7 @@
 const { mongoose } = require("mongoose");
 const Schema = mongoose.Schema;
 
-const taskSchema = new Schema({
+const TaskSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -21,12 +21,10 @@ const taskSchema = new Schema({
     },
 });
 
-taskSchema.virtual("subtasks", {
+TaskSchema.virtual("subtasks", {
     ref: "SubTask",
     localField: "_id",
     foreignField: "task",
 });
 
-const Task = mongoose.model("Task", taskSchema);
-
-module.exports = Task;
+module.exports = TaskSchema;

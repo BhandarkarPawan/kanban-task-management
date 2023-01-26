@@ -1,36 +1,43 @@
 const express = require("express");
-const Board = require("../models/board.js");
+const { Board, Column } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
 router.get("/", async function (req, res, next) {
-    const allBoards = await Board.find({});
+    const allBoards = await Board.find().populate("columns");
     res.json(allBoards);
 });
 
 router.post("/", async function (req, res, next) {
     let { name, columns } = req.body;
-    if (!columns) {
-        columns = [];
-    }
     if (!name) {
-        // error
         res.status(400).json({ error: "Board name is required" });
     }
-    const newBoard = {
-        name,
-        columns,
-    };
-    const board = new Board(newBoard);
+    const board = new Board({ name });
     try {
+        if (columns.length > 0) {
+            for (let i = 0; i < columns.length; i++) {
+                const newColumn = new Column({
+                    name: columns[i].name,
+                    color: columns[i].color,
+                    board: board._id,
+                });
+                await newColumn.save();
+                board.columns.push(newColumn._id);
+            }
+        }
         await board.save();
+        console.log("Board saved");
     } catch (err) {
         console.log(err);
-        return res
-            .status(500)
-            .json({ message: "Error saving board", error: err.toString() });
+        return res.status(500).json({
+            message: "Error saving column",
+            error: err.toString(),
+        });
     }
-    res.status(200).json(board);
+
+    await board.populate("columns");
+    res.status(201).json(board);
 });
 
 router.put("/:id", async function (req, res, next) {

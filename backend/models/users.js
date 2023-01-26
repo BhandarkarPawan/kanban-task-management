@@ -23,6 +23,4 @@ UserSchema.statics.byUsername = function (username) {
     return this.findOne({ username: username });
 };
 
-const User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+module.exports = UserSchema;
