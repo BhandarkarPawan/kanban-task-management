@@ -1,5 +1,5 @@
 const express = require("express");
-const Task = require("../models/task");
+const { Task, Column } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
@@ -16,6 +16,7 @@ router.post("/", async function (req, res, next) {
     if (!subtasks) {
         subtasks = [];
     }
+
     const task = new Task({
         title,
         description,
@@ -23,8 +24,12 @@ router.post("/", async function (req, res, next) {
         subtasks,
         column: columnId,
     });
+
     try {
+        const column = await Column.findById(columnId);
+        column.tasks.push(task._id);
         await task.save();
+        await column.save();
     } catch (err) {
         console.log(err);
         return res

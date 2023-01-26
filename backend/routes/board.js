@@ -36,7 +36,21 @@ router.post("/", async function (req, res, next) {
         });
     }
 
-    await board.populate("columns");
+    await board
+        .populate({
+            path: "columns",
+            model: "Column",
+            populate: {
+                path: "tasks",
+                model: "Task",
+                populate: {
+                    path: "subtasks",
+                    model: "SubTask",
+                },
+            },
+        })
+        .execPopulate();
+
     res.status(201).json(board);
 });
 

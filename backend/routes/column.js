@@ -1,5 +1,5 @@
 const express = require("express");
-const Column = require("../models/column");
+const { Column, Board } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
@@ -19,7 +19,10 @@ router.post("/", async function (req, res, next) {
 
     const column = new Column({ name, color, tasks, board: boardId });
     try {
+        const board = await Board.findById(boardId);
+        board.columns.push(column._id);
         await column.save();
+        await board.save();
     } catch (err) {
         console.log(err);
         return res
