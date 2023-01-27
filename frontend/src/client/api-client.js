@@ -10,4 +10,12 @@ export default class ApiClient {
         console.log(res);
         return res;
     };
+
+    postBoard = async (name, columns) => {
+        const res = await this.httpClient.postJsonToApi("boards", {
+            name,
+            columns,
+        });
+        return res;
+    }
 }

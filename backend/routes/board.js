@@ -2,6 +2,7 @@ const express = require("express");
 const { Board, Column, Task} = require("../models");
 
 const router = express.Router({ mergeParams: true });
+const DEFAULT_COLUMN_COLOR = "#49C4E5";
 
 router.get("/", async function (req, res, next) {
     const allBoards = await Board.find().populate("columns");
@@ -20,12 +21,16 @@ router.get("/", async function (req, res, next) {
 router.post("/", async function (req, res, next) {
     let { name, columns } = req.body;
     if (!name) {
-        res.status(400).json({ error: "Board name is required" });
+        return res.status(400).json({ error: "Board name is required" });
     }
     const board = new Board({ name });
     try {
         if (columns.length > 0) {
             for (let i = 0; i < columns.length; i++) {
+                console.log(!columns[i].color);
+                if(!columns[i].color){
+                    columns[i].color = DEFAULT_COLUMN_COLOR;
+                }
                 const newColumn = new Column({
                     name: columns[i].name,
                     color: columns[i].color,
@@ -45,7 +50,7 @@ router.post("/", async function (req, res, next) {
         });
     }
 
-    res.status(201).json(board);
+    res.status(201).json(board.populate("columns"));
 });
 
 router.put("/:id", async function (req, res, next) {
