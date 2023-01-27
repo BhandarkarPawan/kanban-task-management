@@ -1,10 +1,19 @@
 const express = require("express");
-const { Board, Column } = require("../models");
+const { Board, Column, Task} = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
 router.get("/", async function (req, res, next) {
     const allBoards = await Board.find().populate("columns");
+    console.log(allBoards);
+    for(const board of allBoards){
+        for(const column of board.columns){
+            await column.populate("tasks");
+            for (const task of column.tasks){
+                await task.populate("subtasks");
+            }
+        }
+    }
     res.json(allBoards);
 });
 
@@ -35,21 +44,6 @@ router.post("/", async function (req, res, next) {
             error: err.toString(),
         });
     }
-
-    await board
-        .populate({
-            path: "columns",
-            model: "Column",
-            populate: {
-                path: "tasks",
-                model: "Task",
-                populate: {
-                    path: "subtasks",
-                    model: "SubTask",
-                },
-            },
-        })
-        .execPopulate();
 
     res.status(201).json(board);
 });

@@ -11,7 +11,7 @@ router.post("/", async function (req, res, next) {
     }
     if (!name) {
         // error
-        res.status(400).json({ error: "Column name is required" });
+        return res.status(400).json({ error: "Column name is required" });
     }
     if (!color) {
         color = "#49C4E5";

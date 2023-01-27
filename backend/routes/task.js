@@ -8,7 +8,11 @@ router.post("/", async function (req, res, next) {
     let { title, description, status, subtasks } = req.body;
     if (!title) {
         // error
-        res.status(400).json({ error: "Task title is required" });
+        return res.status(400).json({ error: "Task title is required" });
+    }
+    if (!description) {
+        // error
+        return res.status(400).json({ error: "Task description is required" });
     }
     if (!status) {
         status = "todo";
