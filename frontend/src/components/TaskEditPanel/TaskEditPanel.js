@@ -61,19 +61,20 @@ const TaskEditPanel = ({
         ]);
     };
 
-    const createSubTask = () => {
+    const confirmChange = () => {
         if (title === "") {
             setNameErrorString("Cannot create empty task");
             return;
         }
-        console.log("Create Task: ", {
+
+        const task = {
             title,
             description,
             status,
             subtasks: subTasks,
-        });
+        };
 
-        onChange(false);
+        onChange(task);
     };
 
     return (
@@ -122,7 +123,7 @@ const TaskEditPanel = ({
                     onChange={setStatus}
                 />
             </LabeledInput>
-            <Button onClick={createSubTask}>
+            <Button onClick={confirmChange}>
                 {add ? "Create Task" : "Save Changes"}
             </Button>
         </>

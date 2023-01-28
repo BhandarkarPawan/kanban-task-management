@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { QUERY } from "../../constants";
 
 import Modal from "../Modal";
 
+import AppContext from "../../app-context";
 import TaskEditPanel from "../TaskEditPanel";
 import TaskInfoPanel from "../TaskInfoPanel";
 
@@ -12,21 +13,23 @@ const TaskModal = ({
     statusOptions,
     add = false,
     toggleModal,
+    board,
+    columnId,
     setShowConfirmModal,
     ...delegated
 }) => {
+    const context = useContext(AppContext);
     const [editing, setEditing] = useState(false);
 
     const handleStartEdit = () => {
         setEditing(true);
     };
 
-    const handleEndEdit = () => {
+    const handleEndEdit = async (updatedTask) => {
         setEditing(false);
     };
 
-    const handleEndAdd = () => {
-        console.log("New Task Will be Added");
+    const handleEndAdd = async (newTask) => {
         toggleModal(false);
     };
 

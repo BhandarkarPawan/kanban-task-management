@@ -1,15 +1,17 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Button from "../Button";
+import ConfirmModal from "../ConfirmModal";
 import Heading, { HSIZE } from "../Heading";
 import TaskCard from "../TaskCard";
+import TaskModal from "../TaskModal";
 import TextInput from "../TextInput";
 
 const Column = ({
     board,
     setBoard,
     columnIndex,
-    onTaskSelect,
+    statusOptions,
     ...delegated
 }) => {
     const column = board.columns[columnIndex];
@@ -19,6 +21,18 @@ const Column = ({
     const [editingName, setEditingName] = useState(false);
     const [columnName, setColumnName] = useState(column.name);
     const [renamingErrorString, setRenamingErrorString] = useState("");
+    const [selectedTask, setSelectedTask] = useState(null);
+    const [showDetails, setShowDetails] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+    const toggleConfirmModal = () => {
+        setShowConfirmModal(!showConfirmModal);
+    };
+
+    const toggleModal = () => {
+        setShowDetails(!showDetails);
+        setSelectedTask(null);
+    };
 
     const updateColumnName = (originalName, newName) => {
         const isDuplicate = allColumns.has(newName);
@@ -46,6 +60,24 @@ const Column = ({
 
     return (
         <Wrapper {...delegated}>
+            {showConfirmModal && (
+                <ConfirmModal
+                    name={selectedTask.name}
+                    toggleModal={toggleConfirmModal}
+                    onChange={toggleConfirmModal}
+                />
+            )}
+            {selectedTask && (
+                <TaskModal
+                    statusOptions={statusOptions}
+                    task={selectedTask}
+                    toggleModal={toggleModal}
+                    board={board}
+                    setBoard={setBoard}
+                    setShowConfirmModal={setShowConfirmModal}
+                    columnId={column._id}
+                />
+            )}
             <Title size={HSIZE.L}>
                 <Color color={column.color} />
                 {editingName ? (
@@ -76,7 +108,11 @@ const Column = ({
             )}
             <TaskList>
                 {column.tasks.map((task, i) => (
-                    <TaskCard onClick={onTaskSelect} key={i} task={task} />
+                    <TaskCard
+                        onClick={() => setSelectedTask(task)}
+                        key={i}
+                        task={task}
+                    />
                 ))}
             </TaskList>
         </Wrapper>

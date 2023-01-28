@@ -1,64 +1,36 @@
-import { useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
+import AppContext from "../../app-context";
 import { QUERY } from "../../constants";
 import Button from "../Button";
 import Column from "../Column";
-import ConfirmModal from "../ConfirmModal";
 import Heading from "../Heading";
 import { HSIZE } from "../Heading/Heading";
-import TaskModal from "../TaskModal";
 
 const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
     const isEmpty = board && board.columns.length === 0;
-    const [selectedTask, setSelectedTask] = useState(null);
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-    const [showDetails, setShowDetails] = useState(false);
-    const toggleModal = () => {
-        setShowDetails(!showDetails);
-        setSelectedTask(null);
-    };
-
-    const toggleConfirmModal = () => {
-        setShowConfirmModal(!showConfirmModal);
-    };
+    const context = useContext(AppContext);
 
     const getRandomHexColor = () =>
         `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-    const addColumn = () => {
+    const addColumn = async () => {
         const newColumnName = `Status ${board.columns.length + 1}`;
+        const res = await context.apiClient.createColumn(
+            board._id,
+            newColumnName,
+            getRandomHexColor()
+        );
+        const newColumn = res.data;
 
         setBoard({
             ...board,
-            columns: [
-                ...board.columns,
-                {
-                    name: newColumnName,
-                    color: getRandomHexColor(),
-                    tasks: [],
-                },
-            ],
+            columns: [...board.columns, newColumn],
         });
     };
 
     return (
         <Wrapper {...delegated}>
-            {selectedTask && (
-                <TaskModal
-                    statusOptions={statusOptions}
-                    task={selectedTask}
-                    toggleModal={toggleModal}
-                    setShowConfirmModal={setShowConfirmModal}
-                />
-            )}
-            {showConfirmModal && (
-                <ConfirmModal
-                    name={selectedTask.name}
-                    toggleModal={toggleConfirmModal}
-                    onChange={toggleConfirmModal}
-                />
-            )}
             {isEmpty ? (
                 <EmptyWrapper>
                     <Label>
@@ -81,7 +53,7 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
                                 board={board}
                                 setBoard={setBoard}
                                 columnIndex={i}
-                                onTaskSelect={setSelectedTask}
+                                statusOptions={statusOptions}
                                 key={i}
                             />
                         ))}
