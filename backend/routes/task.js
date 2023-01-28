@@ -1,5 +1,5 @@
 const express = require("express");
-const Task = require("../models/task");
+const { Task, Column } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
@@ -8,7 +8,11 @@ router.post("/", async function (req, res, next) {
     let { title, description, status, subtasks } = req.body;
     if (!title) {
         // error
-        res.status(400).json({ error: "Task title is required" });
+        return res.status(400).json({ error: "Task title is required" });
+    }
+    if (!description) {
+        // error
+        return res.status(400).json({ error: "Task description is required" });
     }
     if (!status) {
         status = "todo";
@@ -16,6 +20,7 @@ router.post("/", async function (req, res, next) {
     if (!subtasks) {
         subtasks = [];
     }
+
     const task = new Task({
         title,
         description,
@@ -23,8 +28,12 @@ router.post("/", async function (req, res, next) {
         subtasks,
         column: columnId,
     });
+
     try {
+        const column = await Column.findById(columnId);
+        column.tasks.push(task._id);
         await task.save();
+        await column.save();
     } catch (err) {
         console.log(err);
         return res

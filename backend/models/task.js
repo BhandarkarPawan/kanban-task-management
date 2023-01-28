@@ -19,12 +19,12 @@ const TaskSchema = new Schema({
         ref: "Column",
         required: true,
     },
-});
-
-TaskSchema.virtual("subtasks", {
-    ref: "SubTask",
-    localField: "_id",
-    foreignField: "task",
+    subtasks: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "SubTask",
+        },
+    ],
 });
 
 module.exports = TaskSchema;

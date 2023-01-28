@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import styled from "styled-components";
 import { PLACEHOLDER, QUERY } from "../../constants";
 import Button from "../Button";
@@ -7,6 +7,7 @@ import Heading, { HSIZE } from "../Heading";
 import LabeledInput from "../LabeledInput";
 import Modal from "../Modal";
 import TextInput from "../TextInput";
+import AppContext from "../../app-context";
 
 const BoardModal = ({
     board,
@@ -15,6 +16,8 @@ const BoardModal = ({
     onChange,
     ...delegated
 }) => {
+
+    const context = useContext(AppContext);
     const [name, setName] = useState(board.name);
     const [columns, setColumns] = useState(board.columns);
     const [nameErrorString, setNameErrorString] = useState("");
@@ -57,7 +60,7 @@ const BoardModal = ({
         ]);
     };
 
-    const createBoard = () => {
+    const createBoard = async () => {
         var error = false;
         if (name === "") {
             setNameErrorString("Name cannot be empty");
@@ -79,6 +82,8 @@ const BoardModal = ({
             name,
             columns,
         });
+        const board = await context.apiClient.postBoard(name, columns);
+
         onChange(false);
     };
 

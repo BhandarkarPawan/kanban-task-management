@@ -17,7 +17,7 @@ const TaskCard = ({ task, onClick, ...delegated }) => {
             <Title onClick={() => onClick(task)}>
                 <ClickableHeading size={HSIZE.M}>{task.title}</ClickableHeading>
             </Title>
-            {task.subtasks.length && (
+            {task.subtasks.length > 0 && (
                 <Progress size={BSIZE.M}>
                     {completed} of {task.subtasks.length} subtasks
                 </Progress>

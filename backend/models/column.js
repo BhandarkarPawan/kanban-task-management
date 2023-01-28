@@ -15,6 +15,12 @@ const ColumnSchema = new Schema({
         ref: "Board",
         required: true,
     },
+    tasks: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Task",
+        },
+    ],
 });
 
 module.exports = ColumnSchema;

@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({ path: "../.env" });
 
 const connectToDatabase = () => {
-    // const url = process.env.MONGO_DB_URL;
-    const url = process.env.CNX_STR;
+    const url = process.env.MONGO_DB_URL;
     console.log("Connecting to database", url);
     // Connect to the database with mongoose
     return new Promise((resolve, reject) => {
