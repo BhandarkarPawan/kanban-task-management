@@ -14,6 +14,8 @@ const BoardModal = ({
     add = false,
     toggleModal,
     onChange,
+    boards,
+    setBoards,
     ...delegated
 }) => {
     const context = useContext(AppContext);
@@ -81,8 +83,10 @@ const BoardModal = ({
             name,
             columns,
         });
-        const board = await context.apiClient.createBoard(name, columns);
 
+        const res = await context.apiClient.createBoard(name, columns);
+        const board = res.data;
+        setBoards([...boards, board]);
         onChange(false);
     };
 

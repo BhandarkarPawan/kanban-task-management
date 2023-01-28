@@ -130,6 +130,8 @@ function App() {
                         board={selectedBoard}
                         toggleModal={toggleEditBoard}
                         onChange={setEditingBoard}
+                        setBoards={setBoards}
+                        boards={boards}
                     />
                 )}
                 {addingBoard && (
@@ -138,6 +140,8 @@ function App() {
                         board={emptyBoard}
                         toggleModal={toggleAddBoard}
                         onChange={toggleAddBoard}
+                        setBoards={setBoards}
+                        boards={boards}
                     />
                 )}
                 {showConfirmModal && (
