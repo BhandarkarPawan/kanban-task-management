@@ -1,16 +1,16 @@
 const express = require("express");
-const { Board, Column, Task} = require("../models");
+const { Board, Column, Task } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 const DEFAULT_COLUMN_COLOR = "#49C4E5";
 
 router.get("/", async function (req, res, next) {
     const allBoards = await Board.find().populate("columns");
-    console.log(allBoards);
-    for(const board of allBoards){
-        for(const column of board.columns){
+
+    for (const board of allBoards) {
+        for (const column of board.columns) {
             await column.populate("tasks");
-            for (const task of column.tasks){
+            for (const task of column.tasks) {
                 await task.populate("subtasks");
             }
         }
@@ -28,7 +28,7 @@ router.post("/", async function (req, res, next) {
         if (columns.length > 0) {
             for (let i = 0; i < columns.length; i++) {
                 console.log(!columns[i].color);
-                if(!columns[i].color){
+                if (!columns[i].color) {
                     columns[i].color = DEFAULT_COLUMN_COLOR;
                 }
                 const newColumn = new Column({
@@ -50,7 +50,8 @@ router.post("/", async function (req, res, next) {
         });
     }
 
-    res.status(201).json(board.populate("columns"));
+    await board.populate("columns");
+    res.status(201).json(board);
 });
 
 router.put("/:id", async function (req, res, next) {
