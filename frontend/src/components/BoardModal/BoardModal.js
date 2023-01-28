@@ -1,5 +1,6 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import AppContext from "../../app-context";
 import { PLACEHOLDER, QUERY } from "../../constants";
 import Button from "../Button";
 import DynamicTextInput from "../DynamicTextInput";
@@ -7,7 +8,6 @@ import Heading, { HSIZE } from "../Heading";
 import LabeledInput from "../LabeledInput";
 import Modal from "../Modal";
 import TextInput from "../TextInput";
-import AppContext from "../../app-context";
 
 const BoardModal = ({
     board,
@@ -16,7 +16,6 @@ const BoardModal = ({
     onChange,
     ...delegated
 }) => {
-
     const context = useContext(AppContext);
     const [name, setName] = useState(board.name);
     const [columns, setColumns] = useState(board.columns);
@@ -82,7 +81,7 @@ const BoardModal = ({
             name,
             columns,
         });
-        const board = await context.apiClient.postBoard(name, columns);
+        const board = await context.apiClient.createBoard(name, columns);
 
         onChange(false);
     };

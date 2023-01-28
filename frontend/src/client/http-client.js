@@ -93,4 +93,65 @@ export default class HTTPClient {
             data: res,
         };
     }
+
+    async putJsonToApi(endpoint, body, ignoreException = false) {
+        const url = this.getUrl(endpoint);
+        const httpRes = await fetch(url, {
+            method: "PUT",
+            credentials: "same-origin",
+            headers: getheaders(),
+            body: JSON.stringify(body),
+        })
+            .then((res) => handleErrors(res, this.errorCb))
+            .catch((error) => {
+                if (!ignoreException) {
+                    throw error;
+                } else {
+                    return null;
+                }
+            });
+
+        const res = await httpRes.json();
+        if (!httpRes.ok) {
+            return {
+                error: res["error"],
+                data: null,
+            };
+        }
+
+        return {
+            error: null,
+            data: res,
+        };
+    }
+
+    async deleteJsonFromApi(endpoint, ignoreException = false) {
+        const url = this.getUrl(endpoint);
+        const httpRes = await fetch(url, {
+            method: "DELETE",
+            credentials: "same-origin",
+            headers: getheaders(),
+        })
+            .then((res) => handleErrors(res, this.errorCb))
+            .catch((error) => {
+                if (!ignoreException) {
+                    throw error;
+                } else {
+                    return null;
+                }
+            });
+
+        const res = await httpRes.json();
+        if (!httpRes.ok) {
+            return {
+                error: res["error"],
+                data: null,
+            };
+        }
+
+        return {
+            error: null,
+            data: res,
+        };
+    }
 }
