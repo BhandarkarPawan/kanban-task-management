@@ -51,8 +51,11 @@ function App() {
     };
 
     const statusOptions = selectedBoard
-        ? selectedBoard.columns.map((c) => c.name)
-        : [];
+        ? selectedBoard.columns.reduce((acc, column) => {
+              acc[column._id] = column.name;
+              return acc;
+          }, {})
+        : {};
 
     const emptyTask = {
         title: "",
@@ -121,6 +124,7 @@ function App() {
                         add
                         statusOptions={statusOptions}
                         task={emptyTask}
+                        board={selectedBoard}
                         toggleModal={toggleAddTaskModal}
                         setShowConfirmModal={setShowConfirmModal}
                     />

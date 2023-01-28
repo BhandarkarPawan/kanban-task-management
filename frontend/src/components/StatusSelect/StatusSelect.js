@@ -29,10 +29,10 @@ const StatusSelect = ({ id, value, options, onChange, ...delegated }) => {
                 {isOpen && (
                     <FocusLock>
                         <OptionList ref={optionsRef}>
-                            {options.map((opt, i) => (
+                            {Object.entries(options).map(([i, opt]) => (
                                 <Option key={i}>
                                     <OptionButton
-                                        onClick={() => handleChange(opt)}
+                                        onClick={() => handleChange(i)}
                                     >
                                         <Text size={BSIZE.L}>{opt}</Text>
                                     </OptionButton>
@@ -43,7 +43,7 @@ const StatusSelect = ({ id, value, options, onChange, ...delegated }) => {
                 )}
             </ModalStyle>
             <Label aria-label="Change Status" onClick={openModal}>
-                <Text size={BSIZE.L}>{value}</Text>
+                <Text size={BSIZE.L}>{options[value]}</Text>
                 <IconWrapper icon={ICON.down} label="Show status options" />
             </Label>
         </Wrapper>

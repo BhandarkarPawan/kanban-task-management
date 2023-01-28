@@ -1,11 +1,12 @@
 const express = require("express");
-const { Task, Column } = require("../models");
+const { Task, Column, SubTask } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
 router.post("/", async function (req, res, next) {
     const { boardId, columnId } = req.params;
     let { title, description, status, subtasks } = req.body;
+
     if (!title) {
         // error
         return res.status(400).json({ error: "Task title is required" });
@@ -17,21 +18,31 @@ router.post("/", async function (req, res, next) {
     if (!status) {
         status = "todo";
     }
-    if (!subtasks) {
-        subtasks = [];
-    }
 
     const task = new Task({
         title,
         description,
         status,
-        subtasks,
         column: columnId,
+        subtasks: [],
     });
 
     try {
         const column = await Column.findById(columnId);
         column.tasks.push(task._id);
+        if (!subtasks) {
+            subtasks = [];
+        } else {
+            for (const st of subtasks) {
+                const subtask = new SubTask({
+                    title: st.title,
+                    isCompleted: st.isCompleted,
+                    task: task._id,
+                });
+                await subtask.save();
+                task.subtasks.push(subtask._id);
+            }
+        }
         await task.save();
         await column.save();
     } catch (err) {

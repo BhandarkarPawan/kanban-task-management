@@ -61,12 +61,13 @@ export default class ApiClient {
         return res;
     };
 
-    createTask = async (boardId, columnId, title, description, subtask) => {
+    createTask = async (boardId, columnId, title, description, subtasks) => {
         const res = await this.httpClient.postJsonToApi(
             `boards/${boardId}/columns/${columnId}/tasks`,
             {
                 title,
                 description,
+                subtasks,
             }
         );
         return res;

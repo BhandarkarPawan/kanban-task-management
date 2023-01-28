@@ -21,15 +21,35 @@ const TaskModal = ({
     const context = useContext(AppContext);
     const [editing, setEditing] = useState(false);
 
+    console.log("board: ", board);
+
     const handleStartEdit = () => {
         setEditing(true);
     };
 
     const handleEndEdit = async (updatedTask) => {
+        context.apiClient.createTask(
+            board._id,
+            columnId,
+            updatedTask.title,
+            updatedTask.description,
+            updatedTask.subtasks
+        );
         setEditing(false);
     };
 
     const handleEndAdd = async (newTask) => {
+        const res = await context.apiClient.createTask(
+            board._id,
+            newTask.status,
+            newTask.title,
+            newTask.description,
+            newTask.subtasks
+        );
+
+        const task = res.data;
+        console.log("task: ", task);
+
         toggleModal(false);
     };
 
