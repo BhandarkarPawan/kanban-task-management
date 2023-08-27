@@ -26,8 +26,6 @@ const BoardModal = ({
     const [nameErrorString, setNameErrorString] = useState("");
     const [columnErrorString, setColumnErrorString] = useState("");
 
-    console.log("selected board", selectedBoard);
-
     const updateName = (value) => {
         setName(value);
         setNameErrorString("");
@@ -37,7 +35,10 @@ const BoardModal = ({
         setColumnErrorString("");
         const newColumns = [...columns];
         newColumns[i].name = value;
-        setColumns(newColumns);
+        setSelectedBoard({
+            ...selectedBoard,
+            columns: newColumns,
+        });
     };
 
     const deleteColumn = (i) => {
@@ -83,18 +84,28 @@ const BoardModal = ({
         if (columns[columns.length - 1].name === "") {
             deleteColumn(columns.length - 1);
         }
-        console.log("create board: ", {
-            name,
-            columns,
-        });
 
-        const res = await context.apiClient.createBoard(name, columns);
-        const board = res.data;
-        setBoards([...boards, board]);
-        if (!selectedBoard) {
-            console.log("selects board");
-            setSelectedBoard(board);
+        if (add) {
+            const res = await context.apiClient.createBoard(name, columns);
+            const board = res.data;
+            setBoards([...boards, board]);
+            if (!selectedBoard) {
+                setSelectedBoard(board);
+            }
+        } else {
+            const res = await context.apiClient.editBoard(
+                board._id,
+                name,
+                columns
+            );
+            const updatedBoard = res.data;
+            setBoards([
+                ...boards.filter((b) => b._id !== board._id),
+                updatedBoard,
+            ]);
+            setSelectedBoard(updatedBoard);
         }
+
         onChange(false);
     };
 
