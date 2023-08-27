@@ -10,11 +10,12 @@ const TaskSchema = new Schema({
         type: String,
         required: true,
     },
-    status: {
-        type: String,
+    board: {
+        type: Schema.Types.ObjectId,
+        ref: "Board",
         required: true,
     },
-    column: {
+    status: {
         type: Schema.Types.ObjectId,
         ref: "Column",
         required: true,

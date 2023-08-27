@@ -29,6 +29,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/boards", boardRouter);
 app.use("/boards/:boardId/columns", columnsRouter);
-app.use("/boards/:boardId/columns/:columnId/tasks", tasksRouter);
+app.use("/boards/:boardId/tasks", tasksRouter);
 
 module.exports = app;

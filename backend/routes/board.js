@@ -8,11 +8,10 @@ router.get("/", async function (req, res, next) {
     const allBoards = await Board.find().populate("columns");
 
     for (const board of allBoards) {
-        for (const column of board.columns) {
-            await column.populate("tasks");
-            for (const task of column.tasks) {
-                await task.populate("subtasks");
-            }
+        await board.populate("tasks");
+        for (const task of board.tasks) {
+            await task.populate("subtasks");
+            await task.populate("status");
         }
     }
     res.json(allBoards);

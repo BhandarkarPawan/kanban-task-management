@@ -4,11 +4,8 @@ const { Column, Board } = require("../models");
 const router = express.Router({ mergeParams: true });
 
 router.post("/", async function (req, res, next) {
-    let { name, color, tasks } = req.body;
+    let { name, color } = req.body;
     let { boardId } = req.params;
-    if (!tasks) {
-        tasks = [];
-    }
     if (!name) {
         // error
         return res.status(400).json({ error: "Column name is required" });
@@ -17,7 +14,7 @@ router.post("/", async function (req, res, next) {
         color = "#49C4E5";
     }
 
-    const column = new Column({ name, color, tasks, board: boardId });
+    const column = new Column({ name, color, board: boardId });
     try {
         const board = await Board.findById(boardId);
         board.columns.push(column._id);

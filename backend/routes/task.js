@@ -1,10 +1,10 @@
 const express = require("express");
-const { Task, Column, SubTask } = require("../models");
+const { Task, Column, Board, SubTask } = require("../models");
 
 const router = express.Router({ mergeParams: true });
 
 router.post("/", async function (req, res, next) {
-    const { boardId, columnId } = req.params;
+    const { boardId } = req.params;
     let { title, description, status, subtasks } = req.body;
 
     if (!title) {
@@ -15,21 +15,24 @@ router.post("/", async function (req, res, next) {
         // error
         return res.status(400).json({ error: "Task description is required" });
     }
+
     if (!status) {
-        status = "todo";
+        // error
+        return res.status(400).json({ error: "Task status is required" });
     }
 
-    const task = new Task({
-        title,
-        description,
-        status,
-        column: columnId,
-        subtasks: [],
-    });
-
     try {
-        const column = await Column.findById(columnId);
-        column.tasks.push(task._id);
+        const column = await Column.findById(status);
+        const board = await Board.findById(boardId);
+
+        const task = new Task({
+            title,
+            status: column._id,
+            description,
+            subtasks: [],
+            board: board._id,
+        });
+
         if (!subtasks) {
             subtasks = [];
         } else {
@@ -43,19 +46,23 @@ router.post("/", async function (req, res, next) {
                 task.subtasks.push(subtask._id);
             }
         }
+
+        board.tasks.push(task._id);
+
         await task.save();
-        await column.save();
+        await board.save();
+        await task.populate("status");
+        return res.status(200).json(task);
     } catch (err) {
         console.log(err);
         return res
             .status(500)
             .json({ message: "Error saving task", error: err.toString() });
     }
-    res.status(200).json(task);
 });
 
 router.put("/:taskId", async function (req, res, next) {
-    const { boardId, columnId, taskId } = req.params;
+    const { boardId, taskId } = req.params;
     const { title, description, status, subtasks } = req.body;
     if (!title && !description && !status && !subtasks) {
         // error
@@ -75,15 +82,20 @@ router.put("/:taskId", async function (req, res, next) {
         }
         if (title) task.title = title;
         if (description) task.description = description;
-        if (status) task.status = status;
         if (subtasks) task.subtasks = subtasks;
+
+        if (status) {
+            const column = await Column.findById(status);
+            task.status = column._id;
+        }
+
         await task.save();
         res.status(200).json(task);
     });
 });
 
 router.delete("/:taskId", async function (req, res, next) {
-    const { boardId, columnId, taskId } = req.params;
+    const { boardId, taskId } = req.params;
     Task.findOneAndDelete({ _id: taskId }, (err, task) => {
         if (err) {
             return res.status(500).json({
