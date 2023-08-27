@@ -50,6 +50,7 @@ const Header = ({
                 <ThemeToggle toggleTheme={toggleTheme} />
             </BoardSelectWrapper>
             <ResponsiveIconButtonWrapper
+                disabled={!selectedBoard}
                 onClick={toggleAddModal}
                 icon={ICON.add}
                 label="Add New Task"

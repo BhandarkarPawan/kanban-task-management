@@ -10,6 +10,8 @@ const ConfirmModal = ({
     name,
     toggleModal,
     onChange,
+    id,
+    onConfirm,
     ...delegated
 }) => {
     console.log("Renders");
@@ -25,7 +27,7 @@ const ConfirmModal = ({
             </Text>
             <DangerButton
                 onClick={() => {
-                    onChange(false);
+                    onConfirm(id);
                 }}
             >
                 Delete
@@ -56,7 +58,7 @@ const Wrapper = styled(Modal)`
     max-width: 480px;
     border-radius: var(--r-m);
     width: min(100%, 480px);
-    color: ${({theme}) => theme.color};
+    color: ${({ theme }) => theme.color};
 
     @media ${QUERY.tabletAndUp} {
         padding: 32px;

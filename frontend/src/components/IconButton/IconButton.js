@@ -45,6 +45,11 @@ const Wrapper = styled.button`
         background-color: var(--color-primary-light);
         cursor: pointer;
     }
+
+    &:disabled {
+        background-color: var(--color-primary-light);
+        cursor: not-allowed;
+    }
 `;
 
 const ResponsiveWrapper = styled(Wrapper)`
@@ -68,7 +73,7 @@ const Label = styled(Heading)`
 
     @media ${QUERY.tabletAndUp} {
         display: initial;
-    } ;
+    }
 `;
 
 export default IconButton;

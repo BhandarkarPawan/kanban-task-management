@@ -17,7 +17,7 @@ const TaskInfoPanel = ({
     const subTasks = task.subtasks;
 
     const completedSubtasks = subTasks.filter((st) => st.isCompleted);
-    const [currentStatus, setCurrentStatus] = useState(task.status);
+    const [currentStatus, setCurrentStatus] = useState(task.status._id);
 
     const OPTIONS = [
         {

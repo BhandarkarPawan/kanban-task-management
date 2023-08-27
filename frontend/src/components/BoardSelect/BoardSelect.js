@@ -23,7 +23,6 @@ const BoardSelect = ({
     const handleSelectBoard = (board) => {
         setSelectedBoard(board);
         setIsOpen(false);
-        console.log("bruh");
     };
 
     const icon = isOpen ? ICON.up : ICON.down;

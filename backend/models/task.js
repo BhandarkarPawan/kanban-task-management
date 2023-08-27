@@ -8,7 +8,6 @@ const TaskSchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
     },
     board: {
         type: Schema.Types.ObjectId,

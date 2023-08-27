@@ -1,18 +1,32 @@
+import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 import styled from "styled-components";
 import Heading, { HSIZE } from "../Heading";
 import Text, { BSIZE } from "../Text ";
 
-const TaskCard = ({ task, onClick, ...delegated }) => {
+const TaskCard = ({ id, task, onClick, ...delegated }) => {
     const completed = task.subtasks.filter(
         (subtask) => subtask.isCompleted
     ).length;
 
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({
+        id: task._id,
+    });
+
+    const style = {
+        // Outputs `translate3d(x, y, 0)`
+        transform: CSS.Translate.toString(transform),
+    };
     return (
         <Wrapper
+            ref={setNodeRef}
             {...delegated}
             onClick={() => {
                 onClick(task);
             }}
+            style={style}
+            {...listeners}
+            {...attributes}
         >
             <Title onClick={() => onClick(task)}>
                 <ClickableHeading size={HSIZE.M}>{task.title}</ClickableHeading>
@@ -42,7 +56,7 @@ const Wrapper = styled.li`
     // TODO: Switch to focus-visible
     &:focus-within {
         // Highlight the card on link focus
-        outline: var(--focus-outline);
+        /* outline: var(--focus-outline); */
     }
 
     // Prevent card flashing on click

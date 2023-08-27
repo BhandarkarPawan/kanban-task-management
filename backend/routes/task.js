@@ -12,8 +12,7 @@ router.post("/", async function (req, res, next) {
         return res.status(400).json({ error: "Task title is required" });
     }
     if (!description) {
-        // error
-        return res.status(400).json({ error: "Task description is required" });
+        description = "";
     }
 
     if (!status) {
@@ -52,6 +51,8 @@ router.post("/", async function (req, res, next) {
         await task.save();
         await board.save();
         await task.populate("status");
+        await task.populate("subtasks");
+
         return res.status(200).json(task);
     } catch (err) {
         console.log(err);
@@ -82,13 +83,29 @@ router.put("/:taskId", async function (req, res, next) {
         }
         if (title) task.title = title;
         if (description) task.description = description;
-        if (subtasks) task.subtasks = subtasks;
+
+        if (subtasks) {
+            task.subtasks = [];
+            for (const st of subtasks) {
+                if (st.title !== "") {
+                    const subtask = new SubTask({
+                        title: st.title,
+                        isCompleted: st.isCompleted,
+                        task: task._id,
+                    });
+                    await subtask.save();
+                    task.subtasks.push(subtask._id);
+                }
+            }
+        }
 
         if (status) {
             const column = await Column.findById(status);
             task.status = column._id;
         }
 
+        await task.populate("status");
+        await task.populate("subtasks");
         await task.save();
         res.status(200).json(task);
     });

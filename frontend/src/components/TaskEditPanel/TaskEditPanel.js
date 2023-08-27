@@ -18,11 +18,15 @@ const TaskEditPanel = ({
 }) => {
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
-    const [status, setStatus] = useState(task.status);
+    const [status, setStatus] = useState(
+        task.status ? task.status._id : Object.keys(statusOptions)[0]
+    );
     const [subTasks, setSubTasks] = useState(task.subtasks);
 
     const [nameErrorString, setNameErrorString] = useState("");
     const [subtaskErrorString, seSubtaskErrorString] = useState("");
+
+    console.log("subTasks", subTasks);
 
     const updateSubTask = (i, value) => {
         seSubtaskErrorString("");
@@ -30,6 +34,8 @@ const TaskEditPanel = ({
         newSubTasks[i].title = value;
         setSubTasks(newSubTasks);
     };
+
+    const formComplete = title !== "" && !!status;
 
     const deleteSubTask = (i) => {
         seSubtaskErrorString("");
@@ -47,7 +53,7 @@ const TaskEditPanel = ({
     };
 
     const addNewSubTask = () => {
-        if (subTasks[subTasks.length - 1].title === "") {
+        if (subTasks.length && subTasks[subTasks.length - 1].title === "") {
             seSubtaskErrorString("Cannot add empty subtask");
             return;
         }
@@ -56,7 +62,7 @@ const TaskEditPanel = ({
             ...subTasks,
             {
                 title: "",
-                status: "TODO",
+                isCompleted: false,
             },
         ]);
     };
@@ -67,14 +73,15 @@ const TaskEditPanel = ({
             return;
         }
 
-        const task = {
+        const updatedTask = {
+            _id: add ? null : task._id,
             title,
             description,
             status,
             subtasks: subTasks,
         };
 
-        onChange(task);
+        onChange(updatedTask);
     };
 
     return (
@@ -123,7 +130,7 @@ const TaskEditPanel = ({
                     onChange={setStatus}
                 />
             </LabeledInput>
-            <Button onClick={confirmChange}>
+            <Button onClick={confirmChange} disabled={!formComplete}>
                 {add ? "Create Task" : "Save Changes"}
             </Button>
         </>

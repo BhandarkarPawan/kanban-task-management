@@ -15,6 +15,8 @@ const BoardModal = ({
     toggleModal,
     onChange,
     boards,
+    selectedBoard,
+    setSelectedBoard,
     setBoards,
     ...delegated
 }) => {
@@ -23,6 +25,8 @@ const BoardModal = ({
     const [columns, setColumns] = useState(board.columns);
     const [nameErrorString, setNameErrorString] = useState("");
     const [columnErrorString, setColumnErrorString] = useState("");
+
+    console.log("selected board", selectedBoard);
 
     const updateName = (value) => {
         setName(value);
@@ -87,6 +91,10 @@ const BoardModal = ({
         const res = await context.apiClient.createBoard(name, columns);
         const board = res.data;
         setBoards([...boards, board]);
+        if (!selectedBoard) {
+            console.log("selects board");
+            setSelectedBoard(board);
+        }
         onChange(false);
     };
 

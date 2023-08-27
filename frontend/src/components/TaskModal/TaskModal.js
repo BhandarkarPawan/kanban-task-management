@@ -14,41 +14,60 @@ const TaskModal = ({
     add = false,
     toggleModal,
     board,
-    columnId,
+    setBoard,
     setShowConfirmModal,
     ...delegated
 }) => {
     const context = useContext(AppContext);
     const [editing, setEditing] = useState(false);
 
-    console.log("board: ", board);
-
     const handleStartEdit = () => {
         setEditing(true);
     };
 
     const handleEndEdit = async (updatedTask) => {
-        context.apiClient.createTask(
+        const res = await context.apiClient.editTask(
             board._id,
-            columnId,
+            updatedTask.status,
+            updatedTask._id,
             updatedTask.title,
             updatedTask.description,
             updatedTask.subtasks
         );
+
         setEditing(false);
+        const updatedTaskList = [
+            ...board.tasks.filter((t) => t._id !== updatedTask._id),
+            res.data,
+        ];
+
+        setBoard({
+            ...board,
+            tasks: updatedTaskList,
+        });
     };
 
-    const handleEndAdd = async (newTask) => {
+    const handleEndAdd = async (task) => {
+        const nonEmptySubTasks = task.subtasks.filter((st) => st.title !== "");
         const res = await context.apiClient.createTask(
             board._id,
-            newTask.status,
-            newTask.title,
-            newTask.description,
-            newTask.subtasks
+            task.status,
+            task.title,
+            task.description,
+            nonEmptySubTasks
         );
 
-        const task = res.data;
-        console.log("task: ", task);
+        const newTask = res.data;
+        console.log("res: ", res);
+        const updatedTaskList = [
+            ...board.tasks.filter((t) => t._id !== newTask._id),
+            newTask,
+        ];
+
+        setBoard({
+            ...board,
+            tasks: updatedTaskList,
+        });
 
         toggleModal(false);
     };

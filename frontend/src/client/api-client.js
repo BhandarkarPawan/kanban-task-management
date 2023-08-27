@@ -7,7 +7,6 @@ export default class ApiClient {
 
     getBoards = async () => {
         const res = await this.httpClient.getJsonFromApi("boards");
-        console.log(res);
         return res;
     };
 
@@ -61,11 +60,12 @@ export default class ApiClient {
         return res;
     };
 
-    createTask = async (boardId, columnId, title, description, subtasks) => {
+    createTask = async (boardId, status, title, description, subtasks) => {
         const res = await this.httpClient.postJsonToApi(
-            `boards/${boardId}/columns/${columnId}/tasks`,
+            `boards/${boardId}/tasks`,
             {
                 title,
+                status,
                 description,
                 subtasks,
             }
@@ -75,27 +75,27 @@ export default class ApiClient {
 
     editTask = async (
         boardId,
-        columnId,
+        status,
         taskId,
         title,
         description,
         subtasks
     ) => {
         const res = await this.httpClient.putJsonToApi(
-            `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+            `boards/${boardId}/tasks/${taskId}`,
             {
                 title,
                 description,
                 subtasks,
-                status: columnId,
+                status,
             }
         );
         return res;
     };
 
-    deleteTask = async (boardId, columnId, taskId) => {
+    deleteTask = async (boardId, taskId) => {
         const res = await this.httpClient.deleteJsonFromApi(
-            `boards/${boardId}/columns/${columnId}/tasks/${taskId}`
+            `boards/${boardId}/tasks/${taskId}`
         );
         return res;
     };

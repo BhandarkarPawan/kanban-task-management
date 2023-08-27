@@ -2,6 +2,7 @@ export const lightTheme = {
     background: `var(--color-gray-100)`,
     backgroundLight: `var(--color-white)`,
     backgroundDark: `linear-gradient(180deg, #E9EFFA 0%, rgba(233, 239, 250, 0.5) 100%);`,
+    backgroundHighlight: `var(--color-gray-200)`,
     placeholderColor: `var(--color-placeholder-light)`,
     color: `var(--color-black)`,
     logo: `assets/logo-dark.svg`,
@@ -19,6 +20,7 @@ export const darkTheme = {
         rgba(43, 44, 55, 0.25) 0%,
         rgba(43, 44, 55, 0.125) 100%
     )`,
+    backgroundHighlight: `var(--color-gray-400)`,
     color: `var(--color-white)`,
     placeholderColor: `var(--color-placeholder-dark)`,
     logo: `assets/logo-light.svg`,

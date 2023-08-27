@@ -28,7 +28,7 @@ const BoardGroup = ({
                             name={TITLE}
                             key={i}
                             value={board}
-                            checked={selectedBoard === board}
+                            checked={selectedBoard._id === board._id}
                             setSelectedBoard={setSelectedBoard}
                         >
                             {board.name}

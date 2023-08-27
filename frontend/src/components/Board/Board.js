@@ -1,3 +1,4 @@
+import { DndContext, MouseSensor, TouchSensor, useSensor } from "@dnd-kit/core";
 import { useContext } from "react";
 import styled from "styled-components";
 import AppContext from "../../app-context";
@@ -10,7 +11,6 @@ import { HSIZE } from "../Heading/Heading";
 const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
     const isEmpty = board && board.columns.length === 0;
     const context = useContext(AppContext);
-
     const getRandomHexColor = () =>
         `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
@@ -26,6 +26,38 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
         setBoard({
             ...board,
             columns: [...board.columns, newColumn],
+        });
+    };
+
+    const mouseSensor = useSensor(MouseSensor, {
+        // Require the mouse to move by 10 pixels before activating
+        activationConstraint: {
+            distance: 10,
+        },
+    });
+    const touchSensor = useSensor(TouchSensor, {
+        // Press delay of 250ms, with tolerance of 5px of movement
+        activationConstraint: {
+            delay: 250,
+            tolerance: 5,
+        },
+    });
+
+    const handleDragEnd = async ({ active, over }) => {
+        const res = await context.apiClient.editTask(
+            board._id.value,
+            over.id,
+            active.id
+        );
+
+        const updatedTaskList = [
+            ...board.tasks.filter((task) => task._id !== active.id),
+            res.data,
+        ];
+
+        setBoard({
+            ...board,
+            tasks: updatedTaskList,
         });
     };
 
@@ -46,10 +78,14 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
                     </Button>
                 </EmptyWrapper>
             ) : (
-                <>
+                <DndContext
+                    onDragEnd={handleDragEnd}
+                    sensors={[mouseSensor, touchSensor]}
+                >
                     {board &&
                         board.columns.map((column, i) => (
                             <Column
+                                id={column._id}
                                 board={board}
                                 setBoard={setBoard}
                                 columnIndex={i}
@@ -57,10 +93,16 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
                                 key={i}
                             />
                         ))}
-                    <AddColumnButton onClick={() => addColumn()}>
-                        <Heading size={HSIZE.XL}>+ New Column</Heading>
-                    </AddColumnButton>
-                </>
+                    {board ? (
+                        <AddColumnButton onClick={() => addColumn()}>
+                            <Heading size={HSIZE.XL}>+ New Column</Heading>
+                        </AddColumnButton>
+                    ) : (
+                        <NoBoardsMessage>
+                            No Boards Found. Why not create one?
+                        </NoBoardsMessage>
+                    )}
+                </DndContext>
             )}
         </Wrapper>
     );
@@ -79,8 +121,17 @@ const EmptyWrapper = styled.div`
     }
 `;
 
+const NoBoardsMessage = styled.p`
+    font-size: var(--size-h-xl);
+    line-height: var(--line-h-l);
+    color: var(--color-gray-300);
+    text-align: center;
+    align-self: center;
+    margin: auto;
+`;
+
 const Label = styled.label`
-    font-size: var(--sizeh-l);
+    font-size: var(--size-h-l);
     line-height: var(--line-h-l);
     color: var(--color-gray-300);
 `;
@@ -126,7 +177,7 @@ const AddColumnButton = styled.button`
     background: ${({ theme }) => theme.backgroundDark};
 
     width: 280px;
-    margin-top: 60px;
+    margin-top: 68px;
     margin-bottom: 50px;
     border-radius: var(--r-m);
     flex-shrink: 0;

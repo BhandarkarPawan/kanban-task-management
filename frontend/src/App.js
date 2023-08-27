@@ -11,7 +11,6 @@ import TaskModal from "./components/TaskModal";
 import GlobalStyles from "./styles/globalStyles";
 import ResetStyles from "./styles/resetStyles";
 import { darkTheme, lightTheme } from "./styles/themes";
-
 function App() {
     const context = useContext(AppContext);
 
@@ -88,6 +87,29 @@ function App() {
             });
     }
 
+    const handleDeleteBoard = async (id) => {
+        await context.apiClient.deleteBoard(id);
+        setBoards(boards.filter((b) => b._id !== id));
+        setSelectedBoard(null);
+        toggleConfirmModal();
+    };
+
+    // const [parent, setParent] = useState(null);
+    // const draggable = <Draggable id="draggable">Go ahead, drag me.</Draggable>;
+
+    // function handleDragEnd({ over }) {
+    //     setParent(over ? over.id : null);
+    // }
+
+    // return (
+    //     <DndContext onDragEnd={handleDragEnd}>
+    //         {!parent ? draggable : null}
+    //         <Droppable id="droppable">
+    //             {parent === "droppable" ? draggable : "Drop here"}
+    //         </Droppable>
+    //     </DndContext>
+    // );
+
     return (
         <>
             <ResetStyles />
@@ -125,6 +147,7 @@ function App() {
                         statusOptions={statusOptions}
                         task={emptyTask}
                         board={selectedBoard}
+                        setBoard={setSelectedBoard}
                         toggleModal={toggleAddTaskModal}
                         setShowConfirmModal={setShowConfirmModal}
                     />
@@ -135,6 +158,8 @@ function App() {
                         toggleModal={toggleEditBoard}
                         onChange={setEditingBoard}
                         setBoards={setBoards}
+                        selectedBoard={selectedBoard}
+                        setSelectedBoard={setSelectedBoard}
                         boards={boards}
                     />
                 )}
@@ -145,6 +170,8 @@ function App() {
                         toggleModal={toggleAddBoard}
                         onChange={toggleAddBoard}
                         setBoards={setBoards}
+                        selectedBoard={selectedBoard}
+                        setSelectedBoard={setSelectedBoard}
                         boards={boards}
                     />
                 )}
@@ -152,8 +179,10 @@ function App() {
                     <ConfirmModal
                         name={selectedBoard.name}
                         board
+                        id={selectedBoard._id}
                         toggleModal={toggleConfirmModal}
                         onChange={toggleConfirmModal}
+                        onConfirm={handleDeleteBoard}
                     />
                 )}
             </ThemeProvider>

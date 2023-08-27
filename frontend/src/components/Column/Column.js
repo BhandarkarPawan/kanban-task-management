@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useDroppable } from "@dnd-kit/core";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import AppContext from "../../app-context";
 import Button from "../Button";
 import ConfirmModal from "../ConfirmModal";
 import Heading, { HSIZE } from "../Heading";
@@ -8,20 +10,22 @@ import TaskModal from "../TaskModal";
 import TextInput from "../TextInput";
 
 const Column = ({
+    id,
     board,
     setBoard,
     columnIndex,
     statusOptions,
     ...delegated
 }) => {
+    const context = useContext(AppContext);
     const column = board.columns[columnIndex];
     const allColumns = new Set(board.columns.map((c) => c.name));
+    const tasksList = board.tasks.filter((t) => t.status._id === column._id);
 
-    const numTasks = column.tasks.length;
     const [editingName, setEditingName] = useState(false);
     const [columnName, setColumnName] = useState(column.name);
     const [renamingErrorString, setRenamingErrorString] = useState("");
-    const [selectedTask, setSelectedTask] = useState(null);
+    const [selectedTaskID, setSelectedTaskId] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -31,8 +35,9 @@ const Column = ({
 
     const toggleModal = () => {
         setShowDetails(!showDetails);
-        setSelectedTask(null);
+        setSelectedTaskId(null);
     };
+    const selectedTask = board.tasks.find((t) => t._id === selectedTaskID);
 
     const updateColumnName = (originalName, newName) => {
         const isDuplicate = allColumns.has(newName);
@@ -58,6 +63,20 @@ const Column = ({
         });
     };
 
+    const { isOver, setNodeRef } = useDroppable({
+        id,
+    });
+
+    const handleDeleteTask = async (taskId) => {
+        await context.apiClient.deleteTask(board._id, taskId);
+        setBoard({
+            ...board,
+            tasks: board.tasks.filter((t) => t._id !== taskId),
+        });
+
+        toggleConfirmModal();
+    };
+
     return (
         <Wrapper {...delegated}>
             {showConfirmModal && (
@@ -65,6 +84,8 @@ const Column = ({
                     name={selectedTask.name}
                     toggleModal={toggleConfirmModal}
                     onChange={toggleConfirmModal}
+                    id={selectedTask._id}
+                    onConfirm={handleDeleteTask}
                 />
             )}
             {selectedTask && (
@@ -106,10 +127,11 @@ const Column = ({
                     Save
                 </SaveButton>
             )}
-            <TaskList>
-                {column.tasks.map((task, i) => (
+            <TaskList ref={setNodeRef} isOver={isOver}>
+                {tasksList.map((task, i) => (
                     <TaskCard
-                        onClick={() => setSelectedTask(task)}
+                        id={id + "_" + i}
+                        onClick={() => setSelectedTaskId(task._id)}
                         key={i}
                         task={task}
                     />
@@ -138,7 +160,6 @@ const Title = styled(Heading)`
 `;
 
 const NameEditForm = styled.div``;
-
 const SaveButton = styled(Button)`
     padding: 8px 16px;
     align-self: flex-start;
@@ -165,6 +186,8 @@ const TaskList = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
+    border-radius: var(--r-l);
 
     // For an improved scroll experience on mobile
     -ms-overflow-style: none; /* IE and Edge */
@@ -177,8 +200,11 @@ const TaskList = styled.ul`
         display: none;
     }
 
+    background-color: ${(props) =>
+        props.isOver ? props.theme.backgroundHighlight : "transparent"};
+
     padding: 0px 2px var(--pad-v) 2px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
     & > *:first-child {
         // allows border of first card to be fully visible
