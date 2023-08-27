@@ -22,8 +22,6 @@ const TaskEditPanel = ({
         task.status ? task.status._id : Object.keys(statusOptions)[0]
     );
     const [subTasks, setSubTasks] = useState(task.subtasks);
-
-    const [nameErrorString, setNameErrorString] = useState("");
     const [subtaskErrorString, seSubtaskErrorString] = useState("");
 
     console.log("subTasks", subTasks);
@@ -69,7 +67,6 @@ const TaskEditPanel = ({
 
     const confirmChange = () => {
         if (title === "") {
-            setNameErrorString("Cannot create empty task");
             return;
         }
 
@@ -146,8 +143,6 @@ const SubTaskEditList = styled.ul`
     flex-direction: column;
     gap: 12px;
 `;
-
-const FieldWithError = styled.div``;
 
 const ErrorMessage = styled.p`
     font-size: 12px;
