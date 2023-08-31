@@ -89,8 +89,9 @@ function App() {
 
     const handleDeleteBoard = async (id) => {
         await context.apiClient.deleteBoard(id);
-        setBoards(boards.filter((b) => b._id !== id));
-        setSelectedBoard(null);
+        const updatedBoards = boards.filter((b) => b._id !== id);
+        setBoards(updatedBoards);
+        setSelectedBoard(updatedBoards.length ? updatedBoards[0] : null);
         toggleConfirmModal();
     };
 
@@ -161,7 +162,7 @@ function App() {
                 )}
                 {showConfirmModal && (
                     <ConfirmModal
-                        name={selectedBoard.name}
+                        name={selectedBoard ? selectedBoard.name : ""}
                         board
                         id={selectedBoard._id}
                         toggleModal={toggleConfirmModal}

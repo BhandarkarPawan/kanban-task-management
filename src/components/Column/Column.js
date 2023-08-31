@@ -20,7 +20,10 @@ const Column = ({
     const context = useContext(AppContext);
     const column = board.columns[columnIndex];
     const allColumns = new Set(board.columns.map((c) => c.name));
-    const tasksList = board.tasks.filter((t) => t.status._id === column._id);
+    const tasksList =
+        board && board.tasks
+            ? board.tasks.filter((t) => t.status && t.status._id === column._id)
+            : [];
 
     const [editingName, setEditingName] = useState(false);
     const [columnName, setColumnName] = useState(column.name);
@@ -37,7 +40,7 @@ const Column = ({
         setShowDetails(!showDetails);
         setSelectedTaskId(null);
     };
-    const selectedTask = board.tasks.find((t) => t._id === selectedTaskID);
+    const selectedTask = tasksList.find((t) => t._id === selectedTaskID);
 
     const updateColumnName = (originalName, newName) => {
         const isDuplicate = allColumns.has(newName);

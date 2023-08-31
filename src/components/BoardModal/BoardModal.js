@@ -35,10 +35,7 @@ const BoardModal = ({
         setColumnErrorString("");
         const newColumns = [...columns];
         newColumns[i].name = value;
-        setSelectedBoard({
-            ...selectedBoard,
-            columns: newColumns,
-        });
+        setColumns(newColumns);
     };
 
     const deleteColumn = (i) => {
