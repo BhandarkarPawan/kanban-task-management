@@ -24,6 +24,7 @@ function decideApiHostNames() {
     const prefix = "api";
     const hostname = process.env.REACT_APP_API_HOSTNAME || "";
     const protocol = "http"; // window.location.protocol === "https" ? "https" : "http";
-    console.log("AKHJGAJKSDGKAS", hostname, protocol);
+
+    console.log("uses backend server at: " + hostname);
     return { prefix, hostname, protocol };
 }

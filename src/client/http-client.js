@@ -65,7 +65,6 @@ export default class HTTPClient {
 
     async getJsonFromApi(endpoint, ignoreException = false) {
         const url = this.getUrl(endpoint);
-        console.log("Fetch from : ", url);
         const httpRes = await fetch(url, {
             method: "GET",
             credentials: "same-origin",
