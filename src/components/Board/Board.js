@@ -104,6 +104,13 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
                     )}
                 </DndContext>
             )}
+            <Attribution>
+                Developed by{" "}
+                <Link href="https://bhandarkar.me">Pawan Bhandarkar</Link> &{" "}
+                <Link href="https://github.com/tatanpoker09">
+                    Christian Eilers
+                </Link>
+            </Attribution>
         </Wrapper>
     );
 };
@@ -138,7 +145,7 @@ const Label = styled.label`
 
 const Wrapper = styled.main`
     --pad-h: 22px;
-
+    position: relative;
     background-color: ${({ theme }) => theme.background};
     height: 100%;
     width: 100%;
@@ -189,3 +196,22 @@ const AddColumnButton = styled.button`
 `;
 
 export default Board;
+
+const Attribution = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px;
+    color: var(--color-gray-300);
+`;
+
+const Link = styled.a`
+    color: var(--color-primary);
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
