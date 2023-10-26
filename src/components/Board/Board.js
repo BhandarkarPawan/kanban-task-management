@@ -107,7 +107,7 @@ const Board = ({ statusOptions, board, setBoard, ...delegated }) => {
             <Attribution>
                 Developed by{" "}
                 <Link href="https://bhandarkar.me">Pawan Bhandarkar</Link> &{" "}
-                <Link href="https://github.com/tatanpoker09">
+                <Link href="https://tatanpoker09.com">
                     Christian Eilers
                 </Link>
             </Attribution>
